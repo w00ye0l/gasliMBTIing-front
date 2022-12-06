@@ -22,7 +22,14 @@
           <div class="field">
             <label>Password</label>
             <div class="control">
-              <input type="password" name="password" class="input" v-model="password">
+              <input type="password" name="password1" class="input" v-model="password1">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Repeat Password</label>
+            <div class="control">
+              <input type="password" name="password2" class="input" v-model="password2">
             </div>
           </div>
 
@@ -51,7 +58,8 @@
       return {
         username: '',
         nickname: '',
-        password: '',
+        password1: '',
+        password2: '',
         errors: [],
       }
     },
@@ -67,8 +75,12 @@
           this.errors.push('The nickname is missing')
         }
 
-        if (this.password === '') {
+        if (this.password1 === '') {
           this.errors.push('The password is too short')
+        }
+
+        if (this.password1 !== this.password2) {
+          this.errors.push('The password are not matching')
         }
 
         if (!this.errors.length) {
@@ -77,7 +89,7 @@
           const formData = {
             username: this.username,
             nickname: this.nickname,
-            password: this.password
+            password: this.password1
           }
 
           await axios
