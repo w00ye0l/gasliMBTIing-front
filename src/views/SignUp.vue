@@ -26,6 +26,13 @@
             </div>
           </div>
 
+          <div class="field">
+            <label>Nickname</label>
+            <div class="control">
+              <input type="text" name="nickname" class="input" v-model="nickname">
+            </div>
+          </div>
+
           <div class="notification is-danger" v-if="errors.length">
             <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
           </div>
@@ -52,6 +59,7 @@
         username: '',
         password1: '',
         password2: '',
+        nickname: '',
         errors: [],
       }
     },
@@ -76,7 +84,8 @@
 
           const formData = {
             username: this.username,
-            password: this.password1
+            password: this.password1,
+            nickname: this.nickname
           }
 
           await axios
