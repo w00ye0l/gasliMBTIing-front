@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="lol">
+    <div class="lol is-8">
       <div class="circle circle_1"></div>
       <div class="circle circle_2"></div>
       <div class="circle circle_3"></div>
@@ -18,7 +18,7 @@
       <div class="circle circle_15"></div>
       <div class="circle circle_16"></div>
     </div>
-    <!-- <img class="logo" alt="Vue logo" src="../assets/gasliMBTIng-logo.png"> -->
+
     <h1 class="title__custom">gasli<span class="title__m">M</span><span class="title__b">B</span><span class="title__t">T</span><span class="title__i">I</span>ng</h1>
 
     <h2 class="subtitle__custom">gasliMBTIng이 뭔데?</h2>
@@ -40,9 +40,9 @@ export default {
 }
 .lol {
   position: relative;
-  margin-top: 80px;
-  width: 300px;
-  height: 300px;
+  margin-top: 5vh;
+  width: 30vh;
+  height: 30vh;
   border-radius: 50%;
   background-image: url("../assets/gaslight.png");
   background-position: center;
@@ -51,8 +51,8 @@ export default {
 }
 .circle {
   position: absolute;
-  width: 25px;
-  height: 25px;
+  width: 2.5vh;
+  height: 2.5vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -102,32 +102,27 @@ export default {
   .circle_#{$i} {
     @-webkit-keyframes circle_#{$i} {
       0% {
-        transform: rotate(($i - 1) * 22.5deg)translate(-150px);
+        transform: rotate(($i - 1) * 22.5deg)translate(-15vh);
       }
       100% {
-        transform: rotate(360 + ($i - 1) * 22.5deg)translate(-150px);
+        transform: rotate(360 + ($i - 1) * 22.5deg)translate(-15vh);
       }
     }
     
     @keyframes circle_#{$i} {
       0% {
-        transform: rotate(($i - 1) * 22.5deg)translate(-150px);
+        transform: rotate(($i - 1) * 22.5deg)translate(-15vh);
       }
       100% {
-        transform: rotate(360 + ($i - 1) * 22.5deg)translate(-150px);
+        transform: rotate(360 + ($i - 1) * 22.5deg)translate(-15vh);
       }
     }
   }
 }
 
-.logo {
-  width: 300px;
-  background: #EAE4E9;
-  border-radius: 20px;
-}
 .title__custom {
-  margin-top: 50px;
-  font-size: 80px;
+  margin-top: 5vh;
+  font-size: 8vh;
   text-decoration: underline;
 }
 .title__m {
@@ -144,7 +139,7 @@ export default {
 }
 
 .subtitle__custom {
-  margin-top: 20px;
-  font-size: 40px;
+  margin-top: 2vh;
+  font-size: 4vh;
 }
 </style>
