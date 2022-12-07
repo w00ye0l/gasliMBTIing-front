@@ -101,7 +101,7 @@
               position: 'bottom-right',
             })
 
-            this.$router.push('/dashboard/communities')
+            this.$router.push('/dashboard/community')
           })
           .catch(error => {
             console.log(error)
