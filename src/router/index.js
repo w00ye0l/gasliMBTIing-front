@@ -6,6 +6,7 @@ import LogIn from '../views/LogIn.vue'
 import Dashboard from '../views/dashboard/Dashboard.vue'
 import MyAccount from '../views/dashboard/MyAccount.vue'
 import Communities from '../views/dashboard/Communities.vue'
+import AddCommunity from '../views/dashboard/AddCommunity.vue'
 
 const routes = [
   {
@@ -43,6 +44,14 @@ const routes = [
     path: '/dashboard/communities',
     name: 'Communities',
     component: Communities,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/communities/add',
+    name: 'AddCommunity',
+    component: AddCommunity,
     meta: {
       requireLogin: true
     }
