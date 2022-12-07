@@ -13,13 +13,13 @@
             <p>Info</p>
           </router-link>
 
-          <router-link to="/" class="btn__custom">
+          <router-link to="/dashboard/communities" class="btn__custom">
             <font-awesome-icon class="icon is-middle" icon="comments" />
             <p>Commu</p>
           </router-link>
           
           <template v-if="!$store.state.isAuthenticated">
-            <router-link to="/sign-up" class="btn__custom">
+            <router-link to="/log-in" class="btn__custom">
               <font-awesome-icon class="icon is-middle" icon="right-to-bracket" />
               <p>Login</p>
             </router-link>

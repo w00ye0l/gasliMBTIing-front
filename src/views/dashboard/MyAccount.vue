@@ -1,13 +1,12 @@
 <template>
   <div class="container">
-    <div class="columns is-multiline">
-      <div class="column is-12">
+    <div class="columns is-multiline is-centered">
+      <div class="column is-10">
         <h1 class="title">My account</h1>
       </div>
 
-      <div class="column is-12">
+      <div class="column is-10">
         <div class="buttons">
-          
           <button @click="logout()" class="button is-danger">Log out</button>
         </div>
       </div>
@@ -35,8 +34,6 @@
         localStorage.removeItem('token')
         localStorage.removeItem('username')
         localStorage.removeItem('userid')
-        localStorage.removeItem('team_name')
-        localStorage.removeItem('team_id')
         this.$store.commit('removeToken')
 
         this.$router.push('/')

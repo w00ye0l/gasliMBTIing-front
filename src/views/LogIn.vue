@@ -6,9 +6,9 @@
 
         <form @submit.prevent="submitForm">
           <div class="field">
-            <label>Username</label>
+            <label>Email</label>
             <div class="control">
-              <input type="text" name="username" class="input" v-model="username">
+              <input type="email" name="email" class="input" v-model="username">
             </div>
           </div>
 
@@ -29,6 +29,7 @@
             </div>
           </div>
         </form>
+        <router-link to="/sign-up">Not a member yet?</router-link>
       </div>
     </div>
   </div>
@@ -68,6 +69,8 @@
             axios.defaults.headers.common['Authorization'] = 'Token ' + token
 
             localStorage.setItem('token', token)
+
+            this.$router.push('/dashboard/my-account')
           })
           .catch(error => {
             if (error.response) {

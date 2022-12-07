@@ -6,16 +6,9 @@
 
         <form @submit.prevent="submitForm">
           <div class="field">
-            <label>Username</label>
+            <label>Email</label>
             <div class="control">
-              <input type="text" name="username" class="input" v-model="username">
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Nickname</label>
-            <div class="control">
-              <input type="text" name="nickname" class="input" v-model="nickname">
+              <input type="email" name="email" class="input" v-model="username">
             </div>
           </div>
 
@@ -30,6 +23,73 @@
             <label>Repeat Password</label>
             <div class="control">
               <input type="password" name="password2" class="input" v-model="password2">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Nickname</label>
+            <div class="control">
+              <input type="text" name="nickname" class="input" v-model="nickname">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>gender</label>
+            <div class="control">
+              <div class="select">
+                <select v-model="gender">
+                  <option value="남">남</option>
+                  <option value="여">여</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>MBTI1</label>
+            <div class="control">
+              <div class="select">
+                <select v-model="mbti1">
+                  <option value="E">E</option>
+                  <option value="I">I</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>MBTI2</label>
+            <div class="control">
+              <div class="select">
+                <select v-model="mbti2">
+                  <option value="N">N</option>
+                  <option value="S">S</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>MBTI3</label>
+            <div class="control">
+              <div class="select">
+                <select v-model="mbti3">
+                  <option value="T">T</option>
+                  <option value="F">F</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>MBTI4</label>
+            <div class="control">
+              <div class="select">
+                <select v-model="mbti4">
+                  <option value="P">P</option>
+                  <option value="J">J</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -57,9 +117,14 @@
     data() {
       return {
         username: '',
-        nickname: '',
         password1: '',
         password2: '',
+        nickname: '',
+        gender: '',
+        mbti1: '',
+        mbti2: '',
+        mbti3: '',
+        mbti4: '',
         errors: [],
       }
     },
@@ -69,10 +134,6 @@
 
         if (this.username === '') {
           this.errors.push('The username is missing')
-        }
-
-        if (this.nickname === '') {
-          this.errors.push('The nickname is missing')
         }
 
         if (this.password1 === '') {
@@ -88,8 +149,13 @@
 
           const formData = {
             username: this.username,
+            password: this.password1,
+            gender: this.gender,
             nickname: this.nickname,
-            password: this.password1
+            mbti1: this.mbti1,
+            mbti2: this.mbti2,
+            mbti3: this.mbti3,
+            mbti4: this.mbti4
           }
 
           await axios
