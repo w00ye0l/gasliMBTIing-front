@@ -5,8 +5,13 @@ import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
 import Dashboard from '../views/dashboard/Dashboard.vue'
 import MyAccount from '../views/dashboard/MyAccount.vue'
+
+import Mbit from '../views/dashboard/Mbti.vue'
+import AddMbit from '../views/dashboard/AddMbti.vue'
+
 import Communities from '../views/dashboard/Communities.vue'
 import AddCommunity from '../views/dashboard/AddCommunity.vue'
+
 
 const routes = [
   {
@@ -41,9 +46,24 @@ const routes = [
     }
   },
   {
+    path: '/dashboard/mbti',
+    name: 'Mbti',
+    component: Mbit,
+    meta: {
+      requireLogin: true
+    }
+  },
     path: '/dashboard/communities',
     name: 'Communities',
     component: Communities,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/mbti/add',
+    name: 'AddMbti',
+    component: AddMbit,
     meta: {
       requireLogin: true
     }

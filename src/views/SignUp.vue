@@ -173,6 +173,7 @@
               this.$router.push('/log-in')
             })
             .catch(error => {
+              console.log(formData)
               if (error.response) {
                 for (const property in error.response.data) {
                   this.errors.push(`${property}: ${error.response.data[property]}`)
