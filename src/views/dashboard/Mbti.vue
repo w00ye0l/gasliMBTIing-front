@@ -20,7 +20,7 @@
           <tbody>
             <tr v-for="mbti_ in mbti" v-bind:key="mbti_.id">
               <td>{{ mbti_.mbti }}</td>
-              <td>{{ mbti_.content }}</td>
+              <td>{{ mbti_.title }}</td>
               <td>{{ mbti_.content }}</td>
             </tr>
           </tbody>
@@ -41,11 +41,11 @@
         mbti: []
       }
     },
-    mounted() {
-      getMbti()
+    created() {
+      this.getMbti()
     },
     methods: {
-      async getLeads() {
+      async getMbti() {
         this.$store.commit('setIsLoading', true)
 
         axios
