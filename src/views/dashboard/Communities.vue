@@ -28,7 +28,7 @@
               <td>{{ community.mbti }}</td>
               <td>
                 <template v-if="community.user">
-                  {{ community.user }}
+                  {{ community.user.nickname }}
                 </template>
               </td>
               <td>
