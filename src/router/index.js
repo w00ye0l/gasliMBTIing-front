@@ -53,6 +53,7 @@ const routes = [
       requireLogin: true
     }
   },
+  {
     path: '/dashboard/communities',
     name: 'Communities',
     component: Communities,

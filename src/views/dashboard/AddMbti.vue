@@ -94,7 +94,7 @@
           .then(response => {
             console.log(response)
 
-            this.$router.push('/dashboard/mbti/add')
+            this.$router.push('/dashboard/mbti/')
           })
           .catch(error => {
             console.log(error)
