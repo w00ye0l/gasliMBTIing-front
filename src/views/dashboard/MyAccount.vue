@@ -7,8 +7,6 @@
 
       <div class="column is-12">
         <div class="buttons">
-          <router-link :to="{ name: 'EditMember', params: { id: Number($store.state.user.id) }}" class="button is-light">Edit</router-link>
-          
           <button @click="logout()" class="button is-danger">Log out</button>
         </div>
       </div>
@@ -36,8 +34,6 @@
         localStorage.removeItem('token')
         localStorage.removeItem('username')
         localStorage.removeItem('userid')
-        localStorage.removeItem('team_name')
-        localStorage.removeItem('team_id')
         this.$store.commit('removeToken')
 
         this.$router.push('/')
