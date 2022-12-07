@@ -13,7 +13,7 @@
             <p>Info</p>
           </router-link>
 
-          <router-link to="/" class="btn__custom">
+          <router-link to="/dashboard/communities" class="btn__custom">
             <font-awesome-icon class="icon is-middle" icon="comments" />
             <p>Commu</p>
           </router-link>

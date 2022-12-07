@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div class="columns is-multiline">
-      <div class="column is-12">
+    <div class="columns is-centered">
+      <div class="column is-10">
         <h1 class="title">Dashboard</h1>
       </div>
     </div>
