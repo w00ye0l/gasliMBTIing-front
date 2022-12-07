@@ -27,9 +27,11 @@
               <td>{{ community.title }}</td>
               <td>{{ community.mbti }}</td>
               <td>
+                <router-link to="/dashboard/my-account">
                 <template v-if="community.user">
                   {{ community.user.nickname }}
                 </template>
+                </router-link>
               </td>
               <td>
                 <!-- <router-link :to="{ name: 'Community', params: { id: community.id }}">Details</router-link> -->
