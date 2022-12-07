@@ -6,16 +6,9 @@
 
         <form @submit.prevent="submitForm">
           <div class="field">
-            <label>Username</label>
+            <label>Email</label>
             <div class="control">
-              <input type="text" name="username" class="input" v-model="username">
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Nickname</label>
-            <div class="control">
-              <input type="text" name="nickname" class="input" v-model="nickname">
+              <input type="email" name="email" class="input" v-model="username">
             </div>
           </div>
 
@@ -57,7 +50,6 @@
     data() {
       return {
         username: '',
-        nickname: '',
         password1: '',
         password2: '',
         errors: [],
@@ -69,10 +61,6 @@
 
         if (this.username === '') {
           this.errors.push('The username is missing')
-        }
-
-        if (this.nickname === '') {
-          this.errors.push('The nickname is missing')
         }
 
         if (this.password1 === '') {
@@ -88,7 +76,6 @@
 
           const formData = {
             username: this.username,
-            nickname: this.nickname,
             password: this.password1
           }
 
