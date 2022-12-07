@@ -20,6 +20,8 @@
     </div>
     <!-- <img class="logo" alt="Vue logo" src="../assets/gasliMBTIng-logo.png"> -->
     <h1 class="title__custom">gasli<span class="title__m">M</span><span class="title__b">B</span><span class="title__t">T</span><span class="title__i">I</span>ng</h1>
+
+    <h2 class="subtitle__custom">gasliMBTIng이 뭔데?</h2>
   </div>
 </template>
 
@@ -139,5 +141,10 @@ export default {
 }
 .title__i {
   color: #88d2f7;
+}
+
+.subtitle__custom {
+  margin-top: 20px;
+  font-size: 40px;
 }
 </style>
