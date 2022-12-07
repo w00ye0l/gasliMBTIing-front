@@ -33,6 +33,66 @@
             </div>
           </div>
 
+          <div class="field">
+            <label>gender</label>
+            <div class="control">
+              <div class="select">
+                <select v-model="gender">
+                  <option value="남">남</option>
+                  <option value="여">여</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>MBTI1</label>
+            <div class="control">
+              <div class="select">
+                <select v-model="mbti1">
+                  <option value="E">E</option>
+                  <option value="I">I</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>MBTI2</label>
+            <div class="control">
+              <div class="select">
+                <select v-model="mbti2">
+                  <option value="N">N</option>
+                  <option value="S">S</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>MBTI3</label>
+            <div class="control">
+              <div class="select">
+                <select v-model="mbti3">
+                  <option value="T">T</option>
+                  <option value="F">F</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>MBTI4</label>
+            <div class="control">
+              <div class="select">
+                <select v-model="mbti4">
+                  <option value="P">P</option>
+                  <option value="J">J</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
           <div class="notification is-danger" v-if="errors.length">
             <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
           </div>
@@ -60,6 +120,11 @@
         password1: '',
         password2: '',
         nickname: '',
+        gender: '',
+        mbti1: '',
+        mbti2: '',
+        mbti3: '',
+        mbti4: '',
         errors: [],
       }
     },
@@ -85,7 +150,12 @@
           const formData = {
             username: this.username,
             password: this.password1,
-            nickname: this.nickname
+            gender: this.gender,
+            nickname: this.nickname,
+            mbti1: this.mbti1,
+            mbti2: this.mbti2,
+            mbti3: this.mbti3,
+            mbti4: this.mbti4
           }
 
           await axios
