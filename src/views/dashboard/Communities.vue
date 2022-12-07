@@ -4,7 +4,7 @@
       <div class="column is-10">
         <h1 class="title">Community</h1>
 
-        <router-link to="/dashboard/communities/add">Add Lead</router-link>
+        <router-link to="/dashboard/community/add">Add Lead</router-link>
       </div>
 
       <div class="column is-10">
@@ -15,6 +15,7 @@
               <th>Title</th>
               <th>Mbti</th>
               <th>User</th>
+              <th></th>
             </tr>
           </thead>
 
@@ -34,7 +35,7 @@
                 </router-link>
               </td>
               <td>
-                <!-- <router-link :to="{ name: 'Community', params: { id: community.id }}">Details</router-link> -->
+                <router-link :to="{ name: 'Community', params: { id: community.id }}">Details</router-link>
               </td>
             </tr>
           </tbody>
