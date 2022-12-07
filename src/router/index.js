@@ -5,6 +5,8 @@ import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
 import Dashboard from '../views/dashboard/Dashboard.vue'
 import MyAccount from '../views/dashboard/MyAccount.vue'
+import Mbit from '../views/dashboard/Mbti.vue'
+import AddMbit from '../views/dashboard/AddMbti.vue'
 
 const routes = [
   {
@@ -34,6 +36,22 @@ const routes = [
     path: '/dashboard/my-account',
     name: 'MyAccount',
     component: MyAccount,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/mbti',
+    name: 'Mbti',
+    component: Mbit,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/mbti/add',
+    name: 'AddMbti',
+    component: AddMbit,
     meta: {
       requireLogin: true
     }
