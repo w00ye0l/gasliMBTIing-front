@@ -52,6 +52,7 @@
   width: 100%;
   height: 100px;
   background: #EAE4E9;
+  z-index: 20;
 }
 .navbar__menu {
   width: 100%;
