@@ -7,6 +7,8 @@ import Dashboard from '../views/dashboard/Dashboard.vue'
 import MyAccount from '../views/dashboard/MyAccount.vue'
 import Communities from '../views/dashboard/Communities.vue'
 import AddCommunity from '../views/dashboard/AddCommunity.vue'
+import Friends from '../views/dashboard/Friends.vue'
+import AddFriends from '../views/dashboard/AddFriends.vue'
 
 const routes = [
   {
@@ -52,6 +54,22 @@ const routes = [
     path: '/dashboard/communities/add',
     name: 'AddCommunity',
     component: AddCommunity,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/friends',
+    name: 'Friends',
+    component: Friends,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/friends/add',
+    name: 'AddFriends',
+    component: AddFriends,
     meta: {
       requireLogin: true
     }
