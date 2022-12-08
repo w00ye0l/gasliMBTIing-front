@@ -4,7 +4,7 @@
       <div class="column is-10 is-center">
         <h1 class="title">{{ community.title }}</h1>
 
-        <router-link :to="{ name: 'EditCommunity', params: { id: community.id }}" class="button is-light">Edit</router-link>
+        <router-link :to="{ name: 'EditCommunity', params: { id: Number(community.id) }}" class="button is-light">Edit</router-link>
       </div>
 
       <div class="column is-10 is-center">
@@ -29,7 +29,9 @@
     name: 'Community',
     data() {
       return {
-        community: {}
+        community: {
+          user: {},
+        },
       }
     },
     created() {
