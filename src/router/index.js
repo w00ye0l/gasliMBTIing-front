@@ -34,9 +34,6 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
-    meta: {
-      requireLogin: true
-    }
   },
   {
     path: '/dashboard/my-account',
@@ -50,9 +47,6 @@ const routes = [
     path: '/dashboard/mbti',
     name: 'Mbti',
     component: Mbti,
-    meta: {
-      requireLogin: true
-    }
   },
   {
     path: '/dashboard/mbti/add',
@@ -66,9 +60,6 @@ const routes = [
     path: '/dashboard/community',
     name: 'Communities',
     component: Communities,
-    meta: {
-      requireLogin: true
-    }
   },
   {
     path: '/dashboard/community/add',
@@ -82,9 +73,6 @@ const routes = [
     path: '/dashboard/community/:id',
     name: 'Community',
     component: Community,
-    meta: {
-      requireLogin: true
-    }
   },
   {
     path: '/dashboard/community/:id/edit',
@@ -98,9 +86,6 @@ const routes = [
     path: '/dashboard/friends',
     name: 'Friends',
     component: Friends,
-    meta: {
-      requireLogin: true
-    }
   },
   {
     path: '/dashboard/friends/add',
