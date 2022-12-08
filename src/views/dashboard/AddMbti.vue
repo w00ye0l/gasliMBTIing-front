@@ -1,28 +1,47 @@
 <template>
   <div class="container">
     <div class="columns is-multiline">
-      <div class="column is-10">
-        <h1 class="title">Add community</h1>
+      <div class="column is-12">
+        <h1 class="title">Add MBTI</h1>
       </div>
 
-      <div class="column is-10">
+      <div class="column is-12">
         <form @submit.prevent="submitForm">
+
           <div class="field">
-            <label>Category</label>
+            <label>board</label>
             <div class="control">
-              <input type="text" class="input" v-model="category">
+              <input type="num" class="input" v-model="board">
             </div>
           </div>
-          
+
+
           <div class="field">
             <label>MBTI</label>
             <div class="control">
-              <input type="text" class="input" v-model="mbti">
+              <select class="select" v-model="mbti">
+                <option value="INFP">INFP</option>
+                <option value="ENFP">ENFP</option>
+                <option value="ESFJ">ESFJ</option>
+                <option value="ISFJ">ISFJ</option>
+                <option value="ISFP">ISFP</option>
+                <option value="ESFP">ESFP</option>
+                <option value="INTP">INTP</option>
+                <option value="INFJ">INFJ</option>
+                <option value="ENFJ">ENFJ</option>
+                <option value="ENTP">ENTP</option>
+                <option value="ESTJ">ESTJ</option>
+                <option value="ISTJ">ISTJ</option>
+                <option value="INTJ">INTJ</option>
+                <option value="ISPT">ISPT</option>
+                <option value="ESTP">ESTP</option>
+                <option value="ENTJ">ENTJ</option>
+              </select>
             </div>
           </div>
 
           <div class="field">
-            <label>Title</label>
+            <label>title</label>
             <div class="control">
               <input type="text" class="input" v-model="title">
             </div>
@@ -35,27 +54,12 @@
             </div>
           </div>
 
-          <!-- 카테고리 예시 -->
-          <!-- <div class="field">
-            <label>Category</label>
-            <div class="control">
-              <div class="select">
-                <select v-model="category">
-                  <option value="new">New</option>
-                  <option value="contacted">Contacted</option>
-                  <option value="inprogress">In progress</option>
-                  <option value="lost">Lost</option>
-                  <option value="won">Won</option>
-                </select>
-              </div>
-            </div>
-          </div> -->
-
           <div class="field">
             <div class="control">
               <button class="button is-success">Submit</button>
             </div>
           </div>
+
         </form>
       </div>
     </div>
@@ -64,14 +68,11 @@
 
 <script>
   import axios from 'axios'
-
-  import { toast } from 'bulma-toast'
-
   export default {
-    name: 'AddCommunity',
+    name: 'AddMbti',
     data() {
       return {
-        category: '',
+        board: '',
         mbti: '',
         title: '',
         content: '',
@@ -80,28 +81,20 @@
     methods: {
       async submitForm() {
         this.$store.commit('setIsLoading', true)
-        
-        console.log('submit form')
-        const community = {
-          category: this.category,
+
+        const mbit_ = {
+          board: this.board,
           mbti: this.mbti,
           title: this.title,
           content: this.content,
         }
 
         await axios
-          .post('/community/create/', community)
+          .post('MBTI/', mbit_)
           .then(response => {
-            toast({
-              message: 'The lead was added',
-              type: 'is-success',
-              dismissible: true,
-              pauseOnHover: true,
-              duration: 2000,
-              position: 'bottom-right',
-            })
+            console.log(response)
 
-            this.$router.push('/dashboard/community')
+            this.$router.push('/dashboard/mbti/')
           })
           .catch(error => {
             console.log(error)

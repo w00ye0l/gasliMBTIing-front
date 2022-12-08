@@ -3,34 +3,30 @@
     <div class="navbar__menu">
       <div class="navbar__item">
         <div class="buttons">
-          <router-link to="/" class="btn__custom">
+          <router-link to="/" class="btn__custom" :class="{ active: active === 'Home' }" @click="active = 'Home'" style="--clr:#FF99C8">
             <font-awesome-icon class="icon is-middle" icon="house" />
-            <span>Home</span>
           </router-link>
 
-          <router-link to="/" class="btn__custom">
+          <router-link to="/dashboard/mbti" class="btn__custom" :class="{ active: active === 'Mbti' || active === 'AddMbti' }" @click="active = 'Mbti'" style="--clr:#FCF6BD">
             <font-awesome-icon class="icon is-middle" icon="book" />
-            <p>Info</p>
           </router-link>
 
-          <router-link to="/dashboard/communities" class="btn__custom">
+          <router-link to="/dashboard/community" :class="{ active: active === 'Communities' || active === 'Community' || active === 'AddCommunity' || active === 'EditCommunity' }" @click="active = 'Communities'" class="btn__custom" style="--clr:#D0F4DE">
             <font-awesome-icon class="icon is-middle" icon="comments" />
-            <p>Commu</p>
           </router-link>
           
           <template v-if="!$store.state.isAuthenticated">
-            <router-link to="/log-in" class="btn__custom">
+            <router-link to="/log-in" class="btn__custom" :class="{ active: active === 'LogIn' || active === 'SignUp' }" @click="active = 'LogIn'" style="--clr:#A9DEF9">
               <font-awesome-icon class="icon is-middle" icon="right-to-bracket" />
-              <p>Login</p>
             </router-link>
           </template>
           
           <template v-else>
-            <router-link to="/dashboard/my-account" class="btn__custom">
+            <router-link to="/dashboard/my-account" :class="{ active: active === 'MyAccount' }" @click="active = 'MyAccount'" class="btn__custom" style="--clr:#A9DEF9">
               <font-awesome-icon class="icon is-middle" icon="circle-user" />
-              <p>User</p>
             </router-link>
           </template>
+          <div class="indicator"></div>
         </div>
       </div>
     </div>
@@ -38,20 +34,32 @@
 </template>
 
 <script>
+  import { computed } from "vue";
+  import { useRoute } from "vue-router";
+
   export default {
-    name: 'Navbar'
+    name: 'Navbar',
+    setup() {
+      const active = computed(() => { 
+        return useRoute().name
+      })
+      return {
+        active,
+      };
+    },
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .navbar__custom {
   position: fixed;
   bottom: 0;
   margin: auto;
   max-width: 650px;
   width: 100%;
-  height: 100px;
+  height: 80px;
   background: #EAE4E9;
+  z-index: 20;
 }
 .navbar__menu {
   width: 100%;
@@ -62,8 +70,10 @@
 }
 .buttons {
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 }
 .btn__custom {
   display: flex;
@@ -71,20 +81,75 @@
   align-items: center;
   justify-content: center;
   width: 70px;
-  height: 100px;
-  background: #EAE4E9;
+  height: 70px;
   border: 0;
+  border-radius: 50%;
   outline: 0;
   color: rgb(74, 74, 74);
+  transition: 0.7s;
 }
-.icon {
-  transition: 0.5s;
+.btn__custom::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--clr);
+  border-radius: 50%;
+  filter: blur(5px);
+  opacity: 0;
+  z-index: -1;
 }
-.btn__custom:hover .icon {
-  transform: translateY(-35px);
+.btn__custom.active {
+  background: var(--clr);
+  transform: translateY(-40px);
+}
+.btn__custom.active::before {
+  opacity: 0.5;
 }
 router-link {
   border: 0;
   outline: none;
 }
+.indicator {
+  position: absolute;
+  top: -45px;
+  left: -80px;
+  width: 90px;
+  height: 90px;
+  background: #EAE4E9;
+  border-radius: 50%;
+  z-index: -2;
+  transition: 0.5s;
+}
+.indicator::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: -28px;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: 15px 18px #EAE4E9;
+}
+.indicator::after {
+  content: '';
+  position: absolute;
+  top: 14px;
+  right: -28px;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: -15px 18px #EAE4E9;
+}
+
+@for $i from 1 to 5 {
+  .buttons :nth-child(#{$i}).active ~ .indicator {
+    transform: translateX(calc(144px * $i));
+  }
+}
+
 </style>

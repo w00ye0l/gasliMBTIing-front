@@ -34,7 +34,14 @@
           </div>
 
           <div class="field">
-            <label>gender</label>
+            <label>Age</label>
+            <div class="control">
+              <input type="text" name="age" class="input" v-model="age">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Gender</label>
             <div class="control">
               <div class="select">
                 <select v-model="gender">
@@ -120,6 +127,7 @@
         password1: '',
         password2: '',
         nickname: '',
+        age: '',
         gender: '',
         mbti1: '',
         mbti2: '',
@@ -152,6 +160,7 @@
             password: this.password1,
             gender: this.gender,
             nickname: this.nickname,
+            age: this.age,
             mbti1: this.mbti1,
             mbti2: this.mbti2,
             mbti3: this.mbti3,
@@ -173,6 +182,7 @@
               this.$router.push('/log-in')
             })
             .catch(error => {
+              console.log(formData)
               if (error.response) {
                 for (const property in error.response.data) {
                   this.errors.push(`${property}: ${error.response.data[property]}`)
