@@ -1,11 +1,25 @@
 <template>
   <div class="main">
-    <Navbar />
+    <template v-if="active === 'Home'">
+    </template>
+    
+    <template v-else>
+      <div class="container">
+        <div class="columns is-justify-content-center">
+          <div class="column is-flex is-10 is-justify-content-end">
+            <router-link to="/">
+              <font-awesome-icon class="icon is-middle" icon="house" />
+            </router-link>
+          </div>
+        </div>
+      </div>
+      <Navbar />
+    </template>
 
     <div class="is-loading-bar has-text-centered" v-bind:class="{'is-loading': $store.state.isLoading}">
       <div class="lds-dual-ring"></div>
     </div>
-
+    
     <section class="section">
       <router-view/>
     </section>
@@ -15,11 +29,26 @@
 <script>
   import axios from 'axios'
   import Navbar from '@/components/layout/Navbar'
+  import { computed } from "vue";
+  import { useRoute } from "vue-router";
 
   export default {
     name: 'App',
     components: {
       Navbar
+    },
+    setup() {
+      const active = computed({
+        get() { 
+          return useRoute().name
+        },
+        set() {
+
+        },
+      });
+      return {
+        active,
+      };
     },
     beforeCreate() {
       this.$store.commit('initializeStore')
@@ -50,8 +79,14 @@
 .main {
   max-width: 650px;
   margin: auto;
-  height: 100vh;
+  padding: 0;
+  min-height: 100vh;
   box-shadow: 0px 0px 20px 5px rgb(199, 199, 199);
+}
+
+.section {
+  min-height: 93vh;
+  padding-bottom: 13vh;
 }
 
 .lds-dual-ring {

@@ -3,8 +3,8 @@
     <div class="navbar__menu">
       <div class="navbar__item">
         <div class="buttons">
-          <router-link to="/" class="btn__custom" :class="{ active: active === 'Home' }" @click="active = 'Home'" style="--clr:#FF99C8">
-            <font-awesome-icon class="icon is-middle" icon="house" />
+          <router-link to="/dashboard/friends" class="btn__custom" :class="{ active: active === 'Friends' }" @click="active = 'Friends'" style="--clr:#FF99C8">
+            <font-awesome-icon class="icon is-middle" icon="address-book" />
           </router-link>
 
           <router-link to="/dashboard/mbti" class="btn__custom" :class="{ active: active === 'Mbti' || active === 'AddMbti' }" @click="active = 'Mbti'" style="--clr:#FCF6BD">
@@ -40,9 +40,14 @@
   export default {
     name: 'Navbar',
     setup() {
-      const active = computed(() => { 
-        return useRoute().name
-      })
+      const active = computed({
+        get() { 
+          return useRoute().name
+        },
+        set() {
+
+        },
+      });
       return {
         active,
       };
@@ -152,4 +157,11 @@ router-link {
   }
 }
 
+@media screen and (max-width: 650px) {
+  @for $i from 1 to 5 {
+    .buttons :nth-child(#{$i}).active ~ .indicator {
+      transform: translateX(calc(22.1538vw * $i));
+    }
+  }
+}
 </style>
