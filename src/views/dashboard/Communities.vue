@@ -4,7 +4,7 @@
       <div class="column is-10">
         <h1 class="title">Community</h1>
 
-        <router-link to="/dashboard/community/add">Add Lead</router-link>
+        <router-link to="/dashboard/community/add" class="button is-light">글쓰기</router-link>
       </div>
 
       <div class="column is-10">
