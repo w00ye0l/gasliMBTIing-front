@@ -22,12 +22,28 @@
     <h1 class="title__custom">gasli<span class="title__m">M</span><span class="title__b">B</span><span class="title__t">T</span><span class="title__i">I</span>ng</h1>
 
     <h2 class="subtitle__custom">gasliMBTIng이 뭔데?</h2>
+    <ModalView v-if="isModalViewed" @close-modal="isModalViewed = false">
+      <Content />
+    </ModalView>
+    <button @click="isModalViewed = true">Open Modal</button>
   </div>
 </template>
 
 <script>
+import Content from '../components/layout/Content';
+import ModalView from '../components/layout/ModalView';
+
 export default {
   name: 'Home',
+  components: {
+    Content,
+    ModalView,
+  },
+  data() {
+    return {
+      isModalViewed: false,
+    };
+  },
 }
 </script>
 
