@@ -26,7 +26,7 @@
               <font-awesome-icon class="icon is-middle" icon="circle-user" />
             </router-link>
           </template>
-          <div class="indicator"></div>
+          <!-- <div class="indicator"></div> -->
         </div>
       </div>
     </div>
@@ -109,6 +109,7 @@
 .btn__custom.active {
   background: var(--clr);
   transform: translateY(-40px);
+  box-shadow: 0 0 0 0.7rem #EAE4E9;
 }
 .btn__custom.active::before {
   opacity: 0.5;
@@ -117,39 +118,39 @@ router-link {
   border: 0;
   outline: none;
 }
-.indicator {
-  position: absolute;
-  top: -45px;
-  left: -80px;
-  width: 90px;
-  height: 90px;
-  background: #EAE4E9;
-  border-radius: 50%;
-  z-index: -2;
-  transition: 0.5s;
-}
-.indicator::before {
-  content: '';
-  position: absolute;
-  top: 14px;
-  left: -28px;
-  width: 30px;
-  height: 30px;
-  background: transparent;
-  border-radius: 50%;
-  box-shadow: 15px 18px #EAE4E9;
-}
-.indicator::after {
-  content: '';
-  position: absolute;
-  top: 14px;
-  right: -28px;
-  width: 30px;
-  height: 30px;
-  background: transparent;
-  border-radius: 50%;
-  box-shadow: -15px 18px #EAE4E9;
-}
+// .btn__custom {
+//   position: absolute;
+//   top: -45px;
+//   left: -80px;
+//   width: 90px;
+//   height: 90px;
+//   background: #EAE4E9;
+//   border-radius: 50%;
+//   z-index: -2;
+//   transition: 0.5s;
+// }
+// .btn__custom::before {
+//   content: '';
+//   position: absolute;
+//   top: 14px;
+//   left: -28px;
+//   width: 30px;
+//   height: 30px;
+//   background: transparent;
+//   border-radius: 50%;
+//   box-shadow: 15px 18px #EAE4E9;
+// }
+// .btn__custom::after {
+//   content: '';
+//   position: absolute;
+//   top: 14px;
+//   right: -28px;
+//   width: 30px;
+//   height: 30px;
+//   background: transparent;
+//   border-radius: 50%;
+//   box-shadow: -15px 18px #EAE4E9;
+// }
 
 @for $i from 1 to 5 {
   .buttons :nth-child(#{$i}).active ~ .indicator {
@@ -160,7 +161,7 @@ router-link {
 @media screen and (max-width: 650px) {
   @for $i from 1 to 5 {
     .buttons :nth-child(#{$i}).active ~ .indicator {
-      transform: translateX(calc(22.1538vw * $i));
+      transform: translateX(calc(23.6vw * $i));
     }
   }
 }
