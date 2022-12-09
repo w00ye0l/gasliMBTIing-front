@@ -4,13 +4,11 @@
     </template>
     
     <template v-else>
-      <div class="container">
-        <div class="columns is-justify-content-center">
-          <div class="column is-flex is-10 is-justify-content-end">
-            <router-link to="/">
-              <font-awesome-icon class="icon is-middle" icon="house" />
-            </router-link>
-          </div>
+      <div class="home__btn">
+        <div class="is-flex is-justify-content-end">
+          <router-link to="/" class="home__link">
+            <font-awesome-icon class="icon is-middle" icon="house" />
+          </router-link>
         </div>
       </div>
       <Navbar />
@@ -73,15 +71,51 @@
 }
 
 * {
-  font-family: 'KOTRAHOPE';
+  font-family: 'KOTRAHOPE' !important;
 }
 
 .main {
+  position: relative;
   max-width: 650px;
   margin: auto;
   padding: 0;
   min-height: 100vh;
   box-shadow: 0px 0px 20px 5px rgb(199, 199, 199);
+}
+
+.home__btn {
+  position: absolute;
+  top: 3rem;
+  right: 6rem;
+  z-index: 20;
+}
+
+@media screen and (max-width:1023px) {
+  .home__btn {
+    right: 5rem;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .home__btn {
+    right: 2rem;
+  }
+}
+
+.home__link {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  background: #9c9c9c;
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+}
+
+.column {
+  margin: auto;
+  background: transparent;
 }
 
 .section {
