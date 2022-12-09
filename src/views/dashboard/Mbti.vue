@@ -110,7 +110,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   label{
     font-size: small;
   }
