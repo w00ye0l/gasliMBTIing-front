@@ -65,7 +65,7 @@
             
             <div class="field gender__field">
               <label>성별</label>
-              <div class="control gender__radio">
+              <div class="control gender__radio box">
                 <label class="radio">
                   <input class="gender__btn" type="radio" name="gender" v-model="gender" value="남">
                   <font-awesome-icon class="gender" icon="fa-mars" style="--genClr:#70d6ff"/>
@@ -233,8 +233,7 @@ label {
   justify-content: space-between;
 }
 .age__field, .gender__field {
-  width: 50%;
-  margin-right: 5%;
+  width: 45%;
 }
 .gender__radio {
   display: flex;
