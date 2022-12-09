@@ -110,7 +110,10 @@
   }
 </script>
 
-<style>
+<style scoped>
+label {
+  font-size: 1.3rem;
+}
 .btn__submit {
   margin-top: 2rem;
   width: 100%;
