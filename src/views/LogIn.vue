@@ -2,21 +2,27 @@
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-10">
-        <h1 class="title">Log in</h1>
+        <h1 class="title">로그인</h1>
 
-        <form @submit.prevent="submitForm">
+        <form @submit.prevent="submitForm" class="box">
           <div class="field">
-            <label>Email</label>
-            <div class="control">
-              <input type="email" name="email" class="input" v-model="username">
-            </div>
+            <label>이메일</label>
+            <p class="control has-icons-left has-icons-right">
+              <input class="input" type="email" placeholder="이메일" name="email" v-model="username">
+              <span class="icon is-small is-left">
+                <font-awesome-icon icon="fa-envelope" />
+              </span>
+            </p>
           </div>
 
           <div class="field">
-            <label>Password</label>
-            <div class="control">
-              <input type="password" name="password" class="input" v-model="password">
-            </div>
+            <label>비밀번호</label>
+            <p class="control has-icons-left">
+              <input class="input" type="password" placeholder="비밀번호" name="password" v-model="password">
+              <span class="icon is-small is-left">
+                <font-awesome-icon icon="fa-lock" />
+              </span>
+            </p>
           </div>
 
           <div class="notification is-danger" v-if="errors.length">
@@ -25,11 +31,15 @@
 
           <div class="field">
             <div class="control">
-              <button class="button is-success">Submit</button>
+              <button class="btn__submit button">Submit</button>
             </div>
           </div>
         </form>
-        <router-link to="/sign-up">Not a member yet?</router-link>
+        <div class="signup__link">
+          <p>아직 회원이 아니신가요?</p>
+          <router-link to="/sign-up">회원가입!</router-link>
+        </div>
+        <img v-src src="" alt="">
       </div>
     </div>
   </div>
@@ -99,3 +109,38 @@
     }
   }
 </script>
+
+<style>
+.btn__submit {
+  margin-top: 2rem;
+  width: 100%;
+  font-size: 1.3rem;
+  background: #bd32fd;
+  border-radius: 2rem;
+  color: #fff;
+  border: 2px dashed rgb(255, 255, 255);
+  box-shadow: 0 0 0 0.2rem #bd32fd;
+}
+.btn__submit:hover {
+  background: #9f22da;
+  color: #fff;
+  border: 2px dashed rgb(255, 255, 255);
+  box-shadow: 0 0 0 0.2rem #9f22da;
+}
+.signup__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+.signup__link a {
+  padding: 0.5rem 1rem;
+  background: #d26ff0;
+  border-radius: 2rem;
+  color: rgb(253, 253, 253);
+}
+.signup__link a:hover {
+  background: #bd32fd;
+}
+</style>
