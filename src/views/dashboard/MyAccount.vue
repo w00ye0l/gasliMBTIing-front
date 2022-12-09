@@ -4,34 +4,33 @@
       <div class="column is-10 is-center">
         <div class="box">
           <h1 class="title">My account</h1>
-          
-          <div class="col-xs-12 col-sm-4 text-center">
-            <figure>
-                <img src="https://mblogthumb-phinf.pstatic.net/MjAxODAxMzFfODcg/MDAxNTE3MzkxNTAxMDkx.M_0YZWPyJdHFTFhy44QVGOefevhQlbp6imgO92lgrWcg.wlSOGUlI6sqwtZX4iOc2PtugEMY0xexfbFqEUyRXRpUg.JPEG.jsrwnmejs/%ED%91%9C%EC%A7%80_%EA%B3%A0%ED%99%94%EC%A7%88ssss.jpg?type=w2" alt="" class="img_profile">
-            </figure>
-          </div>
-          <div>
-            <p class="content-font" style="font-size: 20px"><strong>username: </strong> {{ user.username }} </p>
-            <p class="content-font" style="font-size: 20px"><strong>nickname: </strong> {{ user.nickname }} </p>
-            <p class="content-font" style="font-size: 20px"><strong>mbti: </strong>{{ user.mbti1 }}{{ user.mbti2 }}{{ user.mbti3 }}{{ user.mbti4 }}
-              <span class="tags" style="margin-right:5px">{{ user.age }}</span> 
-              <span class="tags" style="margin-right:5px">{{ user.gender }}</span>
-            </p>
-          </div>
-          <div class="column is-10">
-            <div class="buttons">
+
+            <div style="display: flex; align-items: center; justify-content: space-around;">
+              <img src="https://mblogthumb-phinf.pstatic.net/MjAxODAxMzFfODcg/MDAxNTE3MzkxNTAxMDkx.M_0YZWPyJdHFTFhy44QVGOefevhQlbp6imgO92lgrWcg.wlSOGUlI6sqwtZX4iOc2PtugEMY0xexfbFqEUyRXRpUg.JPEG.jsrwnmejs/%ED%91%9C%EC%A7%80_%EA%B3%A0%ED%99%94%EC%A7%88ssss.jpg?type=w2" alt="" class="img_profile" style="vertical-align:middle;">
+              <span>
+                <p class="mbti_font"><strong>이름: </strong> {{ user.username }} </p>
+                <p class="mbti_font"><strong>닉넴: </strong> {{ user.nickname }} </p>
+                <p class="mbti_font"><strong>mbti: </strong>{{ user.mbti1 }}{{ user.mbti2 }}{{ user.mbti3 }}{{ user.mbti4 }} </p>
+                <p class="mbti_font"><strong>나이: </strong> {{ user.age }} </p> 
+                <p class="mbti_font"><strong>성별: </strong> {{ user.gender }} </p>
+              </span>
+            </div>
+
+          <div class="column is-10" style="text-align: center; margin: auto;">
+            <div class="buttons" style=" display: inline-block;">
               <button @click="logout()" class="button is-danger">Log out</button>
             </div>
           </div>
         </div>
       </div> 
+
       <div class="column is-10 is-center">
         <div class="box">
           <h1 class="title">방명록</h1>
           <div>
-            <p class="content-font" style="font-size: 20px"><strong>username: </strong> </p>
-            <p class="content-font" style="font-size: 20px"><strong>Email: </strong>  </p>
-            <p class="content-font" style="font-size: 20px"><strong>Info: </strong>
+            <p class="mbti_font"><strong>username: </strong> </p>
+            <p class="mbti_font"><strong>Email: </strong>  </p>
+            <p class="mbti_font"><strong>Info: </strong>
             </p>
           </div>
         </div>
@@ -40,41 +39,36 @@
         <div class="box">
           <h1 class="title">친구 분포도</h1>
           <div>
-            <div style="width: 100%, text-align: center display: inline-block">
-              <p class="" style="font-size: 20px;">
-                <strong>I E</strong></p>
+            <div>
+              <div class="mbti_font" style="display: flex;flex-direction: column;">
+                <div><span style="float: left;"><strong>E</strong></span> <span style="float: right;"><strong>I</strong></span></div>
                   <div class="bar-container">
                     <div id="content_bar" class="bar1" style="width:55%"></div>
                   </div>           
             </div>
-            <div style="width: 100%, text-align: center display: inline-block">
-              <p class="" style="font-size: 20px;">
-                <strong>N S</strong></p>
+            <div class="mbti_font" style="display: flex;flex-direction: column;">
+              <div><span style="float: left;"><strong>N</strong></span> <span style="float: right;"><strong>S</strong></span></div>
                   <div class="bar-container">
                     <div id="content_bar" class="bar2" style="width:55%"></div>
                   </div>           
             </div>
-            <div style="width: 100%, text-align: center display: inline-block">
-              <p class="" style="font-size: 20px;">
-                <strong>T P</strong></p>
+            <div class="mbti_font" style="display: flex;flex-direction: column;">
+              <div><span style="float: left;"><strong>T</strong></span> <span style="float: right;"><strong>F</strong></span></div>
                   <div class="bar-container">
                     <div id="content_bar" class="bar3" style="width:55%"></div>
                   </div>           
             </div>
-            <div style="width: 100%, text-align: center display: inline-block">
-              <p class="" style="font-size: 20px;">
-                <strong>P J</strong></p>
+            <div class="mbti_font" style="display: flex;flex-direction: column;">
+              <div><span style="float: left;"><strong>P</strong></span> <span style="float: right;"><strong>J</strong></span></div>
                   <div class="bar-container">
                     <div id="content_bar" class="bar4" style="width:55%"></div>
                   </div>           
-            </div>
-            
-          </div>
-          
+            </div>            
+          </div>  
         </div>
       </div> 
-
     </div>
+  </div>
   </div>
 </template>
 
@@ -133,6 +127,10 @@
 </script>
 
 <style>
+.mbti_font {
+  font-size: 20px;
+  
+}
 
 .bar-container {
 width: 100%;
@@ -168,8 +166,7 @@ border-radius: 5px;
 }
 
 .img_profile {
-  width: 50%;
-  height: 50%;
+  width: 15rem;
 }
 </style>
 
