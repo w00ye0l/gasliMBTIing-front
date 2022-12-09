@@ -24,6 +24,7 @@
     <button class="button is-large modal-button" v-on:click="isShowModal = true">
       MBTI?
     </button>
+    
     <div class="modal" v-bind:class="{ 'is-active': isShowModal }">
     <div class="modal-background" v-on:click="isShowModal = false"></div>
       <div class="modal-card">
@@ -233,7 +234,7 @@ export default {
   display: flex;
   justify-content: center;
   border: 0;
-  background: #ffffff;
+  background: #fff;
 }
 
 .modal-card-head .delete {
@@ -247,14 +248,14 @@ export default {
 }
 
 .modal-card-body {
-  background: #ffffff;
+  background: #fff;
 }
 
 .modal-card-foot {
   display: flex;
   justify-content: center;
   border: 0;
-  background: #ffffff;
+  background: #fff;
 }
 
 .go__to {
