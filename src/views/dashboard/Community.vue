@@ -18,6 +18,7 @@
           <p><strong>User: </strong>{{ community.user.nickname }}</p>
           <p><strong>MBTI: </strong>{{ community.mbti }}</p>
           <p><strong>Content: </strong>{{ community.content }}</p>
+          <p><strong>Image: </strong><img :src="image2"></p>
         </div>
       </div>
     </div>
@@ -26,6 +27,7 @@
 
 <script>
   import axios from 'axios'
+  import { toast } from 'bulma-toast'
   
   export default {
     name: 'Community',
@@ -34,6 +36,7 @@
         community: {
           user: {},
         },
+        image2: '',
       }
     },
     created() {
@@ -45,11 +48,13 @@
         
         const communityID = this.$route.params.id
 
+
         await axios
           .get(`/community/${communityID}/`)
           .then(response => {
             console.log(response)
             this.community = response.data
+            this.image2 = 'http://localhost:8000' + this.community.image
           })
           .catch(error => {
             console.log(error)
@@ -65,7 +70,14 @@
         await axios
           .delete(`/community/delete/${communityID}/`, this.community)
           .then(() => {
-            alert('삭제되었습니다.')
+            toast({
+              message: '삭제되었습니다.',
+              type: 'is-danger',
+              dismissible: true,
+              pauseOnHover: true,
+              duration: 2000,
+              position: 'bottom-right',
+            })
             this.$router.push(`/dashboard/community`)
           }).catch((err) => {
             console.log(err);

@@ -6,7 +6,7 @@
       </div>
 
       <div class="column is-10">
-        <form @submit.prevent="submitForm">
+        <form @submit.prevent="submitForm" enctype="multipart/form-data">
           <div class="field">
             <label>Category</label>
             <div class="control">
@@ -33,6 +33,11 @@
             <div class="control">
               <input type="text" class="input" v-model="content">
             </div>
+          </div>
+
+          <div class="field">
+            <label>Image</label>
+            <input @change="onInputImage()" type="file" ref="communityimage">
           </div>
 
           <!-- 카테고리 예시 -->
@@ -73,24 +78,36 @@
         mbti: '',
         title: '',
         content: '',
+        image: ''
       }
     },
     methods: {
       async submitForm() {
-        this.$store.commit('setIsLoading', true)
-        
-        console.log('submit form')
+        // const formData = new FormData();
+
+        // formData.append("category", this.category)
+        // formData.append("mbti", this.mbti)
+        // formData.append("title", this.title)
+        // formData.append("content", this.content)
+        // formData.append("image", this.image)
+
         const community = {
           category: this.category,
           mbti: this.mbti,
           title: this.title,
           content: this.content,
+          image: this.image
         }
+
+        const headers = {
+          'content-Type': 'multipart/form-data'
+        }
+
         await axios
-          .post('/community/create/', community)
+          .post('/community/create/', community, {headers})
           .then(response => {
             toast({
-              message: 'The lead was added',
+              message: '글 작성이 완료되었습니다.',
               type: 'is-success',
               dismissible: true,
               pauseOnHover: true,
@@ -98,11 +115,17 @@
               position: 'bottom-right',
             })
             this.$router.push('/dashboard/community')
+            
           })
           .catch(error => {
             console.log(error)
           })
         this.$store.commit('setIsLoading', false)
+      },
+
+      async onInputImage() {
+        this.image = this.$refs.communityimage.files[0]
+        return this.image
       }
     }
   }
