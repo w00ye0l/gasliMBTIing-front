@@ -286,4 +286,8 @@ label {
   border: 2px dashed rgb(255, 255, 255);
   box-shadow: 0 0 0 0.2rem #bd32fd;
 }
+.button__submit:hover {
+  background: #9f22da;
+  box-shadow: 0 0 0 0.2rem #9f22da;
+}
 </style>
