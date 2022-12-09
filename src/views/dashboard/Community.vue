@@ -4,7 +4,9 @@
       <div class="column is-10 is-center">
         <h1 class="title">{{ community.title }}</h1>
 
-        <router-link :to="{ name: 'EditCommunity', params: { id: community.id }}" class="button is-light">Edit</router-link>
+        <router-link :to="{ name: 'EditCommunity', params: { id: Number(community.id) }}" class="button is-light">Edit</router-link>&nbsp;
+        <router-link to="/dashboard/community" class="button is-light">Home</router-link>&nbsp;
+        <button type="button" class="button is-light" v-on:click="fnDelete">Delete</button>
       </div>
 
       <div class="column is-10 is-center">
@@ -29,7 +31,9 @@
     name: 'Community',
     data() {
       return {
-        community: {}
+        community: {
+          user: {},
+        },
       }
     },
     created() {
@@ -51,6 +55,21 @@
             console.log(error)
           })
 
+        this.$store.commit('setIsLoading', false)
+      },
+      async fnDelete() {
+        if (!confirm("삭제하시겠습니까?")) return
+
+        const communityID = this.$route.params.id
+
+        await axios
+          .delete(`/community/delete/${communityID}/`, this.community)
+          .then(() => {
+            alert('삭제되었습니다.')
+            this.$router.push(`/dashboard/community`)
+          }).catch((err) => {
+            console.log(err);
+          })
         this.$store.commit('setIsLoading', false)
       }
     }

@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <div class="columns is-multiline">
+    <div class="columns is-centered is-multiline">
       <div class="column is-10">
-        <h1 class="title">Add community</h1>
+        <h1 class="title">커뮤니티 글쓰기</h1>
       </div>
 
       <div class="column is-10">
@@ -64,9 +64,7 @@
 
 <script>
   import axios from 'axios'
-
   import { toast } from 'bulma-toast'
-
   export default {
     name: 'AddCommunity',
     data() {
@@ -88,7 +86,6 @@
           title: this.title,
           content: this.content,
         }
-
         await axios
           .post('/community/create/', community)
           .then(response => {
@@ -100,13 +97,11 @@
               duration: 2000,
               position: 'bottom-right',
             })
-
             this.$router.push('/dashboard/community')
           })
           .catch(error => {
             console.log(error)
           })
-
         this.$store.commit('setIsLoading', false)
       }
     }

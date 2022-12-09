@@ -1,11 +1,23 @@
 <template>
   <div class="main">
-    <Navbar />
+    <template v-if="active === 'Home'">
+    </template>
+    
+    <template v-else>
+      <div class="home__btn">
+        <div class="is-flex is-justify-content-end">
+          <router-link to="/" class="home__link">
+            <font-awesome-icon class="icon is-middle" icon="house" />
+          </router-link>
+        </div>
+      </div>
+      <Navbar />
+    </template>
 
     <div class="is-loading-bar has-text-centered" v-bind:class="{'is-loading': $store.state.isLoading}">
       <div class="lds-dual-ring"></div>
     </div>
-
+    
     <section class="section">
       <router-view/>
     </section>
@@ -15,11 +27,26 @@
 <script>
   import axios from 'axios'
   import Navbar from '@/components/layout/Navbar'
+  import { computed } from "vue";
+  import { useRoute } from "vue-router";
 
   export default {
     name: 'App',
     components: {
       Navbar
+    },
+    setup() {
+      const active = computed({
+        get() { 
+          return useRoute().name
+        },
+        set() {
+
+        },
+      });
+      return {
+        active,
+      };
     },
     beforeCreate() {
       this.$store.commit('initializeStore')
@@ -44,14 +71,56 @@
 }
 
 * {
-  font-family: 'KOTRAHOPE';
+  font-family: 'KOTRAHOPE' !important;
 }
 
 .main {
+  position: relative;
   max-width: 650px;
   margin: auto;
-  height: 100vh;
+  padding: 0;
+  min-height: 100vh;
   box-shadow: 0px 0px 20px 5px rgb(199, 199, 199);
+}
+
+.home__btn {
+  position: absolute;
+  top: 3rem;
+  right: 6rem;
+  z-index: 20;
+}
+
+@media screen and (max-width:1023px) {
+  .home__btn {
+    right: 5rem;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .home__btn {
+    right: 2rem;
+  }
+}
+
+.home__link {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  background: #9c9c9c;
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+}
+
+.column {
+  margin: auto;
+  background: transparent;
+}
+
+.section {
+  min-height: 93vh;
+  padding-bottom: 13vh;
 }
 
 .lds-dual-ring {

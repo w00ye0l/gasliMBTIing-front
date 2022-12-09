@@ -11,7 +11,11 @@
           <div class="field">
             <label>board</label>
             <div class="control">
-              <input type="num" class="input" v-model="board">
+              <select class="select" v-model="board">
+                <option value="상대법">상대법</option>
+                <option value="주의할 점">주의할 점</option>
+                <option value="특징">특징</option>
+              </select>
             </div>
           </div>
 
@@ -88,7 +92,7 @@
           title: this.title,
           content: this.content,
         }
-
+        
         await axios
           .post('MBTI/', mbit_)
           .then(response => {
