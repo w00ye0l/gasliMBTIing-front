@@ -51,8 +51,8 @@
           </div>
           <div class="body__content">
             <li class="body__info">
-              이 앱은 주변 사람들의 MBTI 정보를 손쉽게 저장하고 
-              <br>간편하게 확인할 수 있도록 하는 사전과 같은 앱입니다.
+              주변 사람들의 MBTI 정보를 손쉽게 저장하고 
+              <br>간편하게 확인할 수 있는 사전과 같은 앱입니다.
             </li>
           </div>
 
@@ -73,8 +73,8 @@
           </div>
           <div class="body__content">
             <li class="body__info">
-              커뮤니티 공간에서 서로의 MBTI에 관한 이야기를 통해 
-              <br>정말 가스라이팅이 맞는지 판단해봅시다!
+              커뮤니티 공간에서 서로의 MBTI에 관한 이야기를 
+              <br>통해 정말 가스라이팅이 맞는지 판단해봅시다!
             </li>
           </div>
         </section>
@@ -225,7 +225,7 @@ export default {
 }
 
 .modal-card {
-  max-width: 430px;
+  max-width: 380px;
   border-radius: 1.5rem;
 }
 

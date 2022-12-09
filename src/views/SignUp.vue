@@ -2,101 +2,126 @@
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-10">
-        <h1 class="title">Sign up</h1>
+        <h1 class="title">회원가입</h1>
 
-        <form @submit.prevent="submitForm">
-          <div class="field">
-            <label>Email</label>
+        <form @submit.prevent="submitForm" class="box">
+          <!-- <div class="field">
+            <label>이메일</label>
             <div class="control">
               <input type="email" name="email" class="input" v-model="username">
             </div>
+          </div> -->
+          
+          <div class="field">
+            <label>이메일</label>
+            <p class="control has-icons-left has-icons-right">
+              <input class="input" type="email" placeholder="이메일" name="email" v-model="username">
+              <span class="icon is-small is-left">
+                <font-awesome-icon icon="fa-envelope" />
+              </span>
+            </p>
+          </div>
+          
+          <div class="field">
+            <label>닉네임</label>
+            <p class="control has-icons-left">
+              <input class="input" type="text" placeholder="닉네임" name="nickname" v-model="nickname">
+              <span class="icon is-small is-left">
+                <font-awesome-icon icon="fa-face-smile" />
+              </span>
+            </p>
           </div>
 
           <div class="field">
-            <label>Password</label>
-            <div class="control">
-              <input type="password" name="password1" class="input" v-model="password1">
+            <label>비밀번호</label>
+            <p class="control has-icons-left">
+              <input class="input" type="password" placeholder="비밀번호" name="password1" v-model="password1">
+              <span class="icon is-small is-left">
+                <font-awesome-icon icon="fa-lock" />
+              </span>
+            </p>
+          </div>
+
+          <div class="field">
+            <label>비밀번호 확인</label>
+            <p class="control has-icons-left">
+              <input class="input" type="password" placeholder="비밀번호 확인" name="password2" v-model="password2">
+              <span class="icon is-small is-left">
+                <font-awesome-icon icon="fa-lock" />
+              </span>
+            </p>
+          </div>
+
+          <div class="ageGender">
+            <div class="field age__field">
+              <label>나이</label>
+              <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="19" name="age" v-model="age">
+                <span class="icon is-small is-left">
+                  <font-awesome-icon icon="fa-baby" />
+                </span>
+              </p>
             </div>
-          </div>
-
-          <div class="field">
-            <label>Repeat Password</label>
-            <div class="control">
-              <input type="password" name="password2" class="input" v-model="password2">
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Nickname</label>
-            <div class="control">
-              <input type="text" name="nickname" class="input" v-model="nickname">
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Age</label>
-            <div class="control">
-              <input type="text" name="age" class="input" v-model="age">
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Gender</label>
-            <div class="control">
-              <div class="select">
-                <select v-model="gender">
-                  <option value="남">남</option>
-                  <option value="여">여</option>
-                </select>
+            
+            <div class="field gender__field">
+              <label>성별</label>
+              <div class="control gender__radio">
+                <label class="radio">
+                  <input class="gender__btn" type="radio" name="gender" v-model="gender" value="남">
+                  <font-awesome-icon class="gender" icon="fa-mars" style="--genClr:#70d6ff"/>
+                </label>
+                <label class="radio">
+                  <input class="gender__btn" type="radio" name="gender" v-model="gender" value="여">
+                  <font-awesome-icon class="gender" icon="fa-venus" style="--genClr:#ff70a6"/>
+                </label>
               </div>
             </div>
           </div>
-
-          <div class="field">
-            <label>MBTI1</label>
-            <div class="control">
-              <div class="select">
-                <select v-model="mbti1">
-                  <option value="E">E</option>
-                  <option value="I">I</option>
-                </select>
-              </div>
+          
+          <label>MBTI</label>
+          <div class="field mbti__field box">
+            <div class="control mbti__radio" style="--clr:#FF99C8">
+              <label class="radio">
+                <input class="radio__btn" type="radio" name="mbti1" v-model="mbti1" value="E">
+                <div>E</div>
+              </label>
+              <label class="radio">
+                <input class="radio__btn" type="radio" name="mbti1" v-model="mbti1" value="I">
+                <div>I</div>
+              </label>
             </div>
-          </div>
 
-          <div class="field">
-            <label>MBTI2</label>
-            <div class="control">
-              <div class="select">
-                <select v-model="mbti2">
-                  <option value="N">N</option>
-                  <option value="S">S</option>
-                </select>
-              </div>
+            <div class="control mbti__radio" style="--clr:#FCF6BD">
+              <label class="radio">
+                <input class="radio__btn" type="radio" name="mbti2" v-model="mbti2" value="N">
+                <div>N</div>
+              </label>
+              <label class="radio">
+                <input class="radio__btn" type="radio" name="mbti2" v-model="mbti2" value="S">
+                <div>S</div>
+              </label>
             </div>
-          </div>
 
-          <div class="field">
-            <label>MBTI3</label>
-            <div class="control">
-              <div class="select">
-                <select v-model="mbti3">
-                  <option value="T">T</option>
-                  <option value="F">F</option>
-                </select>
-              </div>
+            <div class="control mbti__radio" style="--clr:#D0F4DE">
+              <label class="radio">
+                <input class="radio__btn" type="radio" name="mbti3" v-model="mbti3" value="F">
+                <div>F</div>
+              </label>
+              <label class="radio">
+                <input class="radio__btn" type="radio" name="mbti3" v-model="mbti3" value="T">
+                <div>T</div>
+              </label>
             </div>
-          </div>
 
-          <div class="field">
-            <label>MBTI4</label>
-            <div class="control">
-              <div class="select">
-                <select v-model="mbti4">
-                  <option value="P">P</option>
-                  <option value="J">J</option>
-                </select>
-              </div>
+            <div class="control mbti__radio" style="--clr:#A9DEF9">
+              <label class="radio">
+                <input class="radio__btn" type="radio" name="mbti4" v-model="mbti4" value="J">
+                <div>J</div>
+              </label>
+              <label class="radio">
+                <input class="radio__btn" type="radio" name="mbti4" v-model="mbti4" value="P">
+                <div>P</div>
+              </label>
             </div>
           </div>
 
@@ -106,7 +131,7 @@
 
           <div class="field">
             <div class="control">
-              <button class="button is-success">Submit</button>
+              <button class="button__submit">MBTI!</button>
             </div>
           </div>
         </form>
@@ -198,3 +223,67 @@
     }
   }
 </script>
+
+<style>
+label {
+  font-size: 1.3rem;
+}
+.ageGender {
+  display: flex;
+  justify-content: space-between;
+}
+.age__field, .gender__field {
+  width: 50%;
+  margin-right: 5%;
+}
+.gender__radio {
+  display: flex;
+  justify-content: space-evenly;
+}
+.gender__radio .gender {
+  font-size: 30px;
+  color: #9c9c9c;
+}
+.gender__btn:checked + .gender {
+  color: var(--genClr);
+}
+.mbti__field {
+  display: flex;
+  justify-content: space-between;
+}
+.mbti__radio {
+  display: flex;
+  flex-direction: column;
+}
+.radio input {
+  display: none;
+}
+.radio + .radio {
+  margin: 0;
+}
+.radio div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid var(--clr);
+  font-size: 2rem;
+  line-height: 4rem;
+}
+.radio__btn:checked + div {
+  background: var(--clr);
+}
+.button__submit {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  border-radius: 2rem;
+  background: #bd32fd;
+  color: #fff;
+  border: 2px dashed rgb(255, 255, 255);
+  box-shadow: 0 0 0 0.2rem #bd32fd;
+}
+</style>
