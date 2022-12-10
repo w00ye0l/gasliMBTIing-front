@@ -55,7 +55,7 @@
 
     <div class="columns is-multiline">
       <div class="column is-10">
-        <h1 class="title">Add Friends</h1>
+        <h1 class="title">Edit Friends</h1>
       </div>
 
       <div class="column is-10">
@@ -127,7 +127,7 @@
               </label>
             </div>
           </div>
-          
+
           <br>
           <div class="field">
             <div class="control" style="text-align: center;">
@@ -148,6 +148,7 @@
     name: 'AddFriends',
     data() {
       return {
+        friend: '',
         name: '',
         mbti: '',
         mbti1: '',
@@ -160,10 +161,37 @@
         isShowModal2: false,
         myGroups:[],
         recommendedGroups :['가족','친구','회사','연예인','동네','게임','동창','비밀','나중에'],
-        addGroupName:'',
+        addGroupName: '',
       }
+    },created() {
+      this.getFriendsDetail()
     },
     methods: {
+      async getFriendsDetail() {
+        this.$store.commit('setIsLoading', true)
+        
+        const friendId = this.$route.params.id
+
+        await axios
+        .get(`/friends/${friendId}/`)
+        .then(response => {
+          this.friend = response.data
+          this.name = this.friend.name
+          this.grade = this.friend.grade
+          this.group = this.friend.group
+          this.mbti1 = this.friend.mbti[0]
+          this.mbti2 = this.friend.mbti[1]
+          this.mbti3 = this.friend.mbti[2]
+          this.mbti4 = this.friend.mbti[3]
+          this.mbti = this.friend.mbti[0] + this.friend.mbti[1] + this.friend.mbti[2] + this.friend.mbti[3]
+        })
+        
+        .catch(error => {
+            console.log(error)
+          })
+          
+        this.$store.commit('setIsLoading', false)
+      },
       async submitForm() {
         this.$store.commit('setIsLoading', true)
         
@@ -175,7 +203,7 @@
         }
 
         await axios
-          .post('/friends/create/', friends)
+          .put(`/friends/update/${this.$route.params.id}/`, friends)
           .then(response => {
             toast({
               message: 'The lead was added',

@@ -14,6 +14,7 @@ import Community from '../views/dashboard/Community.vue'
 import EditCommunity from '../views/dashboard/EditCommunity.vue'
 import Friends from '../views/dashboard/Friends.vue'
 import AddFriends from '../views/dashboard/AddFriends.vue'
+import EditFriends from '../views/dashboard/EditFriends.vue'
 
 
 
@@ -102,6 +103,14 @@ const routes = [
     path: '/dashboard/friends/add',
     name: 'AddFriends',
     component: AddFriends,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/friends/:id',
+    name: 'EditFriends',
+    component: EditFriends,
     meta: {
       requireLogin: true
     }
