@@ -87,7 +87,6 @@
         .then(response => {
           console.log(response)
           this.user = response.data
-          this.user.image = process.env.VUE_APP_API_URL + this.user.image
         })
         
         .catch(error => {

@@ -6,7 +6,7 @@
           <h1 class="title">{{ user.username }}님의 회원정보</h1>
           <form @submit.prevent="submitForm">
             <div style="display: flex; align-items: center; justify-content: space-around;">
-              <img :src="image2" class="img_profile">
+              <img :src="user.image" class="img_profile">
             </div>
 
             <div>
@@ -129,7 +129,7 @@
           this.mbti4 = this.user.mbti4
           this.age = this.user.age
           this.gender = this.user.gender
-          this.image2 = 'http://localhost:8000' + this.user.image
+          this.image = this.user.image
         })
         
         .catch(error => {
