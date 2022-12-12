@@ -3,13 +3,13 @@
     <div class="columns is-multiline" style= "justify-content: center;">
       <div class="column is-10 is-center">
         <div class="box">
-          <h1 class="title">My account</h1>
+          <h1 class="title">{{ user.username }}님의 회원정보</h1>
             <div style="display: flex; align-items: center; justify-content: space-around;">
-              <img src="https://mblogthumb-phinf.pstatic.net/MjAxODAxMzFfODcg/MDAxNTE3MzkxNTAxMDkx.M_0YZWPyJdHFTFhy44QVGOefevhQlbp6imgO92lgrWcg.wlSOGUlI6sqwtZX4iOc2PtugEMY0xexfbFqEUyRXRpUg.JPEG.jsrwnmejs/%ED%91%9C%EC%A7%80_%EA%B3%A0%ED%99%94%EC%A7%88ssss.jpg?type=w2" alt="" class="img_profile">
+              <img :src="image2" class="img_profile">
               <span>
                 <p class="mbti_font"><strong>이름: </strong> {{ user.username }} </p>
                 <p class="mbti_font"><strong>닉넴: </strong> {{ user.nickname }} </p>
-                <p class="mbti_font"><strong>mbti: </strong>{{ user.mbti1 }}{{ user.mbti2 }}{{ user.mbti3 }}{{ user.mbti4 }} </p>
+                <p class="mbti_font"><strong>MBTI: </strong>{{ user.mbti1 }}{{ user.mbti2 }}{{ user.mbti3 }}{{ user.mbti4 }} </p>
                 <p class="mbti_font"><strong>나이: </strong> {{ user.age }} </p> 
                 <p class="mbti_font"><strong>성별: </strong> {{ user.gender }} </p>
               </span>
@@ -17,7 +17,8 @@
 
             <div class="column is-10" style="text-align: center; margin: auto;">
               <div class="buttons" style=" display: inline-block;">
-                <button @click="logout()" class="button is-danger">Log out</button>
+                <router-link :to="{ name: 'EditAccount' }" class="button is-success">프로필 편집</router-link>
+                <button @click="logout()" class="button is-danger">로그아웃</button>
               </div>
             </div>
         </div>
@@ -77,7 +78,7 @@
     name: 'MyAccount',
     data() {
       return {
-        user: ''
+        user: {},
       }
     },
     created() {
@@ -92,6 +93,7 @@
         .then(response => {
           console.log(response)
           this.user = response.data
+          this.image2 = 'http://localhost:8000' + this.user.image
         })
         
         .catch(error => {
@@ -117,16 +119,16 @@
         this.$store.commit('removeToken')
 
         this.$router.push('/')
-      }
+      },
     }
   }
 </script>
 
 <style>
-  .img_profile {
-    width: 15rem;
-    vertical-align: middle;
-  }
+.img_profile {
+  width: 5rem;
+  vertical-align: middle;
+}
 
 .mbti_font {
   font-size: 20px;

@@ -52,6 +52,11 @@
             </p>
           </div>
 
+          <div class="field">
+            <label>프로필 사진</label>
+            <input @change="onInputImage()" type="file" ref="accountimage">
+          </div>
+
           <div class="ageGender">
             <div class="field age__field">
               <label>나이</label>
@@ -151,6 +156,7 @@
         username: '',
         password1: '',
         password2: '',
+        image: '',
         nickname: '',
         age: '',
         gender: '',
@@ -183,6 +189,7 @@
           const formData = {
             username: this.username,
             password: this.password1,
+            image: this.image,
             gender: this.gender,
             nickname: this.nickname,
             age: this.age,
@@ -192,8 +199,12 @@
             mbti4: this.mbti4
           }
 
+          const headers = {
+            'content-Type': 'multipart/form-data'
+          }
+
           await axios
-            .post('/api/v1/users/', formData)
+            .post('/api/v1/users/', formData, {headers})
             .then(response => {
               toast({
                 message: 'Account was created, please log in',
@@ -219,6 +230,10 @@
           
           this.$store.commit('setIsLoading', false)
         }
+      },
+      async onInputImage() {
+        this.image = this.$refs.accountimage.files[0]
+        return this.image
       }
     }
   }
