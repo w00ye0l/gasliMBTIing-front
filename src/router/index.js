@@ -118,7 +118,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  // baseURL: process.env.VUE_APP_API_URL,
+  baseURL: process.env.VUE_APP_API_URL,
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
