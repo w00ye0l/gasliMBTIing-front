@@ -54,7 +54,7 @@
           .then(response => {
             console.log(response)
             this.community = response.data
-            this.image2 = 'http://localhost:8000' + this.community.image
+            this.image2 = `${process.env.VUE_APP_API_URL}` + this.community.image
           })
           .catch(error => {
             console.log(error)
