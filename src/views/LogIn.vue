@@ -39,7 +39,6 @@
           <p>아직 회원이 아니신가요?</p>
           <router-link to="/sign-up">회원가입!</router-link>
         </div>
-        <img v-src src="" alt="">
       </div>
     </div>
   </div>
