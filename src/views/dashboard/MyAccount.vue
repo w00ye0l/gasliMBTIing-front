@@ -5,7 +5,7 @@
         <div class="box">
           <h1 class="title">{{ user.username }}님의 회원정보</h1>
             <div style="display: flex; align-items: center; justify-content: space-around;">
-              <img :src="image2" class="img_profile">
+              <img :src="user.image" class="img_profile">
               <span>
                 <p class="mbti_font"><strong>이름: </strong> {{ user.username }} </p>
                 <p class="mbti_font"><strong>닉넴: </strong> {{ user.nickname }} </p>
@@ -93,7 +93,7 @@
         .then(response => {
           console.log(response)
           this.user = response.data
-          this.image2 = 'http://localhost:8000' + this.user.image
+          this.user.image = process.env.VUE_APP_API_URL + this.user.image
         })
         
         .catch(error => {

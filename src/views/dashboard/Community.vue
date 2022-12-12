@@ -42,7 +42,7 @@
           <hr>
           
           <template v-if="community.image !== null">
-            <img :src="image2" class="article__img">
+            <img :src="community.image" class="article__img">
           </template>
           <p class="article__content">{{ community.content }}</p>
         </div>
@@ -81,7 +81,7 @@
 <script>
   import axios from 'axios'
   import { toast } from 'bulma-toast'
-  import dateformat from '../../assets/js/dateformat.js';
+  import dateformat from '@/assets/js/dateformat.js';
   
   export default {
     name: 'Community',
@@ -93,12 +93,11 @@
         comments: [],
         comment: {},
         commentContent: '',
-        image2: '',
       }
     },
     created() {
       this.getCommunity();
-      // this.getComment();
+      this.getComment();
     },
     methods: {
       async getCommunity() {
@@ -111,7 +110,7 @@
           .then(response => {
             console.log(response)
             this.community = response.data
-            this.image2 = 'http://localhost:8000/media/' + this.community.image
+            this.community.image = process.env.VUE_APP_API_URL + this.community.image
           })
           .catch(error => {
             console.log(error)
@@ -194,7 +193,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .community__head {
   display: flex;
   margin-bottom: 1rem;
@@ -225,7 +224,7 @@
 }
 .article__user {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 }
 .article__userInfo {
   display: flex;
@@ -235,7 +234,7 @@
 }
 .edit__delete__btn {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
 }
 .delete__btn {
