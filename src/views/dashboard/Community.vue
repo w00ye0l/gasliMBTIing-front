@@ -18,7 +18,7 @@
           <p><strong>User: </strong>{{ community.user.nickname }}</p>
           <p><strong>MBTI: </strong>{{ community.mbti }}</p>
           <p><strong>Content: </strong>{{ community.content }}</p>
-          <p><strong>Image: </strong><img :src="image2"></p>
+          <p><strong>Image: </strong><img :src="community.image"></p>
         </div>
       </div>
     </div>
@@ -36,7 +36,6 @@
         community: {
           user: {},
         },
-        image2: '',
       }
     },
     created() {
@@ -54,7 +53,6 @@
           .then(response => {
             console.log(response)
             this.community = response.data
-            this.image2 = `${process.env.VUE_APP_API_URL}` + this.community.image
           })
           .catch(error => {
             console.log(error)
