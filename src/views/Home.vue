@@ -35,7 +35,7 @@
 
         <section class="modal-card-body">
           <div class="body__head">
-            <img class="body__title__img" src="../assets/red.png" alt="">
+            <img class="body__title__img" src="../assets/images/red.png" alt="">
             <span class="body__title">gasliMBTIng이란?</span>
           </div>
           <div class="body__content">
@@ -46,7 +46,7 @@
           </div>
 
           <div class="body__head">
-            <img class="body__title__img" src="../assets/yellow.png" alt="">
+            <img class="body__title__img" src="../assets/images/yellow.png" alt="">
             <span class="body__title">친구들의 MBTI 저장</span>
           </div>
           <div class="body__content">
@@ -57,7 +57,7 @@
           </div>
 
           <div class="body__head">
-            <img class="body__title__img" src="../assets/green.png" alt="">
+            <img class="body__title__img" src="../assets/images/green.png" alt="">
             <span class="body__title">MBTI 정보 확인</span>
           </div>
           <div class="body__content">
@@ -68,7 +68,7 @@
           </div>
 
           <div class="body__head">
-            <img class="body__title__img" src="../assets/blue.png" alt="">
+            <img class="body__title__img" src="../assets/images/blue.png" alt="">
             <span class="body__title">커뮤니티</span>
           </div>
           <div class="body__content">
@@ -111,7 +111,7 @@ export default {
   width: 30vh;
   height: 30vh;
   border-radius: 50%;
-  background-image: url("../assets/gaslight.png");
+  background-image: url("../assets/images/gaslight.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -135,7 +135,7 @@ export default {
 
 @for $i from 1 to 5 {
   .circle_#{$i} {
-    background-image: url("../assets/flower_red.png");
+    background-image: url("../assets/images/flower_red.png");
     -webkit-animation: circle_#{$i} 10s linear infinite;
     animation: circle_#{$i} 10s linear infinite;
   }
@@ -143,7 +143,7 @@ export default {
 
 @for $i from 5 to 9 {
   .circle_#{$i} {
-    background-image: url("../assets/flower_green.png");
+    background-image: url("../assets/images/flower_green.png");
     -webkit-animation: circle_#{$i} 10s linear infinite;
     animation: circle_#{$i} 10s linear infinite;
   }
@@ -151,7 +151,7 @@ export default {
 
 @for $i from 9 to 13 {
   .circle_#{$i} {
-    background-image: url("../assets/flower_blue.png");
+    background-image: url("../assets/images/flower_blue.png");
     -webkit-animation: circle_#{$i} 10s linear infinite;
     animation: circle_#{$i} 10s linear infinite;
   }
@@ -159,7 +159,7 @@ export default {
 
 @for $i from 13 to 17 {
   .circle_#{$i} {
-    background-image: url("../assets/flower_yellow.png");
+    background-image: url("../assets/images/flower_yellow.png");
     -webkit-animation: circle_#{$i} 10s linear infinite;
     animation: circle_#{$i} 10s linear infinite;
   }
