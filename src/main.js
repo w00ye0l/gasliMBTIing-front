@@ -8,6 +8,6 @@ import { faUserSecret, faHouse, faCircleUser, faBook, faComments, faRightToBrack
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(faUserSecret, faHouse, faCircleUser, faBook, faComments, faRightToBracket, faAddressBook, faEnvelope, faLock, faFaceSmile, faBaby, faMars, faVenus);
 
-axios.defaults.baseURL = 'http://localhost:8000'
+axios.defaults.baseURL = process.env.VUE_APP_API_URL
 
 createApp(App).use(store).use(router, axios).component('font-awesome-icon', FontAwesomeIcon).mount('#app')

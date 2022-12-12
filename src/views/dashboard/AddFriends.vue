@@ -9,8 +9,15 @@
         </header>
         <section class="modal-card-body">
           <div class="body__content">
-            <li class="body__info" v-for="myGroup in myGroups"
-                :value="myGroup.name" @click="chooseGroup">{{myGroup.name}}<button class="delete" aria-label="close" :value="myGroup.id" v-on:click="deleteGroup"></button></li>
+            <li 
+              class="body__info" 
+              v-for="myGroup in myGroups"
+              v-bind:key="myGroup"
+              :value="myGroup.name" 
+              @click="chooseGroup"
+            >{{myGroup.name}}
+            <button class="delete" aria-label="close" :value="myGroup.id" v-on:click="deleteGroup"></button>
+            </li>
           </div>
         </section>
         <footer class="modal-card-foot">
@@ -38,7 +45,12 @@
           <div class="body__content">
             <span >추천 인기 그룹</span>
             <br>
-            <button v-for="rgroup in recommendedGroups" :value="rgroup" @click="addChooseGroup">{{rgroup}}</button>
+            <button 
+              v-for="rgroup in recommendedGroups"
+              v-bind:key="rgroup" 
+              :value="rgroup" 
+              @click="addChooseGroup"
+            >{{rgroup}}</button>
           </div>
           
           <div class="field">
