@@ -6,6 +6,12 @@
     <template v-else>
       <div class="home__btn">
         <div class="is-flex is-justify-content-end">
+          <!-- 알림 버튼 -->
+          <router-link to="/" class="bell__link">
+            <font-awesome-icon class="icon is-middle" icon="bell" />
+          </router-link>
+
+          <!-- 홈 버튼 -->
           <router-link to="/" class="home__link">
             <font-awesome-icon class="icon is-middle" icon="house" />
           </router-link>
@@ -102,8 +108,21 @@
   }
 }
 
+.bell__link {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  background: rgb(255, 255, 255);
+  border-radius: 50%;
+  border: 1px solid #9c9c9c;
+  color: #9c9c9c;
+}
+
 .home__link {
   display: flex;
+  margin-left: 0.5rem;
   width: 40px;
   height: 40px;
   justify-content: center;
@@ -111,6 +130,10 @@
   background: #9c9c9c;
   border-radius: 50%;
   color: rgb(255, 255, 255);
+}
+
+.bell__link:hover, .home__link:hover {
+  color: #3f3e3e;
 }
 
 .column {
@@ -121,6 +144,8 @@
 .section {
   min-height: 93vh;
   padding-bottom: 13vh;
+  position: relative;
+  width: 100%;
 }
 
 .lds-dual-ring {
