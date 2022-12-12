@@ -5,6 +5,7 @@ import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
 import Dashboard from '../views/dashboard/Dashboard.vue'
 import MyAccount from '../views/dashboard/MyAccount.vue'
+import Profile from '../views/dashboard/Profile.vue'
 import Mbti from '../views/dashboard/Mbti.vue'
 import AddMbti from '../views/dashboard/AddMbti.vue'
 import MbtiDetail from '../views/dashboard/MbtiDetail.vue'
@@ -14,8 +15,8 @@ import Community from '../views/dashboard/Community.vue'
 import EditCommunity from '../views/dashboard/EditCommunity.vue'
 import Friends from '../views/dashboard/Friends.vue'
 import AddFriends from '../views/dashboard/AddFriends.vue'
-
-
+import Guestbook from '../views/dashboard/Guestbook.vue'
+import AddGuestbook from '../views/dashboard/AddGuestbook.vue'
 
 const routes = [
   {
@@ -42,6 +43,14 @@ const routes = [
     path: '/dashboard/my-account',
     name: 'MyAccount',
     component: MyAccount,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/profile/:id',
+    name: 'Profile',
+    component: Profile,
     meta: {
       requireLogin: true
     }
@@ -105,6 +114,17 @@ const routes = [
     meta: {
       requireLogin: true
     }
+  },
+  {
+    path: '/dashboard/guestbook/:id',
+    name: 'Guestbook',
+    component: Guestbook,
+  },
+  {
+    path: '/dashboard/guestbook/add',
+    name: 'AddGuestbook',
+    component: AddGuestbook,
+    
   },
 ]
 
