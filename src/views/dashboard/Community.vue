@@ -60,7 +60,7 @@
             v-bind:key="com.id"
           >
             <div class="comment__user">
-              <div class="comment__user__img" v-bind:style="{ 'backgroundImage': 'url(' + 'http://localhost:8000' + com.comment_user.image + ')' }">
+              <div class="comment__user__img" v-bind:style="{ 'backgroundImage': 'url(' + com.comment_user.image + ')' }">
                 <!-- <img class="comment__user__img" :src="" alt=""> -->
               </div>
               <p class="comment__user__name">{{ com.comment_user.nickname }}</p>
