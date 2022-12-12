@@ -2,24 +2,77 @@
   <div class="container">
     <div class="columns is-multiline">
       <div class="column is-10 is-center">
-        <h1 class="title">{{ community.title }}</h1>
+        <!-- 커뮤니티 헤드 -->
+        <div class="community__head">
+          <router-link to="/dashboard/community" class="back__btn">
+            <font-awesome-icon class="icon is-middle" icon="arrow-left" />
+          </router-link>
 
-        <router-link :to="{ name: 'EditCommunity', params: { id: Number(community.id) }}" class="button is-light">Edit</router-link>&nbsp;
-        <router-link to="/dashboard/community" class="button is-light">Home</router-link>&nbsp;
-        <button type="button" class="button is-light" v-on:click="fnDelete">Delete</button>
-      </div>
-
-      <div class="column is-10 is-center">
-        <div class="box">
-          <h2 class="subtitle">Details</h2>
-
-          <p><strong>Title: </strong>{{ community.title }}</p>
-          <p><strong>Category: </strong>{{ community.category }}</p>
-          <p><strong>User: </strong>{{ community.user.nickname }}</p>
-          <p><strong>MBTI: </strong>{{ community.mbti }}</p>
-          <p><strong>Content: </strong>{{ community.content }}</p>
-          <p><strong>Image: </strong><img :src="community.image"></p>
+          <div>
+            <h1 class="title">커뮤니티</h1>
+            <p class="article__category">{{ community.category }}</p>
+          </div>
         </div>
+      </div>
+      
+      <!-- 글 -->
+      <div class="column is-10 is-center">
+        <div class="article__head box">
+          <div class="article__user">
+            <div class="article__profileImg">
+              <img src="https://mblogthumb-phinf.pstatic.net/MjAxODAxMzFfODcg/MDAxNTE3MzkxNTAxMDkx.M_0YZWPyJdHFTFhy44QVGOefevhQlbp6imgO92lgrWcg.wlSOGUlI6sqwtZX4iOc2PtugEMY0xexfbFqEUyRXRpUg.JPEG.jsrwnmejs/%ED%91%9C%EC%A7%80_%EA%B3%A0%ED%99%94%EC%A7%88ssss.jpg?type=w2" alt="">
+            </div>
+            <div class="article__userInfo">
+              <p>{{ community.user.nickname }}</p>
+              <p>{{ elapsedText(community.created_at) }}</p>
+            </div>
+          </div>
+          
+          <!-- 작성 수정 버튼 -->
+          <div class="edit__delete__btn">
+            <router-link :to="{ name: 'EditCommunity', params: { id: Number(community.id) }}" class="button is-light ">Edit</router-link>
+            <button type="button" class="button is-light delete__btn" v-on:click="fnDelete">Delete</button>
+          </div>
+        </div>
+        
+        <div class="box">
+          <!-- 글 제목 -->
+          <p class="subtitle">{{ community.title }} <span class="article__mbti">{{ community.mbti }}</span></p>
+          
+          <hr>
+          
+          <template v-if="community.image !== null">
+            <img :src="image2" class="article__img">
+          </template>
+          <p class="article__content">{{ community.content }}</p>
+        </div>
+
+        <!-- 댓글 -->
+        <div 
+          class="box"
+          v-for="comment in comments"
+          v-bind:key="comment.id">
+          <div>{{ comment.content }}</div>
+        </div>
+        
+        <!-- 댓글 입력창 -->
+        <div class="box">
+          <h1 class="title">댓글</h1>
+          <form @submit.prevent="submitForm">
+            <div class="field">
+              <div class="control">
+                <input type="text" class="input" v-model="commentContent">
+              </div>
+            </div>
+            
+            <div class="field">
+              <div class="control">
+                <button class="button is-success">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        
       </div>
     </div>
   </div>
@@ -28,6 +81,7 @@
 <script>
   import axios from 'axios'
   import { toast } from 'bulma-toast'
+  import dateformat from '../../assets/js/dateformat.js';
   
   export default {
     name: 'Community',
@@ -36,10 +90,15 @@
         community: {
           user: {},
         },
+        comments: [],
+        comment: {},
+        commentContent: '',
+        image2: '',
       }
     },
     created() {
-      this.getCommunity()
+      this.getCommunity();
+      // this.getComment();
     },
     methods: {
       async getCommunity() {
@@ -47,12 +106,12 @@
         
         const communityID = this.$route.params.id
 
-
         await axios
           .get(`/community/${communityID}/`)
           .then(response => {
             console.log(response)
             this.community = response.data
+            this.image2 = 'http://localhost:8000' + this.community.image
           })
           .catch(error => {
             console.log(error)
@@ -60,28 +119,143 @@
 
         this.$store.commit('setIsLoading', false)
       },
+
       async fnDelete() {
         if (!confirm("삭제하시겠습니까?")) return
-
+        
         const communityID = this.$route.params.id
-
+        
         await axios
           .delete(`/community/delete/${communityID}/`, this.community)
           .then(() => {
             toast({
-              message: '삭제되었습니다.',
-              type: 'is-danger',
-              dismissible: true,
-              pauseOnHover: true,
-              duration: 2000,
-              position: 'bottom-right',
+                message: '삭제되었습니다.',
+                type: 'is-danger',
+                dismissible: true,
+                pauseOnHover: true,
+                duration: 2000,
+                position: 'bottom-right',
+              })
+              this.$router.push('/dashboard/community')
             })
-            this.$router.push(`/dashboard/community`)
-          }).catch((err) => {
+          .catch((err) => {
             console.log(err);
           })
+
         this.$store.commit('setIsLoading', false)
-      }
+      },
+
+      elapsedText(date) {
+        return dateformat.elapsedText(new Date(date));
+      },
+
+      async getComment() {
+        this.$store.commit('setIsLoading', true)
+
+        await axios
+          .get('/community/comment')
+          .then(response => {
+            console.log(response)
+            this.comments = response.data
+            console.log(comments)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+
+        this.$store.commit('setIsLoading', false)
+      },
+      
+      async submitForm() {
+        this.$store.commit('setIsLoading', true)
+
+        const communityID = this.$route.params.id
+        const comment = {
+          content: this.commentContent,
+        }
+
+        console.log(comment)
+        
+        await axios
+        .post(`/community/${communityID}/comment/create/`, comment)
+        .then(response => {
+            console.log(response)
+            console.log(response.data)
+            
+            this.$router.push(`/dashboard/community/${communityID}`, communityID)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+
+        this.$store.commit('setIsLoading', false)
+      },
     }
   }
 </script>
+
+<style scoped>
+.community__head {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.back__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+  color: #363636;
+}
+.title {
+  font-size: 1.5rem;
+  margin: 0;
+}
+.article__category {
+  font-size: 1.5rem;
+  color: #797979;
+}
+.article__head {
+  display: flex;
+  justify-content: space-between;
+}
+.article__profileImg {
+  margin-right: 1.5rem;
+  width: 20%;
+  border-radius: 2rem;
+}
+.article__user {
+  display: flex;
+  justify-content: start;
+}
+.article__userInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+.edit__delete__btn {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.delete__btn {
+  margin-left: 0.5rem;
+}
+.subtitle {
+  margin-top: 1rem;
+  font-size: 2.5rem;
+}
+.article__mbti {
+  padding: 1px 5px;
+  background: #FF99C8;
+  border-radius: 0.5rem;
+}
+.article__img {
+  border: 1px solid #797979;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+.article__content {
+  font-size: 1.5rem;
+}
+</style>
