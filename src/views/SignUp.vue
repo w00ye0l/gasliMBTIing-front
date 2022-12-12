@@ -193,7 +193,7 @@
           }
 
           await axios
-            .post((process.env.VUE_APP_API_URL + '/api/v1/users/'), formData)
+            .post('/api/v1/users/', formData)
             .then(response => {
               toast({
                 message: 'Account was created, please log in',
