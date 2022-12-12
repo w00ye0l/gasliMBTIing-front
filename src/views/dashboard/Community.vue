@@ -50,9 +50,9 @@
         <!-- 댓글 -->
         <div 
           class="box"
-          v-for="comment in comments"
-          v-bind:key="comment.id">
-          <div>{{ comment.content }}</div>
+          v-for="com in comment"
+          v-bind:key="com.id">
+          <div>{{ com.content }}</div>
         </div>
         
         <!-- 댓글 입력창 -->
@@ -90,8 +90,8 @@
         community: {
           user: {},
         },
-        comments: [],
         comment: {},
+        makeComment: {},
         commentContent: '',
       }
     },
@@ -110,7 +110,6 @@
           .then(response => {
             console.log(response)
             this.community = response.data
-            this.community.image = process.env.VUE_APP_API_URL + this.community.image
           })
           .catch(error => {
             console.log(error)
@@ -150,13 +149,14 @@
 
       async getComment() {
         this.$store.commit('setIsLoading', true)
+        
+        const communityID = this.$route.params.id
 
         await axios
-          .get('/community/comment')
+          .get(`/community/${communityID}/comment`, this.communityID)
           .then(response => {
             console.log(response)
-            this.comments = response.data
-            console.log(comments)
+            this.comment = response.data
           })
           .catch(error => {
             console.log(error)
@@ -169,14 +169,14 @@
         this.$store.commit('setIsLoading', true)
 
         const communityID = this.$route.params.id
-        const comment = {
+        const makeComment = {
           content: this.commentContent,
         }
 
         console.log(comment)
         
         await axios
-        .post(`/community/${communityID}/comment/create/`, comment)
+        .post(`/community/${communityID}/comment/create/`, makeComment)
         .then(response => {
             console.log(response)
             console.log(response.data)
