@@ -128,7 +128,7 @@ const routes = [
     component: Guestbook,
   },
   {
-    path: '/dashboard/guestbook/add',
+    path: '/dashboard/guestbook/add/:id',
     name: 'AddGuestbook',
     component: AddGuestbook,
   },  

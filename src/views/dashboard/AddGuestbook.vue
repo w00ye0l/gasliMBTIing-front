@@ -51,33 +51,44 @@
         name: '',
         password: '',
         contents: '',
-        user_pk:'',
+        user:'',
       }
     },
     created() {
-        this.getuserid()
+      this.getuser()
 
     },
     methods: {
-        getuserid() {    
-            const userId = this.$route.params.id
-            console.log(userId)
-        },
+      async getuser() {
+          const guestbookID = this.$route.params.id
+
+          await axios
+          .get(`/guestbook/get/${guestbookID}/`)
+          .then(response => {
+            this.user = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+
+      },
+
       async submitForm() {
-        
-        
+                
         console.log('submit form')
+
+        const userID = this.$route.params.id
+        console.log(userID)
         const guestbook = {
+          receive_user_id: userID,
           name: this.name,
           password: this.password,
           contents: this.contents,
         }
-
-        const userId2 = this.$route.params.id
-        console.log(userId2)
+                
 
         await axios
-          .post('/guestbook/create/', {guestbook : guestbook, user_pk : this.user_pk })
+          .post('/guestbook/create/', guestbook)
           .then(response => {
             toast({
               message: 'The lead was added',

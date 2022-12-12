@@ -27,7 +27,9 @@
         <div class="column is-10 is-center">
           <div class="box">
             <h1 class="title">방명록</h1>
-            <router-link :to="{ name: 'AddGuestbook', params: { id: user.id }}">글쓰기</router-link>
+            <div v-for="guest in guestlist" v-bind:key="guest.id">
+              {{ guest.name }}, {{ guest.contents }}
+            </div>
           </div>
         </div> 
         <div class="column is-10 is-center">
@@ -63,7 +65,6 @@
         </div> 
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -74,20 +75,26 @@
     data() {
       return {
         user: {},
+        guestlist:[],
       }
     },
+
     created() {
-      this.getUser()
+      this.getUser()      
     },
+
     methods: {
       async getUser() {      
         this.$store.commit('setIsLoading', true)
+
+        const userID = this.$route.params.id
 
         await axios
         .get(`/accounts/`)
         .then(response => {
           console.log(response)
           this.user = response.data
+          console.log(this.user)
           this.user.image = process.env.VUE_APP_API_URL + this.user.image
         })
         
@@ -96,15 +103,16 @@
           })
           
         this.$store.commit('setIsLoading', false)
+        this.getGuestbook()
       },
       async getGuestbook() {
         this.$store.commit('setIsLoading', true)
 
         await axios
-        .get(`/guestbook/`)
+        .get(`/guestbook/${this.user.id}/`)
         .then(response => {
           console.log(response)
-          this.user = response.data
+          this.guestlist = response.data
         })
         
         .catch(error => {
