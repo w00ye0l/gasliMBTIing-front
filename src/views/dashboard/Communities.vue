@@ -31,7 +31,7 @@
 
 <script>
   import axios from 'axios'
-  import dateformat from '../../assets/js/dateformat.js';
+  import dateformat from '@/assets/js/dateformat.js';
 
   export default {
     name: 'Communities',
