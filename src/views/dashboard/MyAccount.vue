@@ -2,69 +2,90 @@
   <div class="container">
     <div class="columns is-multiline" style= "justify-content: center;">
       <div class="column is-10 is-center">
+
+        <!-- 회원 정보 -->
         <div class="box">
-          <h1 class="title">{{ user.username }}님의 회원정보</h1>
-            <div style="display: flex; align-items: center; justify-content: space-around;">
-              <img :src="user.image" class="img_profile">
-              <span>
-                <p class="mbti_font"><strong>이메일: </strong> {{ user.username }} </p>
-                <p class="mbti_font"><strong>닉넴: </strong> {{ user.nickname }} </p>
-                <p class="mbti_font"><strong>MBTI: </strong>{{ user.mbti1 }}{{ user.mbti2 }}{{ user.mbti3 }}{{ user.mbti4 }} </p>
-                <p class="mbti_font"><strong>나이: </strong> {{ user.age }} </p> 
-                <p class="mbti_font"><strong>성별: </strong> {{ user.gender }} </p>
-              </span>
-            </div>
+          <h1 class="title">{{ user.nickname }}님의 회원정보</h1>
+          <div class="accounts__info">
+            <img :src="user.image" class="img__profile">
+            <span>
+              <p class="mbti__font"><strong>이메일: </strong> {{ user.username }} </p>
+              <p class="mbti__font"><strong>MBTI: </strong>{{ user.mbti1 }}{{ user.mbti2 }}{{ user.mbti3 }}{{ user.mbti4 }} </p>
+              <p class="mbti__font"><strong>나이: </strong> {{ user.age }} </p> 
+              <p class="mbti__font"><strong>성별: </strong> {{ user.gender }} </p>
+            </span>
+          </div>
 
-            <div class="column is-10" style="text-align: center; margin: auto;">
-              <div class="buttons" style=" display: inline-block;">
-                <router-link :to="{ name: 'EditAccount' }" class="button is-success">프로필 편집</router-link>
-                <button @click="logout()" class="button is-danger">로그아웃</button>
+          <!-- 로그아웃 버튼 -->
+          <div class="column is-10" style="text-align: center; margin: auto;">
+            <div class="buttons" style=" display: inline-block;">
+              <router-link :to="{ name: 'EditAccount' }" class="button is-success">프로필 편집</router-link>
+              <button @click="logout()" class="button is-danger">로그아웃</button>
+            </div>
+          </div>
+        </div>
+      </div> 
+
+      <!-- 방명록 -->
+      <div class="box">
+        <h1 class="title">방명록</h1>
+        <div class="guest__group column is-10 is-center">
+          <div v-for="guest in guestlist" v-bind:key="guest.id">
+            <router-link class="guest__link" :to="{ name: 'Guestbook', params: { id: guest.id }}">
+              <div class="guest_note">
+                <div class="guest__box">
+                  <p class="guest__content">{{ guest.name }} | {{ guest.contents }}</p>
+                </div>
               </div>
-            </div>
+            </router-link>
           </div>
-        </div> 
+        </div>
+      </div> 
 
-        <div class="column is-10 is-center">
-          <div class="box">
-            <h1 class="title">방명록</h1>
-            <div v-for="guest in guestlist" v-bind:key="guest.id">
-              {{ guest.name }}, {{ guest.contents }}
-            </div>
+      <!-- 원래 수정 전 -->
+      <!-- <div class="column is-10 is-center">
+        <div class="box">
+          <h1 class="title">방명록</h1>
+          <div v-for="guest in guestlist" v-bind:key="guest.id">
+            {{ guest.name }}, {{ guest.contents }}
           </div>
-        </div> 
-        <div class="column is-10 is-center">
-          <div class="box">
-            <h1 class="title">친구 분포도</h1>
-            <div>
-              <div class="mbti_friend">
-                <div><span class="mbti_left">E</span> <span class="mbti_right">I</span></div>
-                <div class="bar-container">
-                  <div id="content_bar" class="bar1"></div>
-                </div> 
+        </div>
+      </div>  -->
+
+      <!-- 친구 분포도 -->
+      <div class="column is-10 is-center">
+        <div class="box">
+          <h1 class="title">친구 분포도</h1>
+          <div>
+            <div class="mbti__friend">
+              <div><span class="mbti__left">E</span> <span class="mbti__right">I</span></div>
+              <div class="bar__container">
+                <div id="content__bar" class="bar1"></div>
+              </div> 
+            </div>           
+            <div class="mbti__friend">
+              <div><span class="mbti__left">N</span> <span class="mbti__right">S</span></div>
+              <div class="bar__container">
+                <div id="content__bar" class="bar2"></div>
               </div>           
-              <div class="mbti_friend">
-                <div><span class="mbti_left">N</span> <span class="mbti_right">S</span></div>
-                <div class="bar-container">
-                  <div id="content_bar" class="bar2"></div>
+            </div>
+            <div class="mbti__friend">
+              <div><span class="mbti__left">T</span> <span class="mbti__right">F</span></div>
+                <div class="bar__container">
+                  <div id="content__bar" class="bar3"></div>
                 </div>           
-              </div>
-              <div class="mbti_friend">
-                <div><span class="mbti_left">T</span> <span class="mbti_right">F</span></div>
-                  <div class="bar-container">
-                    <div id="content_bar" class="bar3"></div>
-                  </div>           
-              </div>
-              <div class="mbti_friend">
-                <div><span class="mbti_left">P</span> <span class="mbti_right">J</span></div>
-                  <div class="bar-container">
-                    <div id="content_bar" class="bar4"></div>
-                  </div>           
-              </div>            
-            </div>  
-          </div>
-        </div> 
-      </div>
+            </div>
+            <div class="mbti__friend">
+              <div><span class="mbti__left">P</span> <span class="mbti__right">J</span></div>
+                <div class="bar__container">
+                  <div id="content__bar" class="bar4"></div>
+                </div>           
+            </div>            
+          </div>  
+        </div>
+      </div> 
     </div>
+  </div>
 </template>
 
 <script>
@@ -171,38 +192,36 @@
 </script>
 
 <style>
-.img_profile {
+.accounts__info {
+  display: flex; 
+  align-items: center; 
+  justify-content: space-around;
+}
+.img__profile {
   width: 5rem;
   vertical-align: middle;
 }
-
-.mbti_font {
+.mbti__font {
   font-size: 20px;
 }
-
-.mbti_font1 {
+.mbti__font1 {
   font-size: 20px;
   font-weight: bold;
 }
-
-.mbti_friend {
+.mbti__friend {
   font-size: 20px;
   display: flex;
-  flex-direction: column;
-  
+  flex-direction: column;  
 }
-
-.mbti_left {
+.mbti__left {
   float: left;
   font-weight: bold;
 }
-
-.mbti_right {
+.mbti__right {
   float: right;
   font-weight: bold;
 }
-
-.bar-container {
+.bar__container {
   width: 100%;
   background-color: #f1f1f1;
   text-align: center;
@@ -210,34 +229,84 @@
   border-radius: 5px;
   margin: 0;
 }
-
 .bar1 {
   height: 20px;
   background-color: #FF99C8;
   border-radius: 5px;
   width:55%
 }
-
 .bar2 {
   height: 20px;
   background-color: #FCF6BD;
   border-radius: 5px;
   width:55%
 }
-
 .bar3 {
   height: 20px;
   background-color: #D0F4DE;
   border-radius: 5px;
   width:55%
 }
-
 .bar4 {
   height: 20px;
   background-color: #A9DEF9;
   border-radius: 5px;
   width:55%
 }
+.guest__content {
+  font-size: 1.3rem;
+}
+.guest__link {
+  color: #000;
+}
 
+/* 방명록 리스트(포스트잇) */
+.guest__group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+*:before,*:after {
+  box-sizing: border-box;
+}
+* {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.guest_note {
+  width: 100%;
+  position: relative;
+  margin: 0;
+}
+.guest__box {
+  width: 10rem;
+  height: 10rem;
+  padding: 40px 0;
+  text-align: center;
+  position: relative;
+  border-bottom-right-radius: 25px;
+  overflow: hidden;
+  box-shadow: 29px 24px 26px -26px rbga(0,0,0,.5);
+  background: #FCF6BD;
+}
+.guest__box:before,.guest__box:after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  right: -5px;
+  bottom: -5px;
+  width: 30px;
+  height: 30px;
+  box-shadow: 0px 5px 25px rbga(0,0,0,.5);
+  transform: skew(-5deg) rotate(-3deg);
+}
+.guest__box:after {
+  right: -5px;
+  bottom: -5px;
+  transform: skew(3deg) rotate(0deg);
+  box-shadow: 2px 2px 18px rbga(0,0,0,.5);;
+}
 </style>
 
