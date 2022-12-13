@@ -52,9 +52,23 @@
           </div>
 
           <div class="field">
+            <label>character</label>
+            <div class="control">
+              <input type="text" class="input" v-model="character">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>summary</label>
+            <div class="control">
+              <input type="text" class="input" v-model="summary">
+            </div>
+          </div>
+
+          <div class="field">
             <label>Content</label>
             <div class="control">
-              <input type="text" class="input" v-model="content">
+              <textarea type="text" class="input" v-model="content" ></textarea>
             </div>
           </div>
 
@@ -80,6 +94,8 @@
         mbti: '',
         title: '',
         content: '',
+        character: '',
+        summary: '',
       }
     },
     methods: {
@@ -91,6 +107,9 @@
           mbti: this.mbti,
           title: this.title,
           content: this.content,
+          character: this.character,
+          summary: this.summary,
+
         }
         
         await axios
@@ -109,3 +128,9 @@
     }
   }
 </script>
+
+<style>
+  .field .control textarea {
+    height: 300px;
+  }
+</style>

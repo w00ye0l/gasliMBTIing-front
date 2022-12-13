@@ -2,7 +2,7 @@
   <div class="container">
     <div class="columns is-centered is-multiline">
       <div class="column is-10">
-        <h1 class="title">MBTI</h1>
+        <h1 class="title">MBTI 정보</h1>
 
         <div class="field">
           <div class="control">
@@ -52,8 +52,8 @@
           <template v-for="mbti_ in mbti">
             <div class="board box" v-if="(mbti_.board === filters)" v-bind:key="mbti_.id">
               <router-link :to="{ name: 'MbtiDetail', params: { id: mbti_.id }}">
-                {{mbti_.mbti}}
-                {{mbti_.board}}
+                {{mbti_.title}}
+                <font-awesome-icon icon="fa-solid fa-chess" />
               </router-link>
             </div>
           </template>
@@ -64,8 +64,8 @@
         <div class="board-group column is-10">
           <div class="board box" v-for="mbti_ in mbti" v-bind:key="mbti_.id">
             <router-link :to="{ name: 'MbtiDetail', params: { id: mbti_.id }}">
-              {{mbti_.mbti}}
-              {{mbti_.board}}  
+              {{mbti_.title}}
+              <font-awesome-icon icon="fa-solid fa-chess" />
             </router-link>
           </div>
         </div>
@@ -172,5 +172,9 @@
     border-radius: 10px;
   }
 
+  a {
+    color: black;
+    font-size: 1.5rem;
+  }
 
 </style>
