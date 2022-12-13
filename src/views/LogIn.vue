@@ -1,3 +1,5 @@
+import { KAKAO_AUTH_URL } from "../shared/OAuth";
+
 <template>
   <div class="container">
     <div class="columns is-centered">
@@ -35,6 +37,13 @@
             </div>
           </div>
         </form>
+        <div>
+          <form @submit.prevent="kakaoLogin">
+            <!-- <a :href="kakaoLoginLink" alt="kakao login"> -->
+              <img alt="kakao logo" src="./../assets/images/kakao_login_medium_wide.png" @click="kakaoLogin()" />
+            <!-- </a> -->
+          </form>
+        </div>
         <div class="signup__link">
           <p>아직 회원이 아니신가요?</p>
           <router-link to="/sign-up">회원가입!</router-link>
@@ -55,6 +64,11 @@
         password: '',
         errors: [],
       }
+    },
+    computed: {
+      kakaoLoginLink() {
+        return `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.VUE_APP_CLIENT_ID}&redirect_uri=${process.env.VUE_APP_REDIRECT_URI}&response_type=code`;
+      },
     },
     methods: {
       async submitForm() {
@@ -104,6 +118,9 @@
           })
         
         this.$store.commit('setIsLoading', false)
+      },
+      async kakaoLogin() {
+        console.log("test")
       }
     }
   }

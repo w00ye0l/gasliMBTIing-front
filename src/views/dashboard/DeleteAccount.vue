@@ -6,13 +6,8 @@
           <h1 class="title">회원 탈퇴</h1>
           <div class="body__content_sub">
             탈퇴하시면 지금까지 저장한 모든 정보가 삭제됩니다.😥
-            <br>동의하신다면 유의사항에 체크해주세요.
-          </div>
-          <div class="body__content">
-            <!-- <label>
-              <input type="checkbox" name="ck" onclick="checkDisable">
-              <span> 탈퇴 및 데이터 삭제 동의</span>
-            </label> -->
+            <br>이에 동의하신다면 회원탈퇴를 해주세요.
+            <br>gasliMBTIng 서비스를 이용해주셔서 감사합니다.
           </div>
 
           <form @submit.prevent="fnDelete">
@@ -40,7 +35,6 @@
 
     methods: {
       async fnDelete() {
-        console.log(this.user)
         await axios
           .delete(`/accounts/delete`, this.user)
           .then(() => {

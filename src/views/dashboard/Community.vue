@@ -65,7 +65,11 @@
               </div>
               <p class="comment__user__name">{{ com.comment_user.nickname }}</p>
             </div>
+            <p class="comment__content">{{ com.id }}</p>
             <p class="comment__content">{{ com.content }}</p>
+
+            <!-- 댓글삭제 -->
+            <p><button type="button" class="button is-light delete__btn" v-on:click="fncomDelete" :data-id="com.id">댓글삭제</button></p>
             <hr>
           </div>
         </div>
@@ -201,6 +205,33 @@
           })
 
         this.getComment()
+
+        this.$store.commit('setIsLoading', false)
+      },
+
+      // 댓글 삭제
+      async fncomDelete(event) {
+        if (!confirm("삭제하시겠습니까?")) return
+        
+        const communityID = this.$route.params.id
+        const commentID = event.target.getAttribute('data-id')
+        
+        await axios
+          .delete(`/community/${communityID}/comment/delete/${commentID}/`, this.community, this.comment)
+          .then(() => {
+            toast({
+                message: '댓글 삭제되었습니다.',
+                type: 'is-danger',
+                dismissible: true,
+                pauseOnHover: true,
+                duration: 2000,
+                position: 'bottom-right',
+              })
+              this.$router.push('/dashboard/community')
+            })
+          .catch((err) => {
+            console.log(err);
+          })
 
         this.$store.commit('setIsLoading', false)
       },
