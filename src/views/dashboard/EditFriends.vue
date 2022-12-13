@@ -9,8 +9,15 @@
         </header>
         <section class="modal-card-body">
           <div class="body__content">
-            <li class="body__info" v-for="myGroup in myGroups"
-                :value="myGroup.name" @click="chooseGroup">{{myGroup.name}}<button class="delete" aria-label="close" :value="myGroup.id" v-on:click="deleteGroup"></button></li>
+            <li 
+              class="body__info" 
+              v-for="myGroup in myGroups"
+              v-bind:key="myGroup"
+              :value="myGroup.name" 
+              @click="chooseGroup"
+            >{{myGroup.name}}
+              <button class="delete" aria-label="close" :value="myGroup.id" v-on:click="deleteGroup"></button>
+            </li>
           </div>
         </section>
         <footer class="modal-card-foot">
@@ -38,7 +45,12 @@
           <div class="body__content">
             <span >추천 인기 그룹</span>
             <br>
-            <button v-for="rgroup in recommendedGroups" :value="rgroup" @click="addChooseGroup">{{rgroup}}</button>
+            <button 
+              v-for="rgroup in recommendedGroups"
+              v-bind:key="rgroup" 
+              :value="rgroup" 
+              @click="addChooseGroup"
+            >{{rgroup}}</button>
           </div>
           
           <div class="field">
@@ -55,27 +67,30 @@
 
     <div class="columns is-multiline">
       <div class="column is-10">
-        <h1 class="title">Edit Friends</h1>
+        <h1 class="title">친구 정보 수정</h1>
+        
+        <hr>
       </div>
+
 
       <div class="column is-10">
         <form @submit.prevent="submitForm">
           <div class="field">
-            <label>Name</label>
+            <label>이름</label>
             <div class="control">
               <input type="text" class="input" v-model="name" placeholder="이름">
             </div>
           </div>
         
           <div class="field">
-            <label>Grade</label>
+            <label>친밀도</label>
             <div class="control">
               <input type="text" class="input" v-model="grade" placeholder="Grade">
             </div>
           </div>
 
           <div class="field">
-            <label>Group</label>
+            <label>그룹</label>
             <div class="control">
               <input type="text" class="input" v-model="group" placeholder="그룹"  v-on:click="isShowModalFunction">
             </div>
@@ -131,7 +146,7 @@
           <br>
           <div class="field">
             <div class="control" style="text-align: center;">
-              <button class="go__to">저장</button>
+              <button class="go__to">수정</button>
             </div>
           </div>
         </form>
@@ -206,7 +221,7 @@
           .put(`/friends/update/${this.$route.params.id}/`, friends)
           .then(response => {
             toast({
-              message: 'The lead was added',
+              message: '친구 정보가 수정되었습니다!',
               type: 'is-success',
               dismissible: true,
               pauseOnHover: true,

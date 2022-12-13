@@ -16,7 +16,7 @@
               :value="myGroup.name" 
               @click="chooseGroup"
             >{{myGroup.name}}
-            <button class="delete" aria-label="close" :value="myGroup.id" v-on:click="deleteGroup"></button>
+              <button class="delete" aria-label="close" :value="myGroup.id" v-on:click="deleteGroup"></button>
             </li>
           </div>
         </section>
@@ -67,27 +67,29 @@
 
     <div class="columns is-multiline">
       <div class="column is-10">
-        <h1 class="title">정보 추가</h1>
+        <h1 class="title">친구 정보 추가</h1>
+
+        <hr>
       </div>
 
       <div class="column is-10">
         <form @submit.prevent="submitForm">
           <div class="field">
-            <label>Name</label>
+            <label>이름</label>
             <div class="control">
               <input type="text" class="input" v-model="name" placeholder="이름">
             </div>
           </div>
         
           <div class="field">
-            <label>Grade</label>
+            <label>친밀도</label>
             <div class="control">
               <input type="text" class="input" v-model="grade" placeholder="Grade">
             </div>
           </div>
 
           <div class="field">
-            <label>Group</label>
+            <label>그룹</label>
             <div class="control">
               <input type="text" class="input" v-model="group" placeholder="그룹" v-on:click="isShowModalFunction" readonly>
             </div>
@@ -190,7 +192,7 @@
           .post('/friends/create/', friends)
           .then(response => {
             toast({
-              message: 'The lead was added',
+              message: '친구 정보가 추가되었습니다!',
               type: 'is-success',
               dismissible: true,
               pauseOnHover: true,

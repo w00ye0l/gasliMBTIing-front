@@ -3,6 +3,8 @@
     <div class="columns is-centered is-multiline">
       <div class="column is-10 community__head">
         <h1 class="title">커뮤니티</h1>
+
+        <hr>
         
         <div class="write__div">
           <router-link to="/dashboard/community/add" class="write__btn is-light">글쓰기</router-link>
