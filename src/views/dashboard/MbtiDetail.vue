@@ -4,14 +4,27 @@
   <div class="container">
     <div class="columns is-multiline is-centered">
       <div class="column is-10">
-        <h1 class="title" v-if="(mbtidetail.board == '상대법')">{{mbtidetail.mbti}} 상대법</h1>
-        <h1 class="title" v-if="(mbtidetail.board == '주의할 점')">{{mbtidetail.mbti}} 주의할 점</h1>
-        <h1 class="title" v-if="(mbtidetail.board == '특징')">{{mbtidetail.mbti}} 특징</h1>
+        <div class="community__head">
+          <router-link to="/dashboard/mbti" class="back__btn">
+            <font-awesome-icon class="icon is-middle" icon="arrow-left" />
+          </router-link>
+
+          <div>
+            <h1 class="title">{{mbtidetail.mbti}} {{mbtidetail.board}}</h1>
+          </div> 
+        </div>
       </div>
 
       <div class="column is-10">
         <div class="box">
-          <p>{{mbtidetail.content}}</p>
+          <p class="detail_head title_">{{mbtidetail.character}}</p> 
+          <p class="detail_head">{{mbtidetail.summary}}</p>
+        </div> 
+      </div>
+      
+      <div class="column is-10">
+        <div class="box">
+          <p class="content">{{mbtidetail.content}}</p>
         </div>
       </div>
     </div>
@@ -47,11 +60,46 @@
           })
           .catch(error => {
             console.log(error)
-          })
+          }),
 
         this.$store.commit('setIsLoading', false)
-      }
+      },
+
     }
   }
 
 </script>
+
+<style scoped>
+  .community__head {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+  .back__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    color: #363636;
+  }
+
+  hr {
+    margin: 1rem 0;
+  }
+
+  .title_{
+    font-size: 1rem;
+    font-weight: bolder;
+  }
+
+  p.content{
+    font-size: 1rem;
+    inline-size: 100%;
+    white-space: pre-line;
+  }
+
+  .detail_head{
+    text-align: center;
+  }
+
+</style>
