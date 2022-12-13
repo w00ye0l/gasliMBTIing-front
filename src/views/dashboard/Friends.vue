@@ -12,8 +12,10 @@
               <div class="select">
                 <select v-model="group">
                   <option value="전체">전체</option>
-                  <option v-for="friend in friends"
-                v-bind:key="friend.id" :value="friend.group">{{friend.group}}</option>
+                  <option v-for="group in groups"
+                    v-bind:key="group" 
+                    :value="group"
+                  >{{group}}</option>
                 </select>
               </div>
             </div>
@@ -131,6 +133,7 @@
       return {
         friends: [],
         group:"전체",
+        groups:[],
         isShowModal: false,
         selectedId:'',
         selectedFriend:'',
@@ -148,6 +151,11 @@
         .get('/friends/')
         .then(response => {
           this.friends = response.data
+          for(let i=0;i<this.friends.length;i++){
+            if(this.groups.includes(this.friends[i].group) != true){
+              this.groups.push(this.friends[i].group)
+            }
+          }
         })
         
         .catch(error => {

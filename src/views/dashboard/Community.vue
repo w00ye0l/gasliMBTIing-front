@@ -61,8 +61,7 @@
           </div>
         </div>
 
-        <!-- <hr> -->
-
+        <hr>       
         <!-- 댓글 입력창 -->
         <div class="comment__formbox is-10">
           <h1 class="title">댓글</h1>
@@ -122,7 +121,7 @@
             </div>
 
             <template v-if="com.comment_user.username === now_user.username">
-              <button type="button" class="button is-light delete__btn" v-on:click="commentDelete">삭제</button>
+              <button type="button" class="button is-light delete__btn" v-on:click="fncomDelete" :data-id="com.id">삭제</button>
             </template>
 
           </div>
@@ -285,16 +284,18 @@
         this.$store.commit('setIsLoading', false)
       },
 
-      async commentDelete() {
+      // 댓글 삭제
+      async fncomDelete(event) {
         if (!confirm("삭제하시겠습니까?")) return
         
         const communityID = this.$route.params.id
+        const commentID = event.target.getAttribute('data-id')
         
         await axios
-          .delete(`/community/delete/${communityID}/`, this.community)
+          .delete(`/community/${communityID}/comment/delete/${commentID}/`, this.community, this.comment)
           .then(() => {
             toast({
-                message: '삭제되었습니다.',
+                message: '댓글 삭제되었습니다.',
                 type: 'is-danger',
                 dismissible: true,
                 pauseOnHover: true,
@@ -302,11 +303,12 @@
                 position: 'bottom-right',
               })
               this.$router.push(`/dashboard/community/${communityID}`)
+              this.getComment()
             })
           .catch((err) => {
             console.log(err);
           })
-      
+
         this.$store.commit('setIsLoading', false)
       },
     }
