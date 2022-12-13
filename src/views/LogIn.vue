@@ -33,7 +33,7 @@ import { KAKAO_AUTH_URL } from "../shared/OAuth";
 
           <div class="field">
             <div class="control">
-              <button class="btn__submit button">Submit</button>
+              <button class="btn__submit button">로그인</button>
             </div>
           </div>
         </form>
