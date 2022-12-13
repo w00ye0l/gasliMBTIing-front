@@ -109,6 +109,9 @@ const routes = [
     path: '/dashboard/community/:id',
     name: 'Community',
     component: Community,
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/dashboard/community/:id/edit',
@@ -140,6 +143,9 @@ const routes = [
     path: '/dashboard/guestbook/add/:id',
     name: 'AddGuestbook',
     component: AddGuestbook,
+    meta: {
+      requireLogin: true
+    }
   },  
   {
     path: '/dashboard/friends/:id',
