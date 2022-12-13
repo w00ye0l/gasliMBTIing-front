@@ -1,74 +1,126 @@
 <template>
   <div class="container">
+    <div class="columns is-centered is-multiline">
+      <div class="column is-10">
+        <h1 class="title">MBTI 저장</h1>
 
+        <hr>
+
+        <div class="header">
+          <div class="field">
+            <div class="control">
+              <div class="select">
+                <select v-model="group">
+                  <option value="전체">전체</option>
+                  <option v-for="group in groups"
+                    v-bind:key="group" 
+                    :value="group"
+                  >{{group}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <router-link class="add__btn" to="/dashboard/friends/add">
+            <font-awesome-icon class="icon is-medium" icon="plus" />
+          </router-link>
+        </div>
+      </div>
+
+      <div class="column is-10">
+
+        <hr>
+
+        <template v-if="group === '전체'">
+          <div
+            v-for="friend in friends"
+            v-bind:key="friend.id"
+            class="friend__box box"
+            v-on:click="showModal" 
+            :data-id="friend.id"
+            >
+            <div class="friend__info">
+              <img class="friend__img" :src="'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-blue-version/8/89/Pikachu.jpg'" alt="">
+              <h1 class="friend__name">{{friend.name}}</h1>
+            </div>
+            <div>
+              <p class="friend__mbti">{{friend.mbti}}</p>
+            </div>
+          </div>
+        </template>
+
+        <template v-else>
+          <div
+            v-for="friend in friends"
+            v-bind:key="friend.id"
+          >
+            <div
+              class="friend__box box"
+              v-if="friend.group === group"
+              v-on:click="showModal" 
+              :data-id="friend.id"
+            >
+              <div class="friend__info">
+                <img class="friend__img" :src="'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-blue-version/8/89/Pikachu.jpg'" alt="">
+                <h1 class="friend__name">{{friend.name}}</h1>
+              </div>
+              <div>
+                <p class="friend__mbti">{{friend.mbti}}</p>
+              </div>
+            </div>
+          </div>
+        </template>
+
+      </div>
+    </div>
+
+    <!-- 모달 -->
     <div class="modal" v-bind:class="{ 'is-active': isShowModal }">
+
     <div class="modal-background" v-on:click="isShowModal = false"></div>
       <div class="modal-card">
         <section class="modal-card-body">
           <div class="body__head">
-            <img class="body__title__img" src="" alt="">
-            <span class="body__title" >{{ selectedFriend.name}} 님이 선택되었습니다.</span><button class="delete" aria-label="close" v-on:click="isShowModal = false"></button>
+            <span class="body__title">상세 정보</span>
+            <button class="delete" aria-label="close" v-on:click="isShowModal=false"></button>
           </div>
+
           <div class="body__content">
-            <router-link :to="{ name: 'EditFriends', params: { id: Number(selectedFriend.id) }}"><button class="go__to">수정</button></router-link>
-            <button class="go__to" @click="deleteFriends" :data-id="selectedFriend.id">삭제</button>
+            <hr class="hr__custom" style="--hr:#fc66ac">
+            <div class="friend__content">
+              <div class="icon__box">
+                <font-awesome-icon class="icon is-medium" icon="circle-user" />
+                <p class="icon__name">이름</p>
+              </div>
+              <p>{{ selectedFriend.name }}</p>
+            </div>
+
+            <hr class="hr__custom" style="--hr:#f7e866">
+            <div class="friend__content">
+              <div class="icon__box">
+                <font-awesome-icon class="icon is-medium" icon="hashtag" />
+                <p class="icon__name">그룹</p>
+              </div>
+              <p>{{ selectedFriend.group }}</p>
+            </div>
+            
+            <hr class="hr__custom" style="--hr:#87f5b1">
+            <div class="friend__content">
+              <div class="icon__box">
+                <img class="icon icon__img" src="../../assets/images/mbti.png" alt="">
+              </div>
+              <p>{{ selectedFriend.mbti }}</p>
+            </div>
+            <hr class="hr__custom" style="--hr:#66c9fa">
+          </div>
+          <div class="friend__content">
+            <router-link class="friend__btn" style="--bgbtn:#eee48f" :to="{ name: 'EditFriends', params: { id: Number(selectedFriend.id) }}">수정
+            </router-link>
+            <button class="friend__btn" style="--bgbtn:#e28181" @click="deleteFriends" :data-id="selectedFriend.id">삭제</button>
           </div>
         </section>
       </div>
     </div>
 
-    <div class="columns is-centered is-multiline">
-      <div class="column is-10">
-        <h1 class="title">MBTI 저장</h1>
-        <h1 class="title">Friends</h1>
-          <div class="field">
-            <div class="control">
-              <div class="select">
-                <select v-model="group">
-                  <option value="그룹">그룹</option>
-                  <option v-for="g in groups"
-                v-bind:key="g" :value="g">{{g}}</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        <router-link to="/dashboard/friends/add">Add Friends</router-link>
-      </div>
-
-      <div class="column is-10">
-        <table class="table is-fullwidth">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Mbti</th>
-              <th>Grade</th>
-              <th>Group</th>
-            </tr>
-          </thead>
-          <tbody v-if="group == '그룹'">
-            <tr
-              v-for="friend in friends"
-              v-bind:key="friend.id"
-              
-            > <td v-on:click="showModal" :data-id="friend.id">{{ friend.name }}</td>
-              <td v-on:click="showModal" :data-id="friend.id">{{ friend.mbti }}</td>
-              <td v-on:click="showModal" :data-id="friend.id">{{ friend.grade }}</td>
-              <td v-on:click="showModal" :data-id="friend.id">{{ friend.group }}</td>
-            </tr>
-          </tbody>
-          <tbody v-if="group != '그룹'">
-            <tr
-              v-for="friend in friends"
-              v-bind:key="friend.id"
-              > <td v-if="friend.group == group" v-on:click="showModal" :data-id="friend.id">{{ friend.name }}</td>
-              <td v-if="friend.group == group" v-on:click="showModal" :data-id="friend.id">{{ friend.mbti }}</td>
-              <td v-if="friend.group == group" v-on:click="showModal" :data-id="friend.id">{{ friend.grade }}</td>
-              <td v-if="friend.group == group" v-on:click="showModal" :data-id="friend.id">{{ friend.group }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -80,8 +132,8 @@
     data() {
       return {
         friends: [],
+        group:"전체",
         groups:[],
-        group:"그룹",
         isShowModal: false,
         selectedId:'',
         selectedFriend:'',
@@ -159,83 +211,55 @@
 </script>
 
 <style scoped>
-/* label {
-  font-size: 1.3rem;
-}
-.ageGender {
+.header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
-.age__field, .gender__field {
-  width: 45%;
-}
-.gender__radio {
-  display: flex;
-  justify-content: space-evenly;
-}
-.gender__radio .gender {
-  font-size: 30px;
-  color: #9c9c9c;
-}
-.gender__btn:checked + .gender {
-  color: var(--genClr);
-}
-.mbti__field {
-  display: flex;
-  justify-content: space-between;
-}
-.mbti__radio {
-  display: flex;
-  flex-direction: column;
-}
-.radio input {
-  display: none;
-}
-.radio + .radio {
-  margin: 0;
-}
-.radio div {
+.add__btn {
+  width: 3rem;
+  height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
-  margin-bottom: 0.5rem;
+  color: #fff;
+  background: #bd32fd;
+  border: 2px dashed #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0.3rem #bd32fd;
+}
+.add__btn:hover {
+  color: #fff;
+  background: #9f22da;
+  box-shadow: 0 0 0 0.3rem #9f22da;
+}
+.friend__box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.friend__box:hover {
+  cursor: pointer;
+}
+.friend__info {
+  display: flex;
+  align-items: center;
+}
+.friend__img {
+  margin-right: 0.5rem;
+  width: 4rem;
+  height: 4rem;
+  border: 0.5px solid #dfdfdf;
   border-radius: 0.5rem;
-  border: 2px solid var(--clr);
-  font-size: 2rem;
-  line-height: 4rem;
 }
-.radio__btn:checked + div {
-  background: var(--clr);
-} */
-.button__submit {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  font-size: 1.2rem;
-  border-radius: 2rem;
-  background: #bd32fd;
-  color: #fff;
-  border: 2px dashed rgb(255, 255, 255);
-  box-shadow: 0 0 0 0.2rem #bd32fd;
+.friend__name {
+  font-size: 1.5rem;
 }
-.button__submit:hover {
-  background: #9f22da;
-  box-shadow: 0 0 0 0.2rem #9f22da;
-}
-
-.modal-button {
-  background: #bd32fd;
-  color: #fff;
-  border-radius: 10rem;
-  border: 4px dashed rgb(255, 255, 255);
-  box-shadow: 0 0 0 0.5rem #bd32fd;
-}
-
-.modal-button:hover {
-  background: #9f22da;
-  color: #fff;
-  box-shadow: 0 0 0 0.5rem #9f22da;
+.friend__mbti {
+  padding: 0 0.5rem;
+  font-size: 1.5rem;
+  background: #dd94ff;
+  border-radius: 0.5rem;
 }
 
 .modal-card {
@@ -243,61 +267,17 @@
   border-radius: 1.5rem;
 }
 
-.modal-card-head {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  border: 0;
-  background: #fff;
-}
-
-.modal-card-head .delete {
-  position: absolute;
-  top: 30px;
-  right: 30px;
-}
-
-.modal__title {
-  font-size: 3rem;
-}
-
 .modal-card-body {
-  background: #fff;
-}
-
-.modal-card-foot {
-  display: flex;
-  justify-content: center;
-  border: 0;
-  background: #fff;
-}
-
-.go__to {
-  width: 40%;
-  background: #bd32fd;
-  color: #fff;
-  text-align: center;
-  font-size: 2rem;
-  border-radius: 3rem;
-  border: 4px dashed rgb(255, 255, 255);
-  box-shadow: 0 0 0 0.5rem #bd32fd;
-  margin: 1.5rem;
-}
-
-.go__to:hover {
-  background: #9f22da;
-  color: #fff;
-  box-shadow: 0 0 0 0.5rem #9f22da;
+  background: rgb(255, 255, 255);
 }
 
 .body__head {
+  width: 90%;
+  margin: auto;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem;
-}
-
-.body__title__img {
-  width: 15%;
+  margin-bottom: 2rem;
 }
 
 .body__title {
@@ -305,13 +285,70 @@
 }
 
 .body__content {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   margin-bottom: 2rem;
+  /* color: #e28181; */
 }
-
-.body__info {
-  padding: 0 2rem;
-  color: #868686;
+.hr__custom {
+  width: 120%;
+  background-color: var(--hr);
+}
+.friend__content{
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+}
+.icon__box {
+  width: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(155, 155, 155);
+}
+.icon__box .icon {
+  margin-top:0.5rem;
+  display: flex;
+  align-items: center;
+}
+.icon__img {
+  margin-top:0.5rem;
+  margin: auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.icon__name {
   font-size: 1rem;
+}
+.friend__btn {
+  width: 40%;
+  height: 3rem;
+  background: var(--bgbtn);
+  color: rgb(70, 67, 67);
+  text-align: center;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  border-radius: 3rem;
+  border: 2px dashed #fff;
+  box-shadow: 0 0 0 0.3rem var(--bgbtn);
+  margin: 1.5rem;
+}
+.friend__btn:hover {
+  background: var(--bgbtn);
+  color: rgb(68, 68, 68);
+  box-shadow: 0 0 0 0.3rem var(--bgbtn);
+  cursor: pointer;
 }
 </style>

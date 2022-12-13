@@ -67,7 +67,7 @@
 
     <div class="columns is-multiline">
       <div class="column is-10">
-        <h1 class="title">Add Friends</h1>
+        <h1 class="title">정보 추가</h1>
       </div>
 
       <div class="column is-10">
@@ -89,7 +89,7 @@
           <div class="field">
             <label>Group</label>
             <div class="control">
-              <input type="text" class="input" v-model="group" placeholder="그룹"  v-on:click="isShowModalFunction">
+              <input type="text" class="input" v-model="group" placeholder="그룹" v-on:click="isShowModalFunction" readonly>
             </div>
           </div>
 
