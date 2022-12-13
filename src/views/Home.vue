@@ -80,7 +80,7 @@
         </section>
 
         <footer class="modal-card-foot">
-          <router-link to="/dashboard/friends" class="go__to">MBTI!</router-link>
+          <router-link to="/log-in" class="go__to">MBTI!</router-link>
         </footer>
       </div>
     </div>
