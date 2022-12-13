@@ -25,12 +25,15 @@
           </div>
         </div>
       </div> 
-
-      <!-- 방명록 -->
-      <div class="box">
-        <h1 class="title">방명록</h1>
-        <div class="guest__group column is-10 is-center">
-          <div v-for="guest in guestlist" v-bind:key="guest.id">
+      <div class="column is-10" style="text-align: center; margin: auto;">
+        <div class="buttons" style=" display: inline-block;">
+          <router-link :to="{ name: 'EditAccount' }" class="button is-success">프로필 편집</router-link>
+          <button @click="logout()" class="button is-danger">로그아웃</button>
+          <router-link :to="{ name: 'DeleteAccount' }" class="button is-danger">회원탈퇴</router-link>
+        <div class="box">
+          <h1 class="title">방명록</h1>
+          <div class="guest__group column is-10 is-center">
+            <div v-for="guest in guestlist" v-bind:key="guest.id">
             <router-link class="guest__link" :to="{ name: 'Guestbook', params: { id: guest.id }}">
               <div class="guest_note">
                 <div class="guest__box">
