@@ -13,8 +13,10 @@
             <p class="article__category">{{ community.category }}</p>
           </div>
         </div>
+
+        <hr>
       </div>
-      
+
       <!-- 글 -->
       <div class="column is-10 is-center">
         <div class="article__head ">
@@ -323,7 +325,6 @@
 }
 .community__head {
   display: flex;
-  margin-bottom: 1rem;
 }
 .back__btn {
   display: flex;
