@@ -36,14 +36,14 @@ import { KAKAO_AUTH_URL } from "../shared/OAuth";
               <button class="btn__submit button">로그인</button>
             </div>
           </div>
+          <div style="text-align:center;">
+            <form @submit.prevent="kakaoLogin">
+              <!-- <a :href="kakaoLoginLink" alt="kakao login"> -->
+                <img alt="kakao logo" src="./../assets/images/kakao_login_medium_wide.png" @click="kakaoLogin()" />
+              <!-- </a> -->
+            </form>
+          </div>
         </form>
-        <div>
-          <form @submit.prevent="kakaoLogin">
-            <!-- <a :href="kakaoLoginLink" alt="kakao login"> -->
-              <img alt="kakao logo" src="./../assets/images/kakao_login_medium_wide.png" @click="kakaoLogin()" />
-            <!-- </a> -->
-          </form>
-        </div>
         <div class="signup__link">
           <p>아직 회원이 아니신가요?</p>
           <router-link to="/sign-up">회원가입!</router-link>

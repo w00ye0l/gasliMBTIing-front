@@ -4,9 +4,9 @@
       <div class="column is-10 is-center">
 
         <!-- 회원 정보 -->
+        <h1 class="title">'{{ user.nickname }}' 님의 회원정보</h1>
         <div class="box">
-          <h1 class="title">{{ user.nickname }}님의 회원정보</h1>
-          <div class="accounts__info">
+          <div class="accounts__info box">
             <img :src="user.image" class="img__profile">
             <span>
               <p class="mbti__font"><strong>이메일: </strong> {{ user.username }} </p>
@@ -15,7 +15,6 @@
               <p class="mbti__font"><strong>성별: </strong> {{ user.gender }} </p>
             </span>
           </div>
-
           <div class="column is-10" style="text-align: center; margin: auto;">
             <div class="buttons" style=" display: inline-block;">
               <router-link :to="{ name: 'EditAccount' }" class="button is-success">프로필 편집</router-link>
@@ -23,21 +22,22 @@
               <router-link :to="{ name: 'DeleteAccount' }" class="button is-danger">회원탈퇴</router-link>
             </div>
           </div>
+        </div>
 
-          <div class="box">
-            <h1 class="title">방명록</h1>
-            <div class="guest__group column is-10 is-center">
-              <div v-for="guest in guestlist" v-bind:key="guest.id">
-              <router-link class="guest__link" :to="{ name: 'Guestbook', params: { id: guest.id }}">
-                <div class="guest_note">
-                  <div class="guest__box">
-                    <p class="guest__content">{{ guest.name }} | {{ guest.contents }}</p>
-                  </div>
+        <h1 class="title">방명록</h1>
+        <div class="box">
+          <div class="guest__group column is-10 is-center">
+            <div v-for="guest in guestlist" v-bind:key="guest.id">
+            <router-link class="guest__link" :to="{ name: 'Guestbook', params: { id: guest.id }}">
+              <div class="guest_note">
+                <div class="guest__box">
+                  <p class="guest__content">{{ guest.name }} | {{ guest.contents }}</p>
                 </div>
-              </router-link>
               </div>
+            </router-link>
             </div>
-          </div> 
+          </div>
+        </div> 
       <!-- 원래 수정 전 -->
       <!-- <div class="column is-10 is-center">
         <div class="box">
@@ -48,42 +48,40 @@
         </div>
       </div>  -->
 
-        <!-- 친구 분포도 -->
-        <div class="column is-10 is-center">
-          <div class="box">
-            <h1 class="title">친구 분포도</h1>
-            <div>
-              <div class="mbti__friend">
-                <div><span class="mbti__left">E</span> <span class="mbti__right">I</span></div>
-                <div class="bar__container">
-                  <div id="content__bar" class="bar1"></div>
-                </div> 
+        <!-- 친구 분포도 -->       
+        <h1 class="title">친구 분포도</h1>
+        <div class="box">
+          <div>
+            <div class="mbti__friend">
+              <div><span class="mbti__left">E</span> <span class="mbti__right">I</span></div>
+              <div class="bar__container">
+                <div id="content__bar" class="bar1"></div>
+              </div> 
+            </div>           
+            <div class="mbti__friend">
+              <div><span class="mbti__left">N</span> <span class="mbti__right">S</span></div>
+              <div class="bar__container">
+                <div id="content__bar" class="bar2"></div>
               </div>           
-              <div class="mbti__friend">
-                <div><span class="mbti__left">N</span> <span class="mbti__right">S</span></div>
+            </div>
+            <div class="mbti__friend">
+              <div><span class="mbti__left">T</span> <span class="mbti__right">F</span></div>
                 <div class="bar__container">
-                  <div id="content__bar" class="bar2"></div>
+                  <div id="content__bar" class="bar3"></div>
                 </div>           
-              </div>
-              <div class="mbti__friend">
-                <div><span class="mbti__left">T</span> <span class="mbti__right">F</span></div>
-                  <div class="bar__container">
-                    <div id="content__bar" class="bar3"></div>
-                  </div>           
-              </div>
-              <div class="mbti__friend">
-                <div><span class="mbti__left">P</span> <span class="mbti__right">J</span></div>
-                  <div class="bar__container">
-                    <div id="content__bar" class="bar4"></div>
-                  </div>           
-              </div>
-            </div>         
-          </div>  
-        </div>
+            </div>
+            <div class="mbti__friend">
+              <div><span class="mbti__left">P</span> <span class="mbti__right">J</span></div>
+                <div class="bar__container">
+                  <div id="content__bar" class="bar4"></div>
+                </div>           
+            </div>
+          </div>         
+        </div>  
       </div> 
     </div>
   </div>
-</div>
+
 </template>
 
 <script>
@@ -111,9 +109,8 @@
         await axios
         .get(`/accounts/`)
         .then(response => {
-          console.log(response)
           this.user = response.data
-          console.log(this.user)
+          //  this.user.image = process.env.VUE_APP_API_URL + this.user.image
         })
         
         .catch(error => {
@@ -130,7 +127,6 @@
         await axios
         .get(`/guestbook/${this.user.id}/`)
         .then(response => {
-          console.log(response)
           this.guestlist = response.data
         })
         

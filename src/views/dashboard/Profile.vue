@@ -4,8 +4,8 @@
       <div class="column is-10 is-center">
 
         <!-- 회원 정보 -->
+        <h1 class="title">'{{ user.nickname }}' 님의 회원정보</h1>
         <div class="box">
-          <h1 class="title">{{ user.nickname }} 님의 회원정보</h1>
           <div class="profile__info">
             <img :src="user.image" class="img__profile">
             <span>
@@ -20,8 +20,8 @@
 
       <!-- 방명록 -->
       <div class="column is-10 is-center">
+        <h1 class="title">방명록</h1>
         <div class="box">
-          <h1 class="title">방명록</h1>
           <div class="write__div">
             <router-link :to="{ name: 'AddGuestbook', params: { id: Number(user.id) }}" class="write__btn is-light">글쓰기</router-link>
           </div>
@@ -35,8 +35,8 @@
 
       <!-- 친구 분포도 -->
       <div class="column is-10 is-center">
+        <h1 class="title">친구 분포도</h1>
         <div class="box">
-          <h1 class="title">친구 분포도</h1>
           <div>
             <div class="mbti__friend">
               <div><span class="mbti__left">E</span> <span class="mbti__right">I</span></div>
@@ -93,9 +93,8 @@
         await axios
         .get(`/accounts/${userID}/`)
         .then(response => {
-          console.log(response)
           this.user = response.data
-          this.user.image = process.env.VUE_APP_API_URL + this.user.image
+        //  this.user.image = process.env.VUE_APP_API_URL + this.user.image
         })
         
         .catch(error => {
@@ -113,7 +112,6 @@
         await axios
         .get(`/guestbook/${userID}/`)
         .then(response => {
-          console.log(response)
           this.guestlist = response.data
         })
         
