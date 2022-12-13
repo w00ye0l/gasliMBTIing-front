@@ -4,7 +4,7 @@
       <div class="column is-10 is-center">
         <h1 class="title">Guestbook</h1>
 
-        <router-link to="/dashboard/guestbook" class="button is-light">Home</router-link>&nbsp;
+        
         <button type="button" class="button is-light" v-on:click="fnDelete">Delete</button>
       </div>
 
@@ -28,8 +28,7 @@
     name: 'Guestbook',
     data() {
       return {
-        guestbook: {
-        }
+        guestbook: {}
       }
     },
     created() {
@@ -43,10 +42,11 @@
 
 
         await axios
-          .get(`/guestbook/${guestbookID}/`)
+          .get(`/guestbook/detail/${guestbookID}/`)
           .then(response => {
             console.log(response)
             this.guestbook = response.data
+            console.log(response.data)
           })
           .catch(error => {
             console.log(error)

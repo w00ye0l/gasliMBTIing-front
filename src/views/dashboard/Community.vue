@@ -17,7 +17,7 @@
       
       <!-- 글 -->
       <div class="column is-10 is-center">
-        <div class="article__head box">
+        <div class="article__head ">
           <div class="article__user">
             <div class="article__profileImg">
               <img src="https://mblogthumb-phinf.pstatic.net/MjAxODAxMzFfODcg/MDAxNTE3MzkxNTAxMDkx.M_0YZWPyJdHFTFhy44QVGOefevhQlbp6imgO92lgrWcg.wlSOGUlI6sqwtZX4iOc2PtugEMY0xexfbFqEUyRXRpUg.JPEG.jsrwnmejs/%ED%91%9C%EC%A7%80_%EA%B3%A0%ED%99%94%EC%A7%88ssss.jpg?type=w2" alt="">
@@ -35,31 +35,46 @@
           </div>
         </div>
         
-        <div class="box">
+        <div class="">
           <!-- 글 제목 -->
           <p class="subtitle">{{ community.title }} <span class="article__mbti">{{ community.mbti }}</span></p>
           
-          <hr>
-          
           <template v-if="community.image !== null">
-            <img :src="community.image" class="article__img">
+            <div class="article__imgbox">
+              <img :src="community.image" class="article__img">
+            </div>
           </template>
           <p class="article__content">{{ community.content }}</p>
+
+          <div class="comment__len">
+            <font-awesome-icon class="icon is-small" icon="comment" />
+            <p class="comment_cnt">{{ comments.length }}</p>
+          </div>
         </div>
 
+        <hr>
         <!-- 댓글 -->
-        <div 
-          class="box"
-          v-for="com in comment"
-          v-bind:key="com.id">
-          <div>{{ com.content }}</div>
+        <div class="">
+          <div
+            v-for="com in comments"
+            v-bind:key="com.id"
+          >
+            <div class="comment__user">
+              <div class="comment__user__img" v-bind:style="{ 'backgroundImage': 'url(' + com.comment_user.image + ')' }">
+                <!-- <img class="comment__user__img" :src="" alt=""> -->
+              </div>
+              <p class="comment__user__name">{{ com.comment_user.nickname }}</p>
+            </div>
+            <p class="comment__content">{{ com.content }}</p>
+            <hr>
+          </div>
         </div>
         
         <!-- 댓글 입력창 -->
-        <div class="box">
+        <div class="comment__formbox">
           <h1 class="title">댓글</h1>
-          <form @submit.prevent="submitForm">
-            <div class="field">
+          <form class="comment__form" @submit.prevent="submitForm">
+            <div class="field comment__input">
               <div class="control">
                 <input type="text" class="input" v-model="commentContent">
               </div>
@@ -67,7 +82,7 @@
             
             <div class="field">
               <div class="control">
-                <button class="button is-success">Submit</button>
+                <button class="button is-success">작성</button>
               </div>
             </div>
           </form>
@@ -90,7 +105,7 @@
         community: {
           user: {},
         },
-        comment: {},
+        comments: [],
         makeComment: {},
         commentContent: '',
       }
@@ -110,7 +125,6 @@
           .then(response => {
             console.log(response)
             this.community = response.data
-            this.community.image = process.env.VUE_APP_API_URL + this.community.image
           })
           .catch(error => {
             console.log(error)
@@ -154,10 +168,10 @@
         const communityID = this.$route.params.id
 
         await axios
-          .get(`/community/${communityID}/comment`, this.communityID)
+          .get(`/community/${communityID}/comment/`, communityID)
           .then(response => {
             console.log(response)
-            this.comment = response.data
+            this.comments = response.data
           })
           .catch(error => {
             console.log(error)
@@ -173,12 +187,10 @@
         const makeComment = {
           content: this.commentContent,
         }
-
-        console.log(comment)
         
         await axios
-        .post(`/community/${communityID}/comment/create/`, makeComment)
-        .then(response => {
+          .post(`/community/${communityID}/comment/create/`, makeComment)
+          .then(response => {
             console.log(response)
             console.log(response.data)
             
@@ -187,6 +199,8 @@
           .catch(error => {
             console.log(error)
           })
+
+        this.getComment()
 
         this.$store.commit('setIsLoading', false)
       },
@@ -250,12 +264,61 @@
   background: #FF99C8;
   border-radius: 0.5rem;
 }
+.article__imgbox {
+  display: flex;
+  justify-content: center;
+}
 .article__img {
-  border: 1px solid #797979;
+  border: 1px solid #b3b3b3;
   border-radius: 1rem;
   margin-bottom: 1rem;
 }
 .article__content {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #7a7a7a;
+}
+.comment__len {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
   font-size: 1.5rem;
+  color: #3f8de7;
+}
+.comment_cnt {
+  margin-left: 0.5rem;
+}
+.comment__user {
+  display: flex;
+  align-items: center;
+}
+.comment__user__img {
+  margin-right: 0.5rem;
+  width: 3rem;
+  height: 3rem;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 0.5rem;
+}
+.comment__user__name {
+  font-size: 1.5rem;
+}
+.comment__content {
+  font-size: 1.5rem;
+  color: #7a7a7a;
+}
+.comment__formbox {
+  bottom: 7rem;
+  background: #fff;
+}
+.comment__form {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.comment__input {
+  width: 80%;
 }
 </style>
