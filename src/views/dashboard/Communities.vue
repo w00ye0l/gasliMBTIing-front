@@ -11,12 +11,12 @@
       
       <div class="column is-10">
         <div
-        class="article box"
-        v-for="community in communities"
-        v-bind:key="community.id"
+          class="article box"
+          v-for="community in communities"
+          v-bind:key="community.id"
         >
         <router-link class="article__link" :to="{ name: 'Community', params: { id: community.id }}">
-            <h2 class="article__title"><span class="article__mbti">{{ community.mbti }}</span> {{ community.title }}</h2>
+            <h2 class="article__title">{{ community.title }}<span class="article__mbti">{{ community.mbti }}</span></h2>
             <p class="article__content">{{ community.content }}</p>
             <p class="article__subcontent">
               <span>{{ elapsedText(community.created_at) }}</span> | 
@@ -101,6 +101,8 @@
   box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 40%), 0 0px 0 1px rgb(10 10 10 / 2%);
 }
 .article__title {
+  display: flex;
+  justify-content: space-between;
   font-size: 1.5rem;
 }
 .article__mbti {
