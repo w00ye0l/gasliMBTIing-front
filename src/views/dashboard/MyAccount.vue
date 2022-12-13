@@ -75,7 +75,7 @@
     data() {
       return {
         user: {},
-        guestlist:[],
+        guestlist:[]
       }
     },
 
@@ -103,6 +103,7 @@
           
         this.$store.commit('setIsLoading', false)
         this.getGuestbook()
+        this.getFriends()
       },
       async getGuestbook() {
         this.$store.commit('setIsLoading', true)
@@ -120,7 +121,34 @@
           
         this.$store.commit('setIsLoading', false)
       },
+      async getFriends(){
+        await axios
+        .get(`/friends/`)
+        .then(response => {
+          const friendsDict = {'E':0,'I':0,'N':0,'S':0,'F':0,'T':0,'P':0,'J':0}
+          for (let i=0;i<response.data.length;i++){
+            for (let j=0;j<response.data[i].mbti.length;j++){
+                friendsDict[response.data[i].mbti[j]] += 1
+            }
+          }
+          const mbtiE = Math.round(friendsDict['E']/(friendsDict['E'] + friendsDict['I']) * 100)
+          const mbtiN = Math.round(friendsDict['N']/(friendsDict['N'] + friendsDict['S']) * 100)
+          const mbtiT = Math.round(friendsDict['T']/(friendsDict['T'] + friendsDict['F']) * 100)
+          const mbtiP = Math.round(friendsDict['P']/(friendsDict['P'] + friendsDict['J']) * 100)
+          const bar1 = document.querySelector('.bar1')
+          const bar2 = document.querySelector('.bar2')
+          const bar3 = document.querySelector('.bar3')
+          const bar4 = document.querySelector('.bar4')
+          bar1.style.width = String(mbtiE) + "%"
+          bar2.style.width = String(mbtiN) + "%"
+          bar3.style.width = String(mbtiT) + "%"
+          bar4.style.width = String(mbtiP) + "%"
 
+        })
+        .catch(error => {
+            console.log(error)
+          })
+      },
       async logout() {
         await axios
           .post('/api/v1/token/logout/')
