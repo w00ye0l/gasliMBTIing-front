@@ -61,28 +61,7 @@
           </div>
         </div>
 
-        <hr>
-        <!-- 댓글 -->
-        <div class="">
-          <div
-            v-for="com in comments"
-            v-bind:key="com.id"
-          >
-            <div class="comment__user">
-              <div class="comment__user__img" v-bind:style="{ 'backgroundImage': 'url(' + com.comment_user.image + ')' }">
-                <!-- <img class="comment__user__img" :src="" alt=""> -->
-              </div>
-              <p class="comment__user__name">{{ com.comment_user.nickname }}</p>
-            </div>
-            <p class="comment__content">{{ com.id }}</p>
-            <p class="comment__content">{{ com.content }}</p>
-
-            <!-- 댓글삭제 -->
-            <p><button type="button" class="button is-light delete__btn" v-on:click="fncomDelete" :data-id="com.id">댓글삭제</button></p>
-            <hr>
-          </div>
-        </div>
-        
+        <hr>       
         <!-- 댓글 입력창 -->
         <div class="comment__formbox is-10">
           <h1 class="title">댓글</h1>
@@ -142,7 +121,7 @@
             </div>
 
             <template v-if="com.comment_user.username === now_user.username">
-              <button type="button" class="button is-light delete__btn" v-on:click="commentDelete">삭제</button>
+              <button type="button" class="button is-light delete__btn" v-on:click="fncomDelete" :data-id="com.id">삭제</button>
             </template>
 
           </div>
@@ -305,31 +284,6 @@
         this.$store.commit('setIsLoading', false)
       },
 
-      async commentDelete() {
-        if (!confirm("삭제하시겠습니까?")) return
-        
-        const communityID = this.$route.params.id
-        
-        await axios
-          .delete(`/community/delete/${communityID}/`, this.community)
-          .then(() => {
-            toast({
-                message: '삭제되었습니다.',
-                type: 'is-danger',
-                dismissible: true,
-                pauseOnHover: true,
-                duration: 2000,
-                position: 'bottom-right',
-              })
-              this.$router.push(`/dashboard/community/${communityID}`)
-            })
-          .catch((err) => {
-            console.log(err);
-          })
-      
-        this.$store.commit('setIsLoading', false)
-      },
-
       // 댓글 삭제
       async fncomDelete(event) {
         if (!confirm("삭제하시겠습니까?")) return
@@ -348,7 +302,8 @@
                 duration: 2000,
                 position: 'bottom-right',
               })
-              this.$router.push('/dashboard/community')
+              this.$router.push(`/dashboard/community/${communityID}`)
+              this.getComment()
             })
           .catch((err) => {
             console.log(err);
