@@ -2,11 +2,9 @@
   <div class="container">
     <div class="columns is-multiline">
       <div class="column is-10 is-center">
-        <h1 class="title">방명록</h1>
+        <h1 class="title">방명록 {{ username }}</h1>
 
         <hr>
-        <!-- 삭제 버튼 -->
-        <button type="button" class="button is-light delete__btn" v-on:click="fnDelete">Delete</button>
       </div>
       
       <!-- 방명록 디테일 -->
@@ -31,12 +29,15 @@
   
   export default {
     name: 'Guestbook',
+    
     data() {
       return {
-        guestbook: {}
+        guestbook: {},
+        username: localStorage.getItem("username"),
       }
     },
     created() {
+      this.username,
       this.getGuestbook()
     },
     methods: {
@@ -49,36 +50,10 @@
         await axios
           .get(`/guestbook/detail/${guestbookID}/`)
           .then(response => {
-            console.log(response)
             this.guestbook = response.data
-            console.log(response.data)
           })
           .catch(error => {
             console.log(error)
-          })
-
-        this.$store.commit('setIsLoading', false)
-      },
-      async fnDelete() {
-        if (!confirm("삭제하시겠습니까?")) return
-        
-        const guestbookID = this.$route.params.id
-        
-        await axios
-          .delete(`/guestbook/delete/${guestbookID}/`, this.guestbook)
-          .then(() => {
-            toast({
-                message: '삭제되었습니다.',
-                type: 'is-danger',
-                dismissible: true,
-                pauseOnHover: true,
-                duration: 2000,
-                position: 'bottom-right',
-              })
-              this.$router.push('/dashboard/my-account')
-            })
-          .catch((err) => {
-            console.log(err);
           })
 
         this.$store.commit('setIsLoading', false)
