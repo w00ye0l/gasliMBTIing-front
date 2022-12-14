@@ -3,7 +3,7 @@
     <div class="columns is-multiline">
       <div class="column is-10 is-center">
         <div class="guestbook__head">
-          <template v-if="guestbook.receive_user.id != userid">
+          <template v-if="guestbook.receive_user != userid">
             <router-link :to="{ name: 'Profile', params: { id: Number(guestbook.receive_user) }}" class="back__btn">
               <font-awesome-icon class="icon is-middle" icon="arrow-left" />
             </router-link>
@@ -50,6 +50,7 @@
         guestbook: {},
         username: localStorage.getItem("username"),
         userid: localStorage.getItem("userid"),
+        token: localStorage.getItem("token"),
       }
     },
     created() {

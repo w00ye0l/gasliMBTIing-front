@@ -110,21 +110,6 @@
       this.getUser()
       this.getGuestbook()
     },
-    mounted() {
-      const totalLen = this.$refs.barContainer.clientWidth;
-
-      this.$refs.per11.textContent = (this.$refs.bar1.clientWidth / totalLen * 100) + '%';
-      this.$refs.per12.textContent = (100 - (this.$refs.bar1.clientWidth / totalLen * 100)) + '%';
-
-      this.$refs.per21.textContent = (this.$refs.bar2.clientWidth / totalLen * 100) + '%';
-      this.$refs.per22.textContent = (100 - (this.$refs.bar2.clientWidth / totalLen * 100)) + '%';
-
-      this.$refs.per31.textContent = (this.$refs.bar3.clientWidth / totalLen * 100) + '%';
-      this.$refs.per32.textContent = (100 - (this.$refs.bar3.clientWidth / totalLen * 100)) + '%';
-      
-      this.$refs.per41.textContent = (this.$refs.bar4.clientWidth / totalLen * 100) + '%';
-      this.$refs.per42.textContent = (100 - (this.$refs.bar4.clientWidth / totalLen * 100)) + '%';
-    },
     methods: {
       async getUser() {      
         this.$store.commit('setIsLoading', true)
@@ -186,17 +171,17 @@
 
             const totalLen = this.$refs.barContainer.clientWidth;
             
-            this.$refs.per11.textContent = (this.$refs.bar1.clientWidth / totalLen * 100) + '%';
-            this.$refs.per12.textContent = (100 - (this.$refs.bar1.clientWidth / totalLen * 100)) + '%';
+            this.$refs.per11.textContent = Math.round(this.$refs.bar1.clientWidth / totalLen * 100) + '%';
+            this.$refs.per12.textContent = Math.round(100 - (this.$refs.bar1.clientWidth / totalLen * 100)) + '%';
 
-            this.$refs.per21.textContent = (this.$refs.bar2.clientWidth / totalLen * 100) + '%';
-            this.$refs.per22.textContent = (100 - (this.$refs.bar2.clientWidth / totalLen * 100)) + '%';
+            this.$refs.per21.textContent = Math.round(this.$refs.bar2.clientWidth / totalLen * 100) + '%';
+            this.$refs.per22.textContent = Math.round(100 - (this.$refs.bar2.clientWidth / totalLen * 100)) + '%';
 
-            this.$refs.per31.textContent = (this.$refs.bar3.clientWidth / totalLen * 100) + '%';
-            this.$refs.per32.textContent = (100 - (this.$refs.bar3.clientWidth / totalLen * 100)) + '%';
+            this.$refs.per31.textContent = Math.round(this.$refs.bar3.clientWidth / totalLen * 100) + '%';
+            this.$refs.per32.textContent = Math.round(100 - (this.$refs.bar3.clientWidth / totalLen * 100)) + '%';
             
-            this.$refs.per41.textContent = (this.$refs.bar4.clientWidth / totalLen * 100) + '%';
-            this.$refs.per42.textContent = (100 - (this.$refs.bar4.clientWidth / totalLen * 100)) + '%';
+            this.$refs.per41.textContent = Math.round(this.$refs.bar4.clientWidth / totalLen * 100) + '%';
+            this.$refs.per42.textContent = Math.round(100 - (this.$refs.bar4.clientWidth / totalLen * 100)) + '%';
           })
           .catch(error => {
             console.log(error)
