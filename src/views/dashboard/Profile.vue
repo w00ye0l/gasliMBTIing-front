@@ -51,32 +51,44 @@
         <h1 class="title">친구 분포도</h1>
         <div class="box">
           <div class="mbti__friend">
-            <div><span class="mbti__left">E</span> <span class="mbti__right">I</span></div>
-            <div class="bar__container" style="--bgClr:#f8afd1">
-              <div id="bar1" class="bar" style="--bgClr:#fc66ac"></div>
+            <div>
+              <span class="mbti__left">E <span ref="per11"></span></span>
+              <span class="mbti__right"><span ref="per12"></span> I</span>
+            </div>
+            <div class="bar__container" ref="barContainer" style="--bgClr:#f8afd1">
+              <div ref="bar1" class="bar" style="--bgClr:#fc66ac"></div>
             </div> 
           </div>   
 
           <div class="mbti__friend">
-            <div><span class="mbti__left">N</span> <span class="mbti__right">S</span></div>
+            <div>
+              <span class="mbti__left">N <span ref="per21"></span></span>
+              <span class="mbti__right"><span ref="per22"></span> S</span>
+            </div>
             <div class="bar__container" style="--bgClr:#FCF6BD">
-              <div id="bar2" class="bar" style="--bgClr:#f7e866"></div>
-            </div>           
+              <div ref="bar2" class="bar" style="--bgClr:#f7e866"></div>
+            </div>
           </div>
 
           <div class="mbti__friend">
-            <div><span class="mbti__left">T</span> <span class="mbti__right">F</span></div>
+            <div>
+              <span class="mbti__left">T <span ref="per31"></span></span>
+              <span class="mbti__right"><span ref="per32"></span> F</span>
+            </div>
             <div class="bar__container" style="--bgClr:#D0F4DE">
-              <div id="bar3" class="bar" style="--bgClr:#43dd7e"></div>
-            </div>           
+              <div ref="bar3" class="bar" style="--bgClr:#43dd7e"></div>
+            </div>
           </div>
 
           <div class="mbti__friend">
-            <div><span class="mbti__left">P</span> <span class="mbti__right">J</span></div>
+            <div>
+              <span class="mbti__left">P <span ref="per41"></span></span> 
+              <span class="mbti__right"><span ref="per42"></span> J</span>
+            </div>
             <div class="bar__container" style="--bgClr:#b9e3f8">
-              <div id="bar4" class="bar" style="--bgClr:#66c9fa"></div>
-            </div>           
-          </div>            
+              <div ref="bar4" class="bar" style="--bgClr:#66c9fa"></div>
+            </div>
+          </div>
         </div>  
       </div> 
     </div>
@@ -97,6 +109,21 @@
     created() {
       this.getUser()
       this.getGuestbook()
+    },
+    mounted() {
+      const totalLen = this.$refs.barContainer.clientWidth;
+
+      this.$refs.per11.textContent = (this.$refs.bar1.clientWidth / totalLen * 100) + '%';
+      this.$refs.per12.textContent = (100 - (this.$refs.bar1.clientWidth / totalLen * 100)) + '%';
+
+      this.$refs.per21.textContent = (this.$refs.bar2.clientWidth / totalLen * 100) + '%';
+      this.$refs.per22.textContent = (100 - (this.$refs.bar2.clientWidth / totalLen * 100)) + '%';
+
+      this.$refs.per31.textContent = (this.$refs.bar3.clientWidth / totalLen * 100) + '%';
+      this.$refs.per32.textContent = (100 - (this.$refs.bar3.clientWidth / totalLen * 100)) + '%';
+      
+      this.$refs.per41.textContent = (this.$refs.bar4.clientWidth / totalLen * 100) + '%';
+      this.$refs.per42.textContent = (100 - (this.$refs.bar4.clientWidth / totalLen * 100)) + '%';
     },
     methods: {
       async getUser() {      
@@ -140,26 +167,36 @@
         await axios
           .get(`/guestbook/get/${this.$route.params.id}/`)
           .then(response => {
-            console.log(response.data)
-            const friendsDict = {'E':0,'I':0,'N':0,'S':0,'F':0,'T':0,'P':0,'J':0}
+            console.log(response.data);
+            const friendsDict = {'E':0,'I':0,'N':0,'S':0,'F':0,'T':0,'P':0,'J':0};
             for (let i=0;i<response.data.length;i++){
               for (let j=0;j<response.data[i].mbti.length;j++){
                   friendsDict[response.data[i].mbti[j]] += 1
               }
-            }
-            const mbtiE = Math.round(friendsDict['E']/(friendsDict['E'] + friendsDict['I']) * 100)
-            const mbtiN = Math.round(friendsDict['N']/(friendsDict['N'] + friendsDict['S']) * 100)
-            const mbtiT = Math.round(friendsDict['T']/(friendsDict['T'] + friendsDict['F']) * 100)
-            const mbtiP = Math.round(friendsDict['P']/(friendsDict['P'] + friendsDict['J']) * 100)
-            const bar1 = document.querySelector('#bar1')
-            const bar2 = document.querySelector('#bar2')
-            const bar3 = document.querySelector('#bar3')
-            const bar4 = document.querySelector('#bar4')
-            bar1.style.width = String(mbtiE) + "%"
-            bar2.style.width = String(mbtiN) + "%"
-            bar3.style.width = String(mbtiT) + "%"
-            bar4.style.width = String(mbtiP) + "%"
+            };
+            const mbtiE = Math.round(friendsDict['E']/(friendsDict['E'] + friendsDict['I']) * 100);
+            const mbtiN = Math.round(friendsDict['N']/(friendsDict['N'] + friendsDict['S']) * 100);
+            const mbtiT = Math.round(friendsDict['T']/(friendsDict['T'] + friendsDict['F']) * 100);
+            const mbtiP = Math.round(friendsDict['P']/(friendsDict['P'] + friendsDict['J']) * 100);
 
+            this.$refs.bar1.style.width = String(mbtiE) + "%";
+            this.$refs.bar2.style.width = String(mbtiN) + "%";
+            this.$refs.bar3.style.width = String(mbtiT) + "%";
+            this.$refs.bar4.style.width = String(mbtiP) + "%";
+
+            const totalLen = this.$refs.barContainer.clientWidth;
+            
+            this.$refs.per11.textContent = (this.$refs.bar1.clientWidth / totalLen * 100) + '%';
+            this.$refs.per12.textContent = (100 - (this.$refs.bar1.clientWidth / totalLen * 100)) + '%';
+
+            this.$refs.per21.textContent = (this.$refs.bar2.clientWidth / totalLen * 100) + '%';
+            this.$refs.per22.textContent = (100 - (this.$refs.bar2.clientWidth / totalLen * 100)) + '%';
+
+            this.$refs.per31.textContent = (this.$refs.bar3.clientWidth / totalLen * 100) + '%';
+            this.$refs.per32.textContent = (100 - (this.$refs.bar3.clientWidth / totalLen * 100)) + '%';
+            
+            this.$refs.per41.textContent = (this.$refs.bar4.clientWidth / totalLen * 100) + '%';
+            this.$refs.per42.textContent = (100 - (this.$refs.bar4.clientWidth / totalLen * 100)) + '%';
           })
           .catch(error => {
             console.log(error)
@@ -230,8 +267,8 @@
 .bar {
   height: 20px;
   background-color: var(--bgClr);
-  border-radius: 5px 0 0 5px;
-  width: 55%;
+  border-radius: 5px;
+  width: 50%;
 }
 
 .guest__group {
