@@ -25,7 +25,6 @@ export default {
                 .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
                 .join('&')
             const result = await axios.post('https://kauth.kakao.com/oauth/token', queryString, { headers: kakaoHeader })
-            console.log(result.data.access_token)
             
             if (result.data.access_token) {
                 const kakaouserinfoHeader = {
@@ -43,7 +42,6 @@ export default {
                     userinfo_gender = "남"
                 }
 
-                console.log('카카오 계정 정보-이메일, 닉네임, 성별', userinfo_email, userinfo_nickname, userinfo_gender)
                 localStorage.setItem('userinfo_email', userinfo_email)
                 localStorage.setItem('userinfo_nickname', userinfo_nickname)
                 localStorage.setItem('userinfo_gender', userinfo_gender)
