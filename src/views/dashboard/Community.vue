@@ -216,7 +216,6 @@
         await axios
         .get(`/community/${communityID}/comment/`, communityID)
         .then(response => {
-          console.log(response)
           this.comments = response.data
         })
         .catch(error => {
@@ -243,10 +242,7 @@
           
           await axios
           .post(`/community/${communityID}/comment/create/`, makeComment)
-          .then(response => {
-            console.log(response)
-            console.log(response.data)
-            
+          .then(response => {            
             this.$router.push(`/dashboard/community/${communityID}`, communityID)
           })
           .catch(error => {
@@ -274,9 +270,7 @@
         await axios
         .get(`/accounts/`)
         .then(response => {
-          console.log(response)
           this.now_user = response.data
-          console.log(this.now_user)
         })
         
         .catch(error => {

@@ -40,21 +40,21 @@
           </div>
 
           <div class="field">
-            <label>Title</label>
+            <label>글 제목</label>
             <div class="control">
               <input type="text" class="input" v-model="title">
             </div>
           </div>
 
           <div class="field">
-            <label>Content</label>
+            <label>글 내용</label>
             <div class="control">
-              <input type="text" class="input" v-model="content">
+              <textarea type="text" class="input" v-model="content"></textarea>
             </div>
           </div>
 
           <div class="field">
-            <label>Image</label>
+            <label>이미지</label>
             <input @change="onInputImage()" type="file" ref="communityimage">
           </div>
 
