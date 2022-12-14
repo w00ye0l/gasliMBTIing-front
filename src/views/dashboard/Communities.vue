@@ -6,11 +6,7 @@
 
         <hr>
         
-        <div class="write__div">
-          <router-link to="/dashboard/community/add" class="write__btn is-light">글쓰기</router-link>
-        </div>
-
-        <div class="select__box">
+        <div class="select__box">  
           <div class="field">
             <div class="control">
               <div class="select">
@@ -19,13 +15,14 @@
                   <option disabled>=========</option>
                   <option value="전체">전체</option>
                   <option v-for="category in categories"
-                    v-bind:key="category" 
-                    :value="category"
+                  v-bind:key="category" 
+                  :value="category"
                   >{{category}}</option>
                 </select>
               </div>
             </div>
           </div>
+
           <div class="field">
             <div class="control">
               <div class="select">
@@ -34,12 +31,16 @@
                   <option disabled>=========</option>
                   <option value="전체">전체</option>
                   <option v-for="mbti in mbtis"
-                    v-bind:key="mbti" 
-                    :value="mbti"
+                  v-bind:key="mbti" 
+                  :value="mbti"
                   >{{mbti}}</option>
                 </select>
               </div>
             </div>
+          </div>
+
+          <div class="write__div">
+            <router-link to="/dashboard/community/add" class="write__btn is-light">글쓰기</router-link>
           </div>
         </div>
       </div>
@@ -182,16 +183,19 @@
 </script>
 
 <style scoped>
+select {
+  margin: 0;
+}
 .community__head {
   position: relative;
 }
 .write__div {
-  position: sticky;
-  top: 6rem;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .write__btn {
+  margin-bottom: 0.8rem;
   padding: 0.3rem 1.5rem;
   background: #bd32fd;
   color: #fff;
@@ -207,11 +211,12 @@
 }
 
 .select__box {
+  /* position: fixed; */
+  top: 6rem;
   margin: auto;
   margin-top: 2rem;
-  width: 50%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .article__link {
