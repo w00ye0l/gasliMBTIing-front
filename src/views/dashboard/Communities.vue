@@ -51,7 +51,20 @@
           v-bind:key="community.id"
         >
         <router-link class="article__link" :to="{ name: 'Community', params: { id: community.id }}">
-            <h2 class="article__title">{{ community.title }}<span class="article__mbti">{{ community.mbti }}</span></h2>
+            <h2 class="article__title">{{ community.title }}
+              <template v-if="community.mbti === 'INTJ' || community.mbti === 'INTP' || community.mbti === 'ENTJ' || community.mbti === 'ENTP'">
+                <span class="article__mbti" style="--bgClr:#fc66ac">{{ community.mbti }}</span>
+              </template>
+              <template v-if="community.mbti === 'INFJ' || community.mbti === 'INFP' || community.mbti === 'ENFJ' || community.mbti === 'ENFP'">
+                <span class="article__mbti" style="--bgClr:#f7e866">{{ community.mbti }}</span>
+              </template>
+              <template v-if="community.mbti === 'ISFJ' || community.mbti === 'ISTJ' || community.mbti === 'ESFJ' || community.mbti === 'ESTJ'">
+                <span class="article__mbti" style="--bgClr:#87f5b1">{{ community.mbti }}</span>
+              </template>
+              <template v-if="community.mbti === 'ISFP' || community.mbti === 'ISTP' || community.mbti === 'ESFP' || community.mbti === 'ESTP'">
+                <span class="article__mbti" style="--bgClr:#66c9fa">{{ community.mbti }}</span>
+              </template>
+            </h2>
             <p class="article__content">{{ community.content }}
               
             </p>
@@ -218,7 +231,7 @@
 }
 .article__mbti {
   padding: 1px 5px;
-  background: #FF99C8;
+  background: var(--bgClr);
   border-radius: 0.5rem;
 }
 .article__content {
