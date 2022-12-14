@@ -45,11 +45,19 @@
         >
         <router-link class="article__link" :to="{ name: 'Community', params: { id: community.id }}">
             <h2 class="article__title">{{ community.title }}<span class="article__mbti">{{ community.mbti }}</span></h2>
-            <p class="article__content">{{ community.content }}</p>
-            <p class="article__subcontent">
-              <span>{{ elapsedText(community.created_at) }}</span> | 
-              <span>{{ community.user.nickname }}</span>
+            <p class="article__content">{{ community.content }}
+              
             </p>
+            <div class="article_bottom">
+              <div class="article__subcontent">
+                <span>{{ elapsedText(community.created_at) }}</span> | 
+                <span>{{ community.user.nickname }}</span>
+              </div>
+              <span class="comment__len">
+                <font-awesome-icon class="icon is-small" icon="comment" />
+                <span class="comment_cnt">{{ community.commentLength }}</span>
+              </span>
+            </div>
           </router-link>
         </div>
       </div>
@@ -70,6 +78,7 @@
         categories:['자유','질문','상담','토론'],
         mbti:'MBTI',
         mbtis:['ENTP','ENTJ','ENFP','ENFJ','ESTP','ESTJ','ESFP','ESFJ','INTP','INTJ','INFP','INFJ','ISTP','ISTJ','ISFP','ISFJ'],
+        commentNums: []
       }
     },
     created() {
@@ -82,8 +91,11 @@
         await axios
         .get('/community/')
         .then(response => {
-          console.log(response.data)
           this.communities = response.data.reverse()
+          this.commentNums = []
+          for (let i=0; i < this.communities.length; i++){
+            this.getComment(this.communities[i].id, i)
+          }
         })
         
         .catch(error => {
@@ -94,7 +106,8 @@
       },
       elapsedText(date) {
         return dateformat.elapsedText(new Date(date));
-      },async changeFilter() {
+      },
+      async changeFilter() {
         this.$store.commit('setIsLoading', true)
         let category = ''
         if (this.category == '자유'){
@@ -124,6 +137,21 @@
         .catch(error => {
           console.log(error)
         })
+        this.$store.commit('setIsLoading', false)
+      },
+      async getComment(comID, index) {
+        this.$store.commit('setIsLoading', true)
+        const communityID = comID
+        await axios
+        .get(`/community/${communityID}/comment/`, communityID)
+        .then(response => {
+          console.log(response)
+          this.communities[index]['commentLength'] = response.data.length
+        })
+        .catch(error => {
+          console.log(error)
+        })
+        
         this.$store.commit('setIsLoading', false)
       },
     }
@@ -173,7 +201,28 @@
   background: #FF99C8;
   border-radius: 0.5rem;
 }
-.article__content, .article__subcontent {
+.article__content {
   color: rgb(109, 109, 109);
+}
+.article_bottom {
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  color: rgb(109, 109, 109);
+}
+
+.article__subcontent {
+  color: rgb(109, 109, 109);
+}
+
+.comment__len {
+  /* display: flex; */
+  align-items: center;
+  font-size: 1.5rem;
+  color: #3f8de7;
+}
+
+.comment_cnt {
+  margin-left: 0.5rem;
 }
 </style>

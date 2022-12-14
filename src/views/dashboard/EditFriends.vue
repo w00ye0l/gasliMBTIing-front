@@ -1,70 +1,82 @@
 <template>
   <div class="container">
     <div class="modal" v-bind:class="{ 'is-active': isShowModal }">
-    <div class="modal-background" v-on:click="isShowModal = false"></div>
+      <div class="modal-background" v-on:click="isShowModal=false"></div>
+
       <div class="modal-card">
         <header class="modal-card-head">
           <h1 class="modal__title">나의 그룹 리스트</h1>
-          <button class="delete" aria-label="close" v-on:click="isShowModal = false"></button>
+          <button class="delete" aria-label="close" v-on:click="isShowModal=false"></button>
         </header>
+
         <section class="modal-card-body">
-          <div class="body__content">
-            <li 
-              class="body__info" 
+          <div class="group__content">
+            <div 
+              class="group__box" 
               v-for="myGroup in myGroups"
               v-bind:key="myGroup"
               :value="myGroup.name" 
               @click="chooseGroup"
-            >{{myGroup.name}}
-              <button class="delete" aria-label="close" :value="myGroup.id" v-on:click="deleteGroup"></button>
-            </li>
+            >
+              <div class="group__info">
+                <span class="group__name">{{myGroup.name}}</span>
+                <button class="delete" aria-label="close" :value="myGroup.id" v-on:click="deleteGroup"></button>
+              </div>
+            </div>
           </div>
         </section>
+
         <footer class="modal-card-foot">
-          <div v-on:click="isShowModal2 = true">+ 새로운 그룹 추가하기</div>
+          <div v-on:click="isShowModal2=true">+ 새로운 그룹 추가하기</div>
         </footer>
       </div>
     </div>
 
     <!--새로운 그룹 추가 하기-->
     <div class="modal" v-bind:class="{ 'is-active': isShowModal2 }">
-    <div class="modal-background" v-on:click="isShowModal2 = false"></div>
+      <div class="modal-background" v-on:click="isShowModal2=false"></div>
+
       <div class="modal-card">
+        <div class="modal-card-head">
+          <h1 class="modal__title">새로운 그룹 추가하기</h1>
+
+          <button class="delete" aria-label="close" v-on:click="isShowModal2=false"></button>
+        </div>
+
         <section class="modal-card-body">
-          <div class="body__head">
-            <img class="body__title__img" src="" alt="">
-            <span class="body__title">새로운 그룹 추가하기</span>
-            <button class="delete" aria-label="close" v-on:click="isShowModal2 = false"></button>
-          </div>
-          <div class="field">
-            <label>Group</label>
-            <div class="control">
-              <input type="text" class="input" v-model="addGroupName" placeholder="그룹이름을 입력해주세요.">
+          <div class="box">
+            <div class="field">
+              <label>그룹</label>
+              <div class="control">
+                <input type="text" class="input" v-model="addGroupName" placeholder="그룹이름을 입력해주세요.">
+              </div>
             </div>
-          </div>
-          <div class="body__content">
-            <span >추천 인기 그룹</span>
-            <br>
-            <button 
-              v-for="rgroup in recommendedGroups"
-              v-bind:key="rgroup" 
-              :value="rgroup" 
-              @click="addChooseGroup"
-            >{{rgroup}}</button>
-          </div>
-          
-          <div class="field">
-            <div class="control" style="text-align: center;">
-              <button class="button is-success" @click="addGroup">저장</button>
+
+            <div class="body__content">
+              <label>추천 인기 그룹</label>
+              <div class="group__box">
+                <button
+                  class="recom__group"
+                  v-for="rgroup in recommendedGroups"
+                  v-bind:key="rgroup" 
+                  :value="rgroup" 
+                  @click="addChooseGroup"
+                >{{rgroup}}
+                </button>
+              </div>
             </div>
           </div>
         </section>
-
+        
         <footer class="modal-card-foot">
+          <div class="control btn__box">
+            <button class="button save__group__btn" @click="addGroup">저장</button>
+          </div>
         </footer>
       </div>
     </div>
 
+    <!-- 수정 내용 -->
     <div class="columns is-multiline">
       <div class="column is-10">
         <h1 class="title">친구 정보 수정</h1>
@@ -72,20 +84,12 @@
         <hr>
       </div>
 
-
       <div class="column is-10">
-        <form @submit.prevent="submitForm">
+        <form class="box" @submit.prevent="submitForm">
           <div class="field">
             <label>이름</label>
             <div class="control">
               <input type="text" class="input" v-model="name" placeholder="이름">
-            </div>
-          </div>
-        
-          <div class="field">
-            <label>친밀도</label>
-            <div class="control">
-              <input type="text" class="input" v-model="grade" placeholder="Grade">
             </div>
           </div>
 
@@ -192,7 +196,6 @@
         .then(response => {
           this.friend = response.data
           this.name = this.friend.name
-          this.grade = this.friend.grade
           this.group = this.friend.group
           this.mbti1 = this.friend.mbti[0]
           this.mbti2 = this.friend.mbti[1]
@@ -237,63 +240,79 @@
 
         this.$store.commit('setIsLoading', false)
       },
+
       changeRadio() {
         this.mbti = this.mbti1 + this.mbti2 + this.mbti3 + this.mbti4
-      },chooseGroup(event) {
+      },
+      
+      chooseGroup(event) {
         this.group = event.target.innerText;
         this.isShowModal = false;
-      },addChooseGroup(event) {
+      },
+      
+      addChooseGroup(event) {
         this.addGroupName = event.target.innerText;
-      },async getMyGroups() {
+      },
+      
+      async getMyGroups() {
         this.isShowModal = true;
+
         await axios
-        .get(`/friends/mygroups/`)
-        .then(response => {
-          this.myGroups = response.data
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      },isShowModalFunction(){
+          .get(`/friends/mygroups/`)
+          .then(response => {
+            this.myGroups = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
+      
+      isShowModalFunction(){
         this.isShowModal = true;
         this.getMyGroups();
-      },async addGroup(event){
+      },
+      
+      async addGroup(event){
         event.preventDefault();
         const myGroupsList = []
+
         for (let i=0; i<this.myGroups.length ;i++){
           myGroupsList.push(this.myGroups[i].name)
         }
+
         if (myGroupsList.includes(this.addGroupName)){
           alert("동일한 그룹이름이 이미 존재합니다.")
         }else {
           await axios
-          .post(`/friends/mygroups/create/`,{name:this.addGroupName})
-          .then(response => {
-            this.myGroups = response.data
-            this.isShowModal = false;
-            this.isShowModal2 = false;
-            this.addGroupName = '';
-            this.getMyGroups()
-          })
-          .catch(error => {
-            console.log(error)
-          })
+            .post(`/friends/mygroups/create/`,{name:this.addGroupName})
+            .then(response => {
+              this.myGroups = response.data
+              this.isShowModal = false;
+              this.isShowModal2 = false;
+              this.addGroupName = '';
+              this.getMyGroups()
+            })
+            .catch(error => {
+              console.log(error)
+            })
         }
-      },async deleteGroup(event){
+      },
+      
+      async deleteGroup(event){
         event.preventDefault();
         
         const deleteConfirm = confirm("해당 그룹을 삭제하시겠습니까?");
-        if (deleteConfirm == false){
-        }else {
+
+        if (deleteConfirm == true) {
           const deletePk = event.target.getAttribute('value')
           await axios
-          .delete(`/friends/mygroups/delete/${deletePk}/`)
-          .then(response => {
-            this.getMyGroups()
-          })
-          .catch(error => {
-            console.log(error)
-          })
+            .delete(`/friends/mygroups/delete/${deletePk}/`)
+            .then(response => {
+              this.getMyGroups()
+            })
+            .catch(error => {
+              console.log(error)
+            })
         }
       }
     }
@@ -304,38 +323,25 @@
 label {
   font-size: 1.3rem;
 }
-.ageGender {
-  display: flex;
-  justify-content: space-between;
-}
-.age__field, .gender__field {
-  width: 45%;
-}
-.gender__radio {
-  display: flex;
-  justify-content: space-evenly;
-}
-.gender__radio .gender {
-  font-size: 30px;
-  color: #9c9c9c;
-}
-.gender__btn:checked + .gender {
-  color: var(--genClr);
-}
+
 .mbti__field {
   display: flex;
   justify-content: space-between;
 }
+
 .mbti__radio {
   display: flex;
   flex-direction: column;
 }
+
 .radio input {
   display: none;
 }
+
 .radio + .radio {
   margin: 0;
 }
+
 .radio div {
   display: flex;
   justify-content: center;
@@ -348,36 +354,9 @@ label {
   font-size: 2rem;
   line-height: 4rem;
 }
+
 .radio__btn:checked + div {
   background: var(--clr);
-}
-.button__submit {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  font-size: 1.2rem;
-  border-radius: 2rem;
-  background: #bd32fd;
-  color: #fff;
-  border: 2px dashed rgb(255, 255, 255);
-  box-shadow: 0 0 0 0.2rem #bd32fd;
-}
-.button__submit:hover {
-  background: #9f22da;
-  box-shadow: 0 0 0 0.2rem #9f22da;
-}
-
-.modal-button {
-  background: #bd32fd;
-  color: #fff;
-  border-radius: 10rem;
-  border: 4px dashed rgb(255, 255, 255);
-  box-shadow: 0 0 0 0.5rem #bd32fd;
-}
-
-.modal-button:hover {
-  background: #9f22da;
-  color: #fff;
-  box-shadow: 0 0 0 0.5rem #9f22da;
 }
 
 .modal-card {
@@ -395,12 +374,12 @@ label {
 
 .modal-card-head .delete {
   position: absolute;
-  top: 30px;
+  top: 45px;
   right: 30px;
 }
 
 .modal__title {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 .modal-card-body {
@@ -410,8 +389,81 @@ label {
 .modal-card-foot {
   display: flex;
   justify-content: center;
+  font-size: 1.5rem;
   border: 0;
   background: #fff;
+}
+
+.group__content {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.group__box {
+  display: block;
+  margin: 0 1rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.group__info {
+  margin-bottom: 1.5rem;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  border-radius: 2rem;
+  box-shadow: 3px 3px 6px 2px #e4e4e4;
+}
+
+.group__name {
+  margin-right: 0.5rem;
+  padding: 0 1rem;
+  width: 100%;
+  font-size: 1.2rem;
+  color: rgb(247, 247, 247);
+  background: #bd32fd;
+  border-radius: 2rem;
+}
+
+.group__name:hover {
+  cursor: pointer;
+  background: #9f22da;
+}
+
+.recom__group {
+  margin: 0 1rem;
+  margin-bottom: 1rem;
+  padding: 0.2rem 1rem;
+  background: #fff;
+  font-size: 1.2rem;
+  color: rgb(247, 247, 247);
+  background: #c96af5;
+  border: 0;
+  border-radius: 2rem;
+  box-shadow: 3px 5px 5px 0.5px #bdbdbd;
+}
+
+.recom__group:hover {
+  cursor: pointer;
+  background: #bd32fd;
+}
+
+.btn__box {
+  display: flex;
+  justify-content: center;
+}
+
+.save__group__btn {
+  height: 2.5rem;
+  background: #bd32fd;
+  color: #fff;
+  text-align: center;
+  font-size: 1.3rem;
+  border-radius: 3rem;
+  border: 2px dashed rgb(255, 255, 255);
+  box-shadow: 0 0 0 0.2rem #bd32fd;
 }
 
 .go__to {
@@ -431,27 +483,7 @@ label {
   box-shadow: 0 0 0 0.5rem #9f22da;
 }
 
-.body__head {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5rem;
-}
-
-.body__title__img {
-  width: 15%;
-}
-
-.body__title {
-  font-size: 2rem;
-}
-
 .body__content {
-  margin-bottom: 2rem;
-}
-
-.body__info {
-  padding: 0 2rem;
-  color: #868686;
-  font-size: 1rem;
+  margin-bottom: 0;
 }
 </style>
