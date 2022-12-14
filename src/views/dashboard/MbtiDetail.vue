@@ -1,6 +1,5 @@
 <template>
 
-
   <div class="container">
     <div class="columns is-multiline is-centered">
       <div class="column is-10">
@@ -11,7 +10,8 @@
 
           <div>
             <h1 class="title">{{mbtidetail.mbti}} {{mbtidetail.board}}</h1>
-          </div> 
+          </div>
+          
         </div>
       </div>
 
@@ -27,6 +27,25 @@
           <p class="content">{{mbtidetail.content}}</p>
         </div>
       </div>
+
+      <div class="column is-10">
+        <div class="box">
+          <p class="content other">관련 글</p>
+
+
+          <div class="is-flex is-justify-content-space-evenly">
+            <template v-for="mbti_ in mbti" v-bind:key="mbti_.id">
+              <template v-if="mbtidetail.mbti === mbti_.mbti && mbtidetail.id != mbti_.id">
+                <router-link :to="{ name: 'MbtiDetail', params: { id: mbti_.id }}">
+                  {{mbti_.title}}
+                </router-link>
+              </template>
+            </template>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -40,18 +59,23 @@
     name: 'MbtiDetail',
     data() {
       return {
-        mbtidetail: {}
+        mbtidetail: {},
+        mbti: []
       }
     },
     created() {
       this.getMbtidetail()
     },
+    mounted() {
+      this.getMbti()
+
+    },
+
     methods: {
       async getMbtidetail() {
         this.$store.commit('setIsLoading', true)
-        
         const mbtidetailID = this.$route.params.id
-
+        // console.log(mbtidetailID)
         await axios
           .get(`/MBTI/${mbtidetailID}/`)
           .then(response => {
@@ -61,11 +85,25 @@
           .catch(error => {
             console.log(error)
           }),
-
         this.$store.commit('setIsLoading', false)
+        
       },
 
-    }
+    async getMbti() {
+      
+      await axios
+      .get(`/MBTI/`)
+      .then(response => {
+        this.mbti = response.data
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+        })
+        
+        this.$store.commit('setIsLoading', false)
+      }
+    },
   }
 
 </script>
@@ -88,8 +126,13 @@
   }
 
   .title_{
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: bolder;
+  }
+
+  .box .other{
+    text-align: center;
+    font-size: 1.5rem;
   }
 
   p.content{

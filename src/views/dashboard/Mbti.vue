@@ -53,7 +53,6 @@
             <div class="board box" v-if="(mbti_.board === filters)" v-bind:key="mbti_.id">
               <router-link :to="{ name: 'MbtiDetail', params: { id: mbti_.id }}">
                 {{mbti_.title}}
-                <font-awesome-icon icon="fa-solid fa-chess" />
               </router-link>
             </div>
           </template>
@@ -65,7 +64,6 @@
           <div class="board box" v-for="mbti_ in mbti" v-bind:key="mbti_.id">
             <router-link :to="{ name: 'MbtiDetail', params: { id: mbti_.id }}">
               {{mbti_.title}}
-              <font-awesome-icon icon="fa-solid fa-chess" />
             </router-link>
           </div>
         </div>
@@ -170,6 +168,10 @@
     width: 45%;
     margin-bottom: 10px;
     border-radius: 10px;
+  }
+
+  .board:hover {
+  box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 40%), 0 0px 0 1px rgb(10 10 10 / 2%);
   }
 
   a {
