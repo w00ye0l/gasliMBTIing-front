@@ -13,15 +13,18 @@
             <p class="article__category">{{ community.category }}</p>
           </div>
         </div>
+
+        <hr>
       </div>
-      
+
       <!-- 글 -->
       <div class="column is-10 is-center">
         <div class="article__head ">
           <div class="article__user">
             <div class="article__profileImg box">
               <template v-if="community.user.image">
-                <img :src="'http://localhost:8000' + community.user.image" alt="">
+                <img :src="community.user.image" alt="">
+                <!-- <img :src="'http://localhost:8000' + community.user.image" alt=""> -->
               </template>
               <template v-else>
                 <img src="https://mblogthumb-phinf.pstatic.net/MjAxODAxMzFfODcg/MDAxNTE3MzkxNTAxMDkx.M_0YZWPyJdHFTFhy44QVGOefevhQlbp6imgO92lgrWcg.wlSOGUlI6sqwtZX4iOc2PtugEMY0xexfbFqEUyRXRpUg.JPEG.jsrwnmejs/%ED%91%9C%EC%A7%80_%EA%B3%A0%ED%99%94%EC%A7%88ssss.jpg?type=w2" alt="">
@@ -50,7 +53,8 @@
           
           <template v-if="community.image !== null">
             <div class="article__imgbox">
-              <img :src="'http://localhost:8000' + community.image" class="article__img">
+              <img :src="community.image" class="article__img">
+              <!-- <img :src="'http://localhost:8000' + community.image" class="article__img"> -->
             </div>
           </template>
           <p class="article__content">{{ community.content }}</p>
@@ -95,8 +99,8 @@
             <div class="comment__user">
               <!-- 댓글 프로필 사진 -->
               <template v-if="com.comment_user.image">
-                <!-- <div class="comment__user__img box" v-bind:style="{ 'backgroundImage': 'url(' + com.comment_user.image + ')' }"> -->
-                <div class="comment__user__img box" v-bind:style="{ 'backgroundImage': 'url(' + 'http://localhost:8000' + com.comment_user.image + ')' }">
+                <div class="comment__user__img box" v-bind:style="{ 'backgroundImage': 'url(' + com.comment_user.image + ')' }">
+                <!-- <div class="comment__user__img box" v-bind:style="{ 'backgroundImage': 'url(' + 'http://localhost:8000' + com.comment_user.image + ')' }"> -->
                 </div>
               </template>
               <template v-else>
@@ -319,7 +323,6 @@
 }
 .community__head {
   display: flex;
-  margin-bottom: 1rem;
 }
 .back__btn {
   display: flex;

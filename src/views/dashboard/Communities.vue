@@ -3,10 +3,38 @@
     <div class="columns is-centered is-multiline">
       <div class="column is-10 community__head">
         <h1 class="title">커뮤니티</h1>
+
+        <hr>
         
         <div class="write__div">
           <router-link to="/dashboard/community/add" class="write__btn is-light">글쓰기</router-link>
         </div>
+        <div class="field">
+            <div class="control">
+              <div class="select">
+                <select v-model="category" @change="changeFilter">
+                  <option value="Category">Category</option>
+                  <option v-for="category in categories"
+                    v-bind:key="category" 
+                    :value="category"
+                  >{{category}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <div class="select">
+                <select v-model="mbti" @change="changeFilter">
+                  <option value="MBTI">MBTI</option>
+                  <option v-for="mbti in mbtis"
+                    v-bind:key="mbti" 
+                    :value="mbti"
+                  >{{mbti}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
       </div>
       
       <div class="column is-10">
@@ -38,6 +66,10 @@
     data() {
       return {
         communities: [],
+        category:'Category',
+        categories:['자유','질문','상담','토론'],
+        mbti:'MBTI',
+        mbtis:['ENTP','ENTJ','ENFP','ENFJ','ESTP','ESTJ','ESFP','ESFJ','INTP','INTJ','INFP','INFJ','ISTP','ISTJ','ISFP','ISFJ'],
       }
     },
     created() {
@@ -62,6 +94,37 @@
       },
       elapsedText(date) {
         return dateformat.elapsedText(new Date(date));
+      },async changeFilter() {
+        this.$store.commit('setIsLoading', true)
+        let category = ''
+        if (this.category == '자유'){
+          category = 'free'
+        }else if(this.category == '질문'){
+          category ='question'
+        }else if(this.category == '상담'){
+          category = 'counsel'
+        }else if(this.category == '토론'){
+          category = 'discussion'
+        }else if(this.category == 'Category'){
+          category = 'all'
+        }
+        let mbti = ''
+        if (this.mbti == 'MBTI'){
+          mbti = 'all'
+        }else{
+          mbti = this.mbti
+        }
+        
+        const data = category+'&'+mbti
+        await axios
+        .get(`/community/filter/${data}/`)
+        .then(response => {
+          this.communities = response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
+        this.$store.commit('setIsLoading', false)
       },
     }
   }

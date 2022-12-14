@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import store from '../store'
 import Home from '../views/Home.vue'
 import SignUp from '../views/SignUp.vue'
+import kakao_SignUp from '../views/kakaoSignUp.vue'
 import LogIn from '../views/LogIn.vue'
 import kakao_LogIn from '../views/kakaoLogIn.vue'
 import Dashboard from '../views/dashboard/Dashboard.vue'
@@ -32,6 +33,11 @@ const routes = [
     path: '/sign-up',
     name: 'SignUp',
     component: SignUp
+  },
+  {
+    path: '/kakao_sign-up',
+    name: 'kakao_SignUp',
+    component: kakao_SignUp
   },
   {
     path: '/log-in',
@@ -115,6 +121,9 @@ const routes = [
     path: '/dashboard/community/:id',
     name: 'Community',
     component: Community,
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/dashboard/community/:id/edit',
@@ -146,6 +155,9 @@ const routes = [
     path: '/dashboard/guestbook/add/:id',
     name: 'AddGuestbook',
     component: AddGuestbook,
+    meta: {
+      requireLogin: true
+    }
   },  
   {
     path: '/dashboard/friends/:id',

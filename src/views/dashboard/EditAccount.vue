@@ -2,8 +2,11 @@
   <div class="container">
     <div class="columns is-multiline" style= "justify-content: center;">
       <div class="column is-10 is-center">
+        <h1 class="title">내 정보 수정</h1>
+        
+        <hr>
+
         <div class="box">
-          <h1 class="title">나의 정보</h1>
           <form @submit.prevent="submitForm">
             <div style="display: flex; align-items: center; justify-content: space-around;">
               <img :src="user.image" class="img_profile">

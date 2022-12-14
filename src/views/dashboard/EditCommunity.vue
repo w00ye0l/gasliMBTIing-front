@@ -3,6 +3,8 @@
     <div class="columns is-multiline">
       <div class="column is-10">
         <h1 class="title">Edit community</h1>
+
+        <hr>
       </div>
 
       <div class="column is-10">

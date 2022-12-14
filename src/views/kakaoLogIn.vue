@@ -26,15 +26,32 @@ export default {
                 .join('&')
             const result = await axios.post('https://kauth.kakao.com/oauth/token', queryString, { headers: kakaoHeader })
             console.log(result.data.access_token)
+            
             if (result.data.access_token) {
-                const token = result.data.access_token
-                this.$store.commit('setToken', token)
-                axios.defaults.headers.common['Authorization'] = 'Token ' + token
-                localStorage.setItem('token', token)
-                this.$router.push('/dashboard/sign-up')
+                const kakaouserinfoHeader = {
+                    'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+                    'Authorization': 'Bearer ' + `${result.data.access_token}`
+                }
+                const userinfo_result = await axios.post('https://kapi.kakao.com/v2/user/me', queryString, { headers: kakaouserinfoHeader })
+                const userinfo_email = userinfo_result.data.kakao_account.email
+                const userinfo_nickname = userinfo_result.data.properties.nickname
+                const userinfo_gender_tmp = userinfo_result.data.kakao_account.gender
+                let userinfo_gender = ''
+                if (userinfo_gender_tmp == "female") {
+                    userinfo_gender = "여"
+                } else {
+                    userinfo_gender = "남"
+                }
+
+                console.log('카카오 계정 정보-이메일, 닉네임, 성별', userinfo_email, userinfo_nickname, userinfo_gender)
+                localStorage.setItem('userinfo_email', userinfo_email)
+                localStorage.setItem('userinfo_nickname', userinfo_nickname)
+                localStorage.setItem('userinfo_gender', userinfo_gender)
+
+                this.$router.push('/kakao_sign-up')
             } else {
                 alert('로그인할 수 없습니다.')
-                this.$router.push('/dashboard/log-in')
+                this.$router.push('/log-in')
             }
             return result
         } catch (e) {

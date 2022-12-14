@@ -3,6 +3,8 @@
     <div class="columns is-centered is-multiline">
       <div class="column is-10">
         <h1 class="title">커뮤니티 글쓰기</h1>
+
+        <hr>
       </div>
 
       <div class="column is-10">
@@ -10,14 +12,30 @@
           <div class="field">
             <label>Category</label>
             <div class="control">
-              <input type="text" class="input" v-model="category">
+              <div class="select">
+                <select v-model="category">
+                  <!-- <option value="Category">Category</option> -->
+                  <option v-for="category in categories"
+                    v-bind:key="category" 
+                    :value="category"
+                  >{{category}}</option>
+                </select>
+              </div>
             </div>
           </div>
-          
+
           <div class="field">
             <label>MBTI</label>
             <div class="control">
-              <input type="text" class="input" v-model="mbti">
+              <div class="select">
+                <select v-model="mbti">
+                  <!-- <option value="MBTI">MBTI</option> -->
+                  <option v-for="mbti in mbtis"
+                    v-bind:key="mbti" 
+                    :value="mbti"
+                  >{{mbti}}</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -40,22 +58,6 @@
             <input @change="onInputImage()" type="file" ref="communityimage">
           </div>
 
-          <!-- 카테고리 예시 -->
-          <!-- <div class="field">
-            <label>Category</label>
-            <div class="control">
-              <div class="select">
-                <select v-model="category">
-                  <option value="new">New</option>
-                  <option value="contacted">Contacted</option>
-                  <option value="inprogress">In progress</option>
-                  <option value="lost">Lost</option>
-                  <option value="won">Won</option>
-                </select>
-              </div>
-            </div>
-          </div> -->
-
           <div class="field">
             <div class="control">
               <button class="button is-success">Submit</button>
@@ -74,23 +76,17 @@
     name: 'AddCommunity',
     data() {
       return {
-        category: '',
-        mbti: '',
+        category: '자유',
+        categories:['자유','질문','상담','토론'],
+        mbti: 'ENTP',
         title: '',
         content: '',
-        image: ''
+        image: '',
+        mbtis:['ENTP','ENTJ','ENFP','ENFJ','ESTP','ESTJ','ESFP','ESFJ','INTP','INTJ','INFP','INFJ','ISTP','ISTJ','ISFP','ISFJ']
       }
     },
     methods: {
       async submitForm() {
-        // const formData = new FormData();
-
-        // formData.append("category", this.category)
-        // formData.append("mbti", this.mbti)
-        // formData.append("title", this.title)
-        // formData.append("content", this.content)
-        // formData.append("image", this.image)
-
         const community = {
           category: this.category,
           mbti: this.mbti,
@@ -107,7 +103,7 @@
           .post('/community/create/', community, {headers})
           .then(response => {
             toast({
-              message: '글 작성이 완료되었습니다.',
+              message: '글 작성이 완료되었습니다!',
               type: 'is-success',
               dismissible: true,
               pauseOnHover: true,

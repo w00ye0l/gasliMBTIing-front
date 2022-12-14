@@ -6,7 +6,8 @@
 
         <form @submit.prevent="submitForm" class="box">
           <div class="field">
-            <label>이메일</label>
+            <label>이메일 {{ userinfo_email }}</label>
+            
             <p class="control has-icons-left has-icons-right">
               <input class="input" type="email" placeholder="이메일" name="email" v-model="username">
               <span class="icon is-small is-left">
@@ -30,18 +31,16 @@
           </div>
 
           <div class="field">
-            <div class="control">
-              <button class="btn__submit button">로그인</button>
+            <div class="control btn__box">
+              <button class="btn__submit">로그인</button>
             </div>
           </div>
+
+          <div class="btn__box">
+              <a :href="kakaoLoginLink" type="submit" class="kakao__login__btn" @click="kakaoLoginLink()">카카오 로그인</a>
+          </div>
         </form>
-        <div>
-          <!-- <form @submit.prevent="kakaoLogin"> -->
-            <a :href="kakaoLoginLink" alt="kakao login">
-              <img alt="kakao logo" src="./../assets/images/kakao_login_medium_wide.png" />
-            </a>
-          <!-- </form> -->
-        </div>
+
         <div class="signup__link">
           <p>아직 회원이 아니신가요?</p>
           <router-link to="/sign-up">회원가입!</router-link>
@@ -88,7 +87,6 @@
             this.$store.commit('setToken', token)
 
             axios.defaults.headers.common['Authorization'] = 'Token ' + token
-            console.log("토큰 뭐지", token)
 
             localStorage.setItem('token', token)
 
@@ -126,9 +124,14 @@
 label {
   font-size: 1.3rem;
 }
+.btn__box {
+  display: flex;
+  justify-content: center;
+}
 .btn__submit {
   margin-top: 2rem;
-  width: 100%;
+  width: 70%;
+  height: 2.5rem;
   font-size: 1.3rem;
   background: #bd32fd;
   border-radius: 2rem;
@@ -137,10 +140,28 @@ label {
   box-shadow: 0 0 0 0.2rem #bd32fd;
 }
 .btn__submit:hover {
+  cursor: pointer;
   background: #9f22da;
-  color: #fff;
-  border: 2px dashed rgb(255, 255, 255);
   box-shadow: 0 0 0 0.2rem #9f22da;
+}
+.kakao__login__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  height: 2.5rem;
+  font-size: 1.3rem;
+  background: #f7d646;
+  border-radius: 2rem;
+  color: rgb(51, 39, 14);
+  text-align: center;
+  border: 2px dashed rgb(255, 255, 255);
+  box-shadow: 0 0 0 0.2rem #f7d646;
+}
+.kakao__login__btn:hover {
+  cursor: pointer;
+  background: #e4c435;
+  box-shadow: 0 0 0 0.2rem #e4c435;
 }
 .signup__link {
   display: flex;

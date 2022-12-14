@@ -2,7 +2,9 @@
   <div class="container">
     <div class="columns is-multiline">
       <div class="column is-10 is-center">
-        <h1 class="title">Guestbook</h1>
+        <h1 class="title">방명록</h1>
+
+        <hr>
         <!-- 삭제 버튼 -->
         <button type="button" class="button is-light delete__btn" v-on:click="fnDelete">Delete</button>
       </div>
@@ -88,7 +90,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .subtitle {
   font-size: 1.6rem;
 
