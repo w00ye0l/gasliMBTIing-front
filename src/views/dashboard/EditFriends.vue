@@ -216,7 +216,6 @@
         const friends = {
           name: this.name,
           mbti: this.mbti,
-          grade: this.grade,
           group: this.group,
         }
 
