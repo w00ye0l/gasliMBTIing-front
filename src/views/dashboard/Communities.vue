@@ -52,7 +52,8 @@
           v-bind:key="community.id"
         >
         <router-link class="article__link" :to="{ name: 'Community', params: { id: community.id }}">
-            <h2 class="article__title">{{ community.title }}
+            <h2 class="article__title">
+              <span class="real__title">{{ community.title }}</span>
               <template v-if="community.mbti === 'INTJ' || community.mbti === 'INTP' || community.mbti === 'ENTJ' || community.mbti === 'ENTP'">
                 <span class="article__mbti" style="--bgClr:#fc66ac">{{ community.mbti }}</span>
               </template>
@@ -66,8 +67,8 @@
                 <span class="article__mbti" style="--bgClr:#66c9fa">{{ community.mbti }}</span>
               </template>
             </h2>
+
             <p class="article__content">{{ community.content }}
-              
             </p>
             <div class="article_bottom">
               <div class="article__subcontent">
@@ -229,9 +230,17 @@ select {
   box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 40%), 0 0px 0 1px rgb(10 10 10 / 2%);
 }
 .article__title {
+  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   font-size: 1.5rem;
+}
+.real__title {
+  width: 50%;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .article__mbti {
   padding: 1px 5px;
@@ -240,6 +249,10 @@ select {
 }
 .article__content {
   color: rgb(109, 109, 109);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .article_bottom {
   display: flex;
