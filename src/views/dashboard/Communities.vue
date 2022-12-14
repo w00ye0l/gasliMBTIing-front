@@ -113,7 +113,12 @@
         await axios
         .get('/community/')
         .then(response => {
-          this.communities = response.data.reverse()
+          this.communities = response.data
+
+          this.communities.sort((a, b) => {
+            return new Date(b.created_at) - new Date(a.created_at)
+          });
+          
           this.commentNums = []
           for (let i=0; i < this.communities.length; i++){
             this.getComment(this.communities[i].id, i)
