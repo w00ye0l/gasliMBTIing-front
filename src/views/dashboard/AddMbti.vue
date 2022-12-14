@@ -37,7 +37,7 @@
                 <option value="ESTJ">ESTJ</option>
                 <option value="ISTJ">ISTJ</option>
                 <option value="INTJ">INTJ</option>
-                <option value="ISPT">ISTP</option>
+                <option value="ISTP">ISTP</option>
                 <option value="ESTP">ESTP</option>
                 <option value="ENTJ">ENTJ</option>
               </select>
