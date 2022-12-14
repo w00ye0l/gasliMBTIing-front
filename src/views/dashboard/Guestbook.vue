@@ -2,7 +2,15 @@
   <div class="container">
     <div class="columns is-multiline">
       <div class="column is-10 is-center">
-        <h1 class="title">방명록</h1>
+        <div class="guestbook__head">
+          <router-link :to="{ name: 'Profile', params: { id: Number(guestbook.receive_user) }}" class="back__btn">
+            <font-awesome-icon class="icon is-middle" icon="arrow-left" />
+          </router-link>
+          
+          <div>
+            <h1 class="title">방명록</h1>
+          </div>
+        </div>
 
         <hr>
       </div>
@@ -66,9 +74,18 @@
 </script>
 
 <style scoped>
+.guestbook__head {
+  display: flex;
+}
+.back__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+  color: #363636;
+}
 .subtitle {
   font-size: 1.6rem;
-
 }
 .guestdetail__content {
   font-size: 1.4rem;
