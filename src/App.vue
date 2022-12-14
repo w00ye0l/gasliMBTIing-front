@@ -25,7 +25,7 @@
     </div>
     
     <section class="section">
-      <router-view :key="$route.fullPath"></router-view>
+      <router-view/>
     </section>
   </div>
 </template>
@@ -143,7 +143,7 @@
 
 .section {
   min-height: 93vh;
-  padding-bottom: 13vh;
+  padding-bottom: 17vh;
   position: relative;
   width: 100%;
 }
