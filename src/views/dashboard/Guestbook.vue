@@ -2,7 +2,7 @@
   <div class="container">
     <div class="columns is-multiline">
       <div class="column is-10 is-center">
-        <h1 class="title">방명록 {{ username }}</h1>
+        <h1 class="title">방명록</h1>
 
         <hr>
       </div>
