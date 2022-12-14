@@ -7,8 +7,8 @@
       <div class="home__btn">
         <div class="is-flex is-justify-content-end">
           <!-- 알림 버튼 -->
-          <router-link to="/" class="bell__link">
-            <font-awesome-icon class="icon is-middle" icon="bell" />
+          <router-link to="/dashboard/notifications" class="bell__link">
+            <font-awesome-icon class="icon is-middle" icon="bell" />{{notificationsLength}}
           </router-link>
 
           <!-- 홈 버튼 -->
@@ -54,6 +54,12 @@
         active,
       };
     },
+    data() {
+      return {
+        notificationsLength:0
+      }
+    },
+    
     beforeCreate() {
       this.$store.commit('initializeStore')
         
@@ -61,6 +67,25 @@
         axios.defaults.headers.common['Authorization'] = "Token " + this.$store.state.token
       } else {
         axios.defaults.headers.common['Authorization'] = ""
+      }
+    },
+    created() {
+      this.getNotification()
+    },
+    methods: {
+      async getNotification() {
+        this.$store.commit('setIsLoading', true)
+        
+        await axios
+        .get('/community/notification/')
+        .then(response => {
+          this.notificationsLength = response.data.length
+          console.log(this.notificationsLength)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+        this.$store.commit('setIsLoading', false)
       }
     }
   }
