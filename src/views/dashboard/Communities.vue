@@ -169,7 +169,6 @@
         await axios
         .get(`/community/${communityID}/comment/`, communityID)
         .then(response => {
-          console.log(response)
           this.communities[index]['commentLength'] = response.data.length
         })
         .catch(error => {
