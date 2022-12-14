@@ -69,23 +69,20 @@
         axios.defaults.headers.common['Authorization'] = ""
       }
     },
-    created() {
+    mounted(){
       this.getNotification()
+      this.loading = setInterval(this.getNotification, 10000);
     },
     methods: {
       async getNotification() {
-        this.$store.commit('setIsLoading', true)
-        
         await axios
         .get('/community/notification/')
         .then(response => {
           this.notificationsLength = response.data.length
-          console.log(this.notificationsLength)
         })
         .catch(error => {
           console.log(error)
         })
-        this.$store.commit('setIsLoading', false)
       }
     }
   }
