@@ -37,7 +37,7 @@
             </div>
           </div>
 
-          <div class="field">
+          <div class="field image__box">
             <label>이미지</label>
             <img :src="community.image" alt="">
             <input @change="onInputImage()" type="file" ref="communityimage">
@@ -127,23 +127,54 @@
 </script>
 
 <style scoped>
+.image__box {
+  display: flex;
+  flex-direction: column;
+}
+
 .edit__delete__btn {
   display: flex;
-  justify-content: flex-left;
+  justify-content: flex-end;
   align-items: center;
   font-size: 1.4rem;
 }
+
 .edit__btn {
-  background: #f5e691;
+  width: 5rem;
+  height: 2.5rem;
+  color: rgb(75, 75, 72);
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1rem;
+  background: rgb(241, 227, 21);
+  border-radius: 3rem;
+  border: 2px dashed #fff;
+  box-shadow: 0 0 0 2px rgb(241, 227, 21);
 }
+
 .edit__btn:hover {
-  background: #f0da62;
+  background: rgb(218, 203, 0);
+  box-shadow: 0 0 0 2px rgb(218, 203, 0);
 }
+
 .delete__btn {
-  margin-left: 0.5rem;
-  background: #fd8383;
+  margin-left: 1rem;
+  width: 5rem;
+  height: 2.5rem;
+  background: #fc4b4b;
+  color: #ffffff;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1rem;
+  border-radius: 3rem;
+  border: 2px dashed #fff;
+  box-shadow: 0 0 0 2px #fc4b4b;
 }
+
 .delete__btn:hover {
-  background: #f35c5c;
+  color: #fff;
+  background: #cc2525;
+  cursor: pointer;
+  box-shadow: 0 0 0 2px #cc2525;
 }
 </style>
