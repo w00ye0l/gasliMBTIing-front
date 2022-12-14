@@ -19,9 +19,9 @@
           </div>
           <div class="column is-10" style="text-align: center; margin: auto;">
             <div class="buttons" style=" display: inline-block;">
-              <router-link :to="{ name: 'EditAccount' }" class="button is-success">프로필 편집</router-link>
-              <button @click="logout()" class="button is-danger">로그아웃</button>
-              <router-link :to="{ name: 'DeleteAccount' }" class="button is-danger">회원탈퇴</router-link>
+              <router-link :to="{ name: 'EditAccount' }" class="button is-warning is-rounded">프로필 편집</router-link>
+              <button @click="logout()" class="button is-danger is-rounded">로그아웃</button>
+              <router-link :to="{ name: 'DeleteAccount' }" class="button is-danger is-outlined is-rounded">회원탈퇴</router-link>
             </div>
           </div>
         </div>
