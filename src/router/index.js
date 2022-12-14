@@ -22,7 +22,7 @@ import AddFriends from '../views/dashboard/AddFriends.vue'
 import Guestbook from '../views/dashboard/Guestbook.vue'
 import AddGuestbook from '../views/dashboard/AddGuestbook.vue'
 import EditFriends from '../views/dashboard/EditFriends.vue'
-
+import Notifications from '../views/dashboard/Notifications.vue'
 const routes = [
   {
     path: '/',
@@ -166,6 +166,14 @@ const routes = [
     path: '/dashboard/friends/:id',
     name: 'EditFriends',
     component: EditFriends,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/dashboard/notifications',
+    name: 'Notifications',
+    component: Notifications,
     meta: {
       requireLogin: true
     }

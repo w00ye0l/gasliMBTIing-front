@@ -51,7 +51,7 @@
       return {
         active,
       };
-    },
+    }
   }
 </script>
 
