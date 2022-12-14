@@ -161,13 +161,11 @@
     methods: {
       async getCommunity() {
         this.$store.commit('setIsLoading', true)
-        
         const communityID = this.$route.params.id
 
         await axios
           .get(`/community/${communityID}/`)
           .then(response => {
-            console.log(response.data.user)
             this.community = response.data
           })
           .catch(error => {

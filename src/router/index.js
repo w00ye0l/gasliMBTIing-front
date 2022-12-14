@@ -3,6 +3,7 @@ import store from '../store'
 import Home from '../views/Home.vue'
 import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
+import kakao_LogIn from '../views/kakaoLogIn.vue'
 import Dashboard from '../views/dashboard/Dashboard.vue'
 import MyAccount from '../views/dashboard/MyAccount.vue'
 import Profile from '../views/dashboard/Profile.vue'
@@ -36,6 +37,11 @@ const routes = [
     path: '/log-in',
     name: 'LogIn',
     component: LogIn
+  },
+  {
+    path: '/kakao_log-in',
+    name: 'kakao_LogIn',
+    component: kakao_LogIn
   },
   {
     path: '/dashboard',

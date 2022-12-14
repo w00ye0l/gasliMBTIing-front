@@ -1,5 +1,3 @@
-import { KAKAO_AUTH_URL } from "../shared/OAuth";
-
 <template>
   <div class="container">
     <div class="columns is-centered">
@@ -38,11 +36,11 @@ import { KAKAO_AUTH_URL } from "../shared/OAuth";
           </div>
         </form>
         <div>
-          <form @submit.prevent="kakaoLogin">
-            <!-- <a :href="kakaoLoginLink" alt="kakao login"> -->
-              <img alt="kakao logo" src="./../assets/images/kakao_login_medium_wide.png" @click="kakaoLogin()" />
-            <!-- </a> -->
-          </form>
+          <!-- <form @submit.prevent="kakaoLogin"> -->
+            <a :href="kakaoLoginLink" alt="kakao login">
+              <img alt="kakao logo" src="./../assets/images/kakao_login_medium_wide.png" />
+            </a>
+          <!-- </form> -->
         </div>
         <div class="signup__link">
           <p>아직 회원이 아니신가요?</p>
@@ -90,6 +88,7 @@ import { KAKAO_AUTH_URL } from "../shared/OAuth";
             this.$store.commit('setToken', token)
 
             axios.defaults.headers.common['Authorization'] = 'Token ' + token
+            console.log("토큰 뭐지", token)
 
             localStorage.setItem('token', token)
 
@@ -119,9 +118,6 @@ import { KAKAO_AUTH_URL } from "../shared/OAuth";
         
         this.$store.commit('setIsLoading', false)
       },
-      async kakaoLogin() {
-        console.log("test")
-      }
     }
   }
 </script>
