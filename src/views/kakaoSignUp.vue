@@ -8,7 +8,7 @@
           <div class="field">
             <label>이메일</label>
             <p class="control has-icons-left has-icons-right">
-              <input class="input" type="email" placeholder="이메일" name="email" v-model="username">
+              <input class="input" type="email" placeholder="이메일" name="email" v-model="username" disabled>
               <span class="icon is-small is-left">
                 <font-awesome-icon icon="fa-envelope" />
               </span>
@@ -18,7 +18,7 @@
           <div class="field">
             <label>닉네임</label>
             <p class="control has-icons-left">
-              <input class="input" type="text" placeholder="닉네임" name="nickname" v-model="nickname">
+              <input class="input" type="text" placeholder="닉네임" name="nickname" v-model="nickname" disabled>
               <span class="icon is-small is-left">
                 <font-awesome-icon icon="fa-face-smile" />
               </span>
@@ -65,11 +65,11 @@
               <label>성별</label>
               <div class="control gender__radio box">
                 <label class="radio">
-                  <input class="gender__btn" type="radio" name="gender" v-model="gender" value="남">
+                  <input class="gender__btn" type="radio" name="gender" v-model="gender" value="남" disabled>
                   <font-awesome-icon class="gender" icon="fa-mars" style="--genClr:#70d6ff"/>
                 </label>
                 <label class="radio">
-                  <input class="gender__btn" type="radio" name="gender" v-model="gender" value="여">
+                  <input class="gender__btn" type="radio" name="gender" v-model="gender" value="여" disabled>
                   <font-awesome-icon class="gender" icon="fa-venus" style="--genClr:#ff70a6"/>
                 </label>
               </div>
@@ -146,19 +146,26 @@
     name: 'SignUp',
     data() {
       return {
-        username: '',
+        username: localStorage.getItem("userinfo_email"),
         password1: '',
         password2: '',
         image: '',
-        nickname: '',
+        nickname: localStorage.getItem("userinfo_nickname"),
         age: '',
-        gender: '',
+        gender: localStorage.getItem("userinfo_gender"),
         mbti1: '',
         mbti2: '',
         mbti3: '',
         mbti4: '',
         errors: [],
       }
+    },
+    mounted() {
+        this.userinfo_email,
+        this.userinfo_nickname,
+        this.userinfo_gender,
+
+        this.removelocalstorage()
     },
     methods: {
       async submitForm() {
@@ -227,6 +234,11 @@
       async onInputImage() {
         this.image = this.$refs.accountimage.files[0]
         return this.image
+      },
+      async removelocalstorage() {
+        localStorage.removeItem('userinfo_email')
+        localStorage.removeItem('userinfo_nickname')
+        localStorage.removeItem('userinfo_gender')
       }
     }
   }

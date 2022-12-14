@@ -2,7 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import store from '../store'
 import Home from '../views/Home.vue'
 import SignUp from '../views/SignUp.vue'
+import kakao_SignUp from '../views/kakaoSignUp.vue'
 import LogIn from '../views/LogIn.vue'
+import kakao_LogIn from '../views/kakaoLogIn.vue'
 import Dashboard from '../views/dashboard/Dashboard.vue'
 import MyAccount from '../views/dashboard/MyAccount.vue'
 import Profile from '../views/dashboard/Profile.vue'
@@ -33,9 +35,19 @@ const routes = [
     component: SignUp
   },
   {
+    path: '/kakao_sign-up',
+    name: 'kakao_SignUp',
+    component: kakao_SignUp
+  },
+  {
     path: '/log-in',
     name: 'LogIn',
     component: LogIn
+  },
+  {
+    path: '/kakao_log-in',
+    name: 'kakao_LogIn',
+    component: kakao_LogIn
   },
   {
     path: '/dashboard',

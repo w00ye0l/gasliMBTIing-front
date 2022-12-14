@@ -181,6 +181,10 @@
         localStorage.removeItem('token')
         localStorage.removeItem('username')
         localStorage.removeItem('userid')
+        localStorage.removeItem('userinfo_email')
+        localStorage.removeItem('userinfo_nickname')
+        localStorage.removeItem('userinfo_gender')
+        
         this.$store.commit('removeToken')
         this.$router.push('/')
       },

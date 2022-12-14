@@ -1,5 +1,3 @@
-import { KAKAO_AUTH_URL } from "../shared/OAuth";
-
 <template>
   <div class="container">
     <div class="columns is-centered">
@@ -8,7 +6,8 @@ import { KAKAO_AUTH_URL } from "../shared/OAuth";
 
         <form @submit.prevent="submitForm" class="box">
           <div class="field">
-            <label>이메일</label>
+            <label>이메일 {{ userinfo_email }}</label>
+            
             <p class="control has-icons-left has-icons-right">
               <input class="input" type="email" placeholder="이메일" name="email" v-model="username">
               <span class="icon is-small is-left">
@@ -37,14 +36,11 @@ import { KAKAO_AUTH_URL } from "../shared/OAuth";
             </div>
           </div>
 
-          <div>
-            <form class="btn__box" @submit.prevent="kakaoLogin">
-              <!-- <a :href="kakaoLoginLink" alt="kakao login"> -->
-              <button type="submit" class="kakao__login__btn" @click="kakaoLogin()">카카오 로그인</button>
-              <!-- </a> -->
-            </form>
+          <div class="btn__box">
+              <a :href="kakaoLoginLink" type="submit" class="kakao__login__btn" @click="kakaoLoginLink()">카카오 로그인</a>
           </div>
         </form>
+
         <div class="signup__link">
           <p>아직 회원이 아니신가요?</p>
           <router-link to="/sign-up">회원가입!</router-link>
@@ -120,9 +116,6 @@ import { KAKAO_AUTH_URL } from "../shared/OAuth";
         
         this.$store.commit('setIsLoading', false)
       },
-      async kakaoLogin() {
-        console.log("test")
-      }
     }
   }
 </script>
