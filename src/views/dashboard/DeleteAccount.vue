@@ -2,16 +2,19 @@
   <div class="container">
     <div class="columns is-multiline" style= "justify-content: center;">
       <div class="column is-10 is-center">
+        <h1 class="title">회원 탈퇴</h1>
+
+        <hr>
+
         <div class="box">
-          <h1 class="title">회원 탈퇴</h1>
           <div class="body__content_sub">
             탈퇴하시면 지금까지 저장한 모든 정보가 삭제됩니다.😥
             <br>이에 동의하신다면 회원탈퇴를 해주세요.
             <br>gasliMBTIng 서비스를 이용해주셔서 감사합니다.
           </div>
 
-          <form @submit.prevent="fnDelete">
-            <button class="button is-large modal-button">
+          <form @submit.prevent="fnDelete" class="submit__box">
+            <button class="button submit__btn modal-button">
               회원탈퇴
             </button>
           </form>

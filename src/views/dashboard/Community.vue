@@ -131,6 +131,7 @@
           </div>
 
           <p class="comment__content">{{ com.content }}</p>
+          <p>{{ elapsedText(com.created_at) }}</p>
         </div>
         
       </div>
@@ -369,17 +370,39 @@
   font-size: 1.4rem;
 }
 .edit__btn {
-  background: #f5e691;
+  width: 3rem;
+  height: 2rem;
+  color: rgb(75, 75, 72);
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1rem;
+  background: #fff;
+  border-radius: 3rem;
+  border: 2px dashed rgb(218, 203, 0);
 }
+
 .edit__btn:hover {
-  background: #f0da62;
+  background: rgb(218, 203, 0);
+  // box-shadow: 0 0 0 0.2rem rgb(136, 136, 136);
 }
+
 .delete__btn {
-  margin-left: 0.5rem;
-  background: #fd8383;
+  margin-left: 1rem;
+  width: 3rem;
+  height: 2rem;
+  background: #fff;
+  color: #fc4b4b;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1rem;
+  border-radius: 3rem;
+  border: 2px dashed #fc4b4b;
 }
+
 .delete__btn:hover {
-  background: #f35c5c;
+  color: #fff;
+  background: #fc4b4b;
+  cursor: pointer;
 }
 .subtitle {
   display: flex;

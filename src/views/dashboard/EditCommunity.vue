@@ -2,13 +2,13 @@
   <div class="container">
     <div class="columns is-multiline">
       <div class="column is-10">
-        <h1 class="title">Edit community</h1>
+        <h1 class="title">커뮤니티 글 수정</h1>
 
         <hr>
       </div>
 
       <div class="column is-10">
-        <form @submit.prevent="submitForm">
+        <form @submit.prevent="submitForm" class="box">
           <div class="field">
             <label>Category</label>
             <div class="control">

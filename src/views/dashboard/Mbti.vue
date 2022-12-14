@@ -4,6 +4,8 @@
       <div class="column is-10">
         <h1 class="title">MBTI 정보</h1>
 
+        <hr>
+
         <div class="field">
           <div class="control">
             
@@ -50,19 +52,17 @@
       <template v-if="filters !== '전체'">
         <div class="board-group column is-10">
           <template v-for="mbti_ in mbti">
-            <div class="board box" v-if="(mbti_.board === filters)" v-bind:key="mbti_.id">
-              <router-link :to="{ name: 'MbtiDetail', params: { id: mbti_.id }}">
-                {{mbti_.title}}
-              </router-link>
-            </div>
+            <router-link class="board box" :to="{ name: 'MbtiDetail', params: { id: mbti_.id }}" v-if="(mbti_.board === filters)" v-bind:key="mbti_.id">
+              {{mbti_.title}}
+            </router-link>
           </template>
         </div>
       </template>
       
       <template v-if="filters === '전체'">
         <div class="board-group column is-10">
-          <div class="board box" v-for="mbti_ in mbti" v-bind:key="mbti_.id">
-            <router-link :to="{ name: 'MbtiDetail', params: { id: mbti_.id }}">
+          <div class="board" v-for="mbti_ in mbti" v-bind:key="mbti_.id">
+            <router-link class="board__link box" :to="{ name: 'MbtiDetail', params: { id: mbti_.id }}">
               {{mbti_.title}}
             </router-link>
           </div>
@@ -112,9 +112,6 @@
   label{
     font-size: small;
   }
-  hr {
-    background-color: #EAE4E9;
-  }
 
   .radio-tile-group {
     display: flex;
@@ -124,8 +121,8 @@
 
   .input-container {
     position: relative;
+    width: 70px;
     height: 40px;
-    width: 60px;
     margin: 0.5rem;
   }
 
@@ -138,19 +135,24 @@
     z-index: 2;
     opacity: 0;
   }
-
+  
   .input-container .radio-tile{
+    height: 40px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 40px;
-    border: 2px solid #EAE4E9;
-    border-radius: 10px;
+    align-items: center;
+    border: 2px solid #c961fa;
+    border-radius: 2rem;
+  }
+
+  .radio-tile label {
+    font-size: 1.2rem;
   }
 
   input:checked + .radio-tile {
-    background-color: #EAE4E9;
+    color: #fff;
+    background-color: #c961fa;
   }
   
   .board-group {
@@ -171,12 +173,25 @@
   }
 
   .board:hover {
-  box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 40%), 0 0px 0 1px rgb(10 10 10 / 2%);
+  box-shadow: 0 0.5em 1em -0.125em rgba(133, 46, 248, 0.4), 0 0px 0 1px rgba(80, 41, 117, 0.02);
   }
 
   a {
     color: black;
     font-size: 1.5rem;
+  }
+  
+  .board__link {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .board__link:hover {
+    border: 0;
+    box-shadow: none;
   }
 
 </style>
