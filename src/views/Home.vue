@@ -80,7 +80,7 @@
         </section>
 
         <footer class="modal-card-foot">
-          <template v-if="$store.state.isAuthenticated">
+          <template v-if="!$store.state.isAuthenticated">
             <router-link to="/log-in" class="go__to">MBTI!</router-link>
           </template>
           <template v-else>
