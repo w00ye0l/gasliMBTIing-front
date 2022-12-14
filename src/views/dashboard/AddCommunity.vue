@@ -12,14 +12,30 @@
           <div class="field">
             <label>Category</label>
             <div class="control">
-              <input type="text" class="input" v-model="category">
+              <div class="select">
+                <select v-model="category">
+                  <!-- <option value="Category">Category</option> -->
+                  <option v-for="category in categories"
+                    v-bind:key="category" 
+                    :value="category"
+                  >{{category}}</option>
+                </select>
+              </div>
             </div>
           </div>
-          
+
           <div class="field">
             <label>MBTI</label>
             <div class="control">
-              <input type="text" class="input" v-model="mbti">
+              <div class="select">
+                <select v-model="mbti">
+                  <!-- <option value="MBTI">MBTI</option> -->
+                  <option v-for="mbti in mbtis"
+                    v-bind:key="mbti" 
+                    :value="mbti"
+                  >{{mbti}}</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -60,11 +76,13 @@
     name: 'AddCommunity',
     data() {
       return {
-        category: '',
-        mbti: '',
+        category: '자유',
+        categories:['자유','질문','상담','토론'],
+        mbti: 'ENTP',
         title: '',
         content: '',
-        image: ''
+        image: '',
+        mbtis:['ENTP','ENTJ','ENFP','ENFJ','ESTP','ESTJ','ESFP','ESFJ','INTP','INTJ','INFP','INFJ','ISTP','ISTJ','ISFP','ISFJ']
       }
     },
     methods: {
