@@ -37,7 +37,7 @@
                 <option value="ESTJ">ESTJ</option>
                 <option value="ISTJ">ISTJ</option>
                 <option value="INTJ">INTJ</option>
-                <option value="ISPT">ISPT</option>
+                <option value="ISPT">ISTP</option>
                 <option value="ESTP">ESTP</option>
                 <option value="ENTJ">ENTJ</option>
               </select>
@@ -113,7 +113,7 @@
         }
         
         await axios
-          .post('MBTI/', mbit_)
+          .post('mbti/', mbit_)
           .then(response => {
             console.log(response)
 

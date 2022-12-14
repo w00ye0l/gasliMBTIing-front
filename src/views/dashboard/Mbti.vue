@@ -94,7 +94,7 @@
         this.$store.commit('setIsLoading', true)
 
         axios
-          .get('/MBTI/')
+          .get('/mbti/')
           .then(response => {
             this.mbti = response.data
           })

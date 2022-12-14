@@ -11,12 +11,13 @@
           <div>
             <h1 class="title">{{mbtidetail.mbti}} {{mbtidetail.board}}</h1>
           </div>
-          
+
         </div>
       </div>
 
       <div class="column is-10">
-        <div class="box">
+        <div class="box head">
+          <img :src="require(`@/assets/images/${mbtidetail.mbti}.png`)"/>
           <p class="detail_head title_">{{mbtidetail.character}}</p> 
           <p class="detail_head">{{mbtidetail.summary}}</p>
         </div> 
@@ -77,7 +78,7 @@
         const mbtidetailID = this.$route.params.id
         // console.log(mbtidetailID)
         await axios
-          .get(`/MBTI/${mbtidetailID}/`)
+          .get(`/mbti/${mbtidetailID}/`)
           .then(response => {
             console.log(response)
             this.mbtidetail = response.data
@@ -92,7 +93,7 @@
     async getMbti() {
       
       await axios
-      .get(`/MBTI/`)
+      .get(`/mbti/`)
       .then(response => {
         this.mbti = response.data
         console.log(response)
@@ -143,6 +144,18 @@
 
   .detail_head{
     text-align: center;
+  }
+
+  .head {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img {
+    width: 80px;
+    height: auto;
   }
 
 </style>
