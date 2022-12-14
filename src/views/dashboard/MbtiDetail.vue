@@ -35,12 +35,12 @@
 
 
           <div class="is-flex is-justify-content-space-evenly">
-            <template v-for="mbti_ in mbti" v-bind:key="mbti_.id">
-              <template v-if="mbtidetail.mbti === mbti_.mbti && mbtidetail.id != mbti_.id">
-                <router-link :to="{ name: 'MbtiDetail', params: { id: mbti_.id }}">
+            <template v-for="mbti_ in mbti" >
+              <div v-if="mbtidetail.mbti === mbti_.mbti && mbtidetail.id != mbti_.id">
+                <router-link :to="{ name: 'MbtiDetail', params: { id: mbti_.id }}" v-bind:key="mbti_.id">
                   {{mbti_.title}}
                 </router-link>
-              </template>
+              </div>
             </template>
           </div>
 
