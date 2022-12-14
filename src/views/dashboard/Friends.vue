@@ -39,11 +39,34 @@
             :data-id="friend.id"
             >
             <div class="friend__info">
-              <img class="friend__img" :src="'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-blue-version/8/89/Pikachu.jpg'" alt="">
+              <template v-if="friend.mbti === 'INTJ' || friend.mbti === 'INTP' || friend.mbti === 'ENTJ' || friend.mbti === 'ENTP'">
+                <img class="friend__img" src="../../assets/images/red.png" alt="">
+              </template>
+              <template v-if="friend.mbti === 'INFJ' || friend.mbti === 'INFP' || friend.mbti === 'ENFJ' || friend.mbti === 'ENFP'">
+                <img class="friend__img" src="../../assets/images/yellow.png" alt="">
+              </template>
+              <template v-if="friend.mbti === 'ISFJ' || friend.mbti === 'ISTJ' || friend.mbti === 'ESFJ' || friend.mbti === 'ESTJ'">
+                <img class="friend__img" src="../../assets/images/green.png" alt="">
+              </template>
+              <template v-if="friend.mbti === 'ISFP' || friend.mbti === 'ISTP' || friend.mbti === 'ESFP' || friend.mbti === 'ESTP'">
+                <img class="friend__img" src="../../assets/images/blue.png" alt="">
+              </template>
+
               <h1 class="friend__name">{{friend.name}}</h1>
             </div>
             <div>
-              <p class="friend__mbti">{{friend.mbti}}</p>
+              <template v-if="friend.mbti === 'INTJ' || friend.mbti === 'INTP' || friend.mbti === 'ENTJ' || friend.mbti === 'ENTP'">
+                <p class="friend__mbti" style="--bgClr:#fc66ac">{{friend.mbti}}</p>
+              </template>
+              <template v-if="friend.mbti === 'INFJ' || friend.mbti === 'INFP' || friend.mbti === 'ENFJ' || friend.mbti === 'ENFP'">
+                <p class="friend__mbti" style="--bgClr:#f7e866">{{friend.mbti}}</p>
+              </template>
+              <template v-if="friend.mbti === 'ISFJ' || friend.mbti === 'ISTJ' || friend.mbti === 'ESFJ' || friend.mbti === 'ESTJ'">
+                <p class="friend__mbti" style="--bgClr:#87f5b1">{{friend.mbti}}</p>
+              </template>
+              <template v-if="friend.mbti === 'ISFP' || friend.mbti === 'ISTP' || friend.mbti === 'ESFP' || friend.mbti === 'ESTP'">
+                <p class="friend__mbti" style="--bgClr:#66c9fa">{{friend.mbti}}</p>
+              </template>
             </div>
           </div>
         </template>
@@ -52,7 +75,7 @@
           <div
             v-for="friend in friends"
             v-bind:key="friend.id"
-          >
+            >
             <div
               class="friend__box box"
               v-if="friend.group === group"
@@ -60,11 +83,34 @@
               :data-id="friend.id"
             >
               <div class="friend__info">
-                <img class="friend__img" :src="'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-blue-version/8/89/Pikachu.jpg'" alt="">
+                <template v-if="friend.mbti === 'INTJ' || friend.mbti === 'INTP' || friend.mbti === 'ENTJ' || friend.mbti === 'ENTP'">
+                  <img class="friend__img" src="../../assets/images/red.png" alt="">
+                </template>
+                <template v-if="friend.mbti === 'INFJ' || friend.mbti === 'INFP' || friend.mbti === 'ENFJ' || friend.mbti === 'ENFP'">
+                  <img class="friend__img" src="../../assets/images/yellow.png" alt="">
+                </template>
+                <template v-if="friend.mbti === 'ISFJ' || friend.mbti === 'ISTJ' || friend.mbti === 'ESFJ' || friend.mbti === 'ESTJ'">
+                  <img class="friend__img" src="../../assets/images/green.png" alt="">
+                </template>
+                <template v-if="friend.mbti === 'ISFP' || friend.mbti === 'ISTP' || friend.mbti === 'ESFP' || friend.mbti === 'ESTP'">
+                  <img class="friend__img" src="../../assets/images/blue.png" alt="">
+                </template>
+
                 <h1 class="friend__name">{{friend.name}}</h1>
               </div>
               <div>
-                <p class="friend__mbti">{{friend.mbti}}</p>
+                <template v-if="friend.mbti === 'INTJ' || friend.mbti === 'INTP' || friend.mbti === 'ENTJ' || friend.mbti === 'ENTP'">
+                  <p class="friend__mbti" style="--bgClr:#fc66ac">{{friend.mbti}}</p>
+                </template>
+                <template v-if="friend.mbti === 'INFJ' || friend.mbti === 'INFP' || friend.mbti === 'ENFJ' || friend.mbti === 'ENFP'">
+                  <p class="friend__mbti" style="--bgClr:#f7e866">{{friend.mbti}}</p>
+                </template>
+                <template v-if="friend.mbti === 'ISFJ' || friend.mbti === 'ISTJ' || friend.mbti === 'ESFJ' || friend.mbti === 'ESTJ'">
+                  <p class="friend__mbti" style="--bgClr:#87f5b1">{{friend.mbti}}</p>
+                </template>
+                <template v-if="friend.mbti === 'ISFP' || friend.mbti === 'ISTP' || friend.mbti === 'ESFP' || friend.mbti === 'ESTP'">
+                  <p class="friend__mbti" style="--bgClr:#66c9fa">{{friend.mbti}}</p>
+                </template>
               </div>
             </div>
           </div>
@@ -108,14 +154,26 @@
               <div class="icon__box">
                 <img class="icon icon__img" src="../../assets/images/mbti.png" alt="">
               </div>
-              <p>{{ selectedFriend.mbti }}</p>
+
+              <template v-if="selectedFriend.mbti === 'INTJ' || selectedFriend.mbti === 'INTP' || selectedFriend.mbti === 'ENTJ' || selectedFriend.mbti === 'ENTP'">
+                <p class="friend__mbti" style="--bgClr:#fc66ac">{{selectedFriend.mbti}}</p>
+              </template>
+              <template v-if="selectedFriend.mbti === 'INFJ' || selectedFriend.mbti === 'INFP' || selectedFriend.mbti === 'ENFJ' || selectedFriend.mbti === 'ENFP'">
+                <p class="friend__mbti" style="--bgClr:#f7e866">{{selectedFriend.mbti}}</p>
+              </template>
+              <template v-if="selectedFriend.mbti === 'ISFJ' || selectedFriend.mbti === 'ISTJ' || selectedFriend.mbti === 'ESFJ' || selectedFriend.mbti === 'ESTJ'">
+                <p class="friend__mbti" style="--bgClr:#87f5b1">{{selectedFriend.mbti}}</p>
+              </template>
+              <template v-if="selectedFriend.mbti === 'ISFP' || selectedFriend.mbti === 'ISTP' || selectedFriend.mbti === 'ESFP' || selectedFriend.mbti === 'ESTP'">
+                <p class="friend__mbti" style="--bgClr:#66c9fa">{{selectedFriend.mbti}}</p>
+              </template>
             </div>
             <hr class="hr__custom" style="--hr:#66c9fa">
           </div>
           <div class="friend__content">
-            <router-link class="friend__btn" style="--bgbtn:#eee48f" :to="{ name: 'EditFriends', params: { id: Number(selectedFriend.id) }}">수정
+            <router-link class="edit__btn" :to="{ name: 'EditFriends', params: { id: Number(selectedFriend.id) }}">수정
             </router-link>
-            <button class="friend__btn" style="--bgbtn:#e28181" @click="deleteFriends" :data-id="selectedFriend.id">삭제</button>
+            <button class="delete__btn" @click="deleteFriends" :data-id="selectedFriend.id">삭제</button>
           </div>
         </section>
       </div>
@@ -216,6 +274,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .add__btn {
   width: 3rem;
   height: 3rem;
@@ -228,37 +287,45 @@
   border-radius: 50%;
   box-shadow: 0 0 0 0.3rem #bd32fd;
 }
+
 .add__btn:hover {
   color: #fff;
   background: #9f22da;
   box-shadow: 0 0 0 0.3rem #9f22da;
 }
+
 .friend__box {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1.5rem;
 }
+
 .friend__box:hover {
   cursor: pointer;
 }
+
 .friend__info {
   display: flex;
   align-items: center;
 }
+
 .friend__img {
-  margin-right: 0.5rem;
+  margin-right: 0.8rem;
   width: 4rem;
   height: 4rem;
   border: 0.5px solid #dfdfdf;
   border-radius: 0.5rem;
 }
+
 .friend__name {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
+
 .friend__mbti {
   padding: 0 0.5rem;
-  font-size: 1.5rem;
-  background: #dd94ff;
+  font-size: 1.8rem;
+  background: var(--bgClr);
   border-radius: 0.5rem;
 }
 
@@ -295,10 +362,12 @@
   margin-bottom: 2rem;
   /* color: #e28181; */
 }
+
 .hr__custom {
   width: 120%;
   background-color: var(--hr);
 }
+
 .friend__content{
   margin-bottom: 1rem;
   width: 100%;
@@ -307,6 +376,7 @@
   align-items: center;
   font-size: 2rem;
 }
+
 .icon__box {
   width: 3rem;
   display: flex;
@@ -315,11 +385,13 @@
   align-items: center;
   color: rgb(155, 155, 155);
 }
+
 .icon__box .icon {
   margin-top:0.5rem;
   display: flex;
   align-items: center;
 }
+
 .icon__img {
   margin-top:0.5rem;
   margin: auto;
@@ -329,26 +401,42 @@
   background-size: contain;
   background-repeat: no-repeat;
 }
+
 .icon__name {
   font-size: 1rem;
 }
-.friend__btn {
+
+.edit__btn {
   width: 40%;
   height: 3rem;
-  background: var(--bgbtn);
   color: rgb(70, 67, 67);
   text-align: center;
   font-size: 2rem;
   line-height: 2.5rem;
   border-radius: 3rem;
-  border: 2px dashed #fff;
-  box-shadow: 0 0 0 0.3rem var(--bgbtn);
+  border: 2px dashed rgb(70, 67, 67);
   margin: 1.5rem;
 }
-.friend__btn:hover {
-  background: var(--bgbtn);
-  color: rgb(68, 68, 68);
-  box-shadow: 0 0 0 0.3rem var(--bgbtn);
+
+.edit__btn:hover {
+  box-shadow: 0 0 0 0.2rem rgb(136, 136, 136);
+}
+
+.delete__btn {
+  width: 40%;
+  height: 3rem;
+  background: #fff;
+  color: #fc4b4b;
+  text-align: center;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  border-radius: 3rem;
+  border: 2px dashed #fc4b4b;
+  margin: 1.5rem;
+}
+
+.delete__btn:hover {
+  box-shadow: 0 0 0 0.2rem #fc4b4b;
   cursor: pointer;
 }
 </style>

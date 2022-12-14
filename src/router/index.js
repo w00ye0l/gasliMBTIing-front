@@ -125,6 +125,9 @@ const routes = [
     path: '/dashboard/friends',
     name: 'Friends',
     component: Friends,
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/dashboard/friends/add',
