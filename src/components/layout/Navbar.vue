@@ -108,7 +108,7 @@
 }
 .btn__custom.active {
   background: var(--clr);
-  transform: translateY(-40px);
+  transform: translateY(-25px);
   box-shadow: 0 0 0 0.7rem #EAE4E9;
 }
 .btn__custom.active::before {
