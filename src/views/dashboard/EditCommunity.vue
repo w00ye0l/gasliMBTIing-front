@@ -8,7 +8,7 @@
       </div>
 
       <div class="column is-10">
-        <form @submit.prevent="submitForm" class="box">
+        <form @submit.prevent="submitForm" class="box" enctype="multipart/form-data">
           <div class="field">
             <label>Category</label>
             <div class="control">
@@ -40,7 +40,8 @@
           <div class="field image__box">
             <label>이미지</label>
             <img :src="community.image" alt="">
-            <input @change="onInputImage()" type="file" ref="communityimage">
+            <!-- <input name="upfile[]" @change="onInputImage()" type="file" ref="communityimage" accept="image/*"> -->
+            <input type="file" @change="onInputImage()" ref="communityimage">
           </div>
 
           <div class="field">
@@ -57,6 +58,7 @@
 
 <script>
   import axios from 'axios'
+  import { toast } from 'bulma-toast'
     
   export default {
     name: 'EditCommunity',
@@ -67,7 +69,7 @@
         mbti: '',
         content: '',
         image: '',
-        community: {},
+        community: {}
       }
     },
     mounted() {
@@ -105,7 +107,7 @@
             mbti: this.mbti,
             title: this.title,
             content: this.content,
-            image: this.image,
+            image: this.$refs.communityimage.files[0],
         }
 
         const headers = {
@@ -115,6 +117,15 @@
         await axios
           .put(`/community/update/${communityID}/`, formData, {headers})
           .then(response => {
+            toast({
+              message: '글이 수정되었습니다!',
+              type: 'is-success',
+              dismissible: true,
+              pauseOnHover: true,
+              duration: 2000,
+              position: 'bottom-right',
+            })
+
             this.$router.push(`/dashboard/community/${communityID}`)
           })
           .catch(error => {
