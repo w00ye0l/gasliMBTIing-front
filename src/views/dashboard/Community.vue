@@ -21,9 +21,9 @@
       <div class="column is-10 is-center">
         <div class="article__head ">
           <div class="article__user">
-            <div class="article__profileImg box">
+            <div class="article__profileImgBox box">
               <template v-if="community.user.image">
-                <img :src="community.user.image" alt="">
+                <img class="article__profileImg" :src="community.user.image" alt="">
                 <!-- <img :src="'http://localhost:8000' + community.user.image" alt=""> -->
               </template>
               <template v-else>
@@ -49,7 +49,8 @@
         
         <!-- 글 제목 -->
         <div>
-          <p class="subtitle">{{ community.title }}
+          <p class="subtitle">
+            <span class="com__title">{{ community.title }}</span>
             <template v-if="community.mbti === 'INTJ' || community.mbti === 'INTP' || community.mbti === 'ENTJ' || community.mbti === 'ENTP'">
               <span class="article__mbti" style="--bgClr:#fc66ac">{{ community.mbti }}</span>
             </template>
@@ -63,7 +64,10 @@
               <span class="article__mbti" style="--bgClr:#66c9fa">{{ community.mbti }}</span>
             </template>
           </p>
+
+          <hr>
           
+          <!-- 글 내용 -->
           <template v-if="community.image !== null">
             <div class="article__imgbox">
               <img :src="community.image" class="article__img">
@@ -351,7 +355,7 @@
   display: flex;
   justify-content: space-between;
 }
-.article__profileImg {
+.article__profileImgBox {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -359,6 +363,10 @@
   padding: 0;
   width: 4rem;
   height: 4rem;
+  object-fit: contain;
+}
+.article__profileImg {
+  max-height: 100%;
 }
 .article__user {
   display: flex;
@@ -420,8 +428,12 @@
 .subtitle {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   margin-top: 1rem;
-  font-size: 2.5rem;
+  font-size: 1.9rem;
+}
+.com__title {
+  width: 60%;
 }
 .article__mbti {
   padding: 0 5px;
@@ -439,8 +451,9 @@
 }
 .article__content {
   margin-bottom: 1rem;
-  font-size: 2rem;
+  font-size: 1.3rem;
   color: #7a7a7a;
+  word-wrap: break-word;
 }
 .comment__formbox {
   padding: 1rem;
