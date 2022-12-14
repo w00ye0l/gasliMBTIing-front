@@ -3,10 +3,17 @@
     <div class="columns is-multiline">
       <div class="column is-10 is-center">
         <div class="guestbook__head">
-          <router-link :to="{ name: 'Profile', params: { id: Number(guestbook.receive_user) }}" class="back__btn">
-            <font-awesome-icon class="icon is-middle" icon="arrow-left" />
-          </router-link>
+          <template v-if="guestbook.receive_user.id != userid">
+            <router-link :to="{ name: 'Profile', params: { id: Number(guestbook.receive_user) }}" class="back__btn">
+              <font-awesome-icon class="icon is-middle" icon="arrow-left" />
+            </router-link>
+          </template>
           
+          <template v-else>
+            <router-link to="/dashboard/my-account" class="back__btn">
+              <font-awesome-icon class="icon is-middle" icon="arrow-left" />
+            </router-link>
+          </template>
           <div>
             <h1 class="title">방명록</h1>
           </div>
@@ -42,10 +49,12 @@
       return {
         guestbook: {},
         username: localStorage.getItem("username"),
+        userid: localStorage.getItem("userid"),
       }
     },
     created() {
       this.username,
+      this.userid,
       this.getGuestbook()
     },
     methods: {
@@ -53,7 +62,6 @@
         this.$store.commit('setIsLoading', true)
         
         const guestbookID = this.$route.params.id
-
 
         await axios
           .get(`/guestbook/detail/${guestbookID}/`)
