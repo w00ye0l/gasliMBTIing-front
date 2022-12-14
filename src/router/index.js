@@ -178,6 +178,10 @@ const routes = [
       requireLogin: true
     }
   },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: "/"
+  },
 ]
 
 const router = createRouter({
