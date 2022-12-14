@@ -12,28 +12,28 @@
           <div class="field">
             <label>Category</label>
             <div class="control">
-              <input type="text" class="input" v-model="community.category">
+              <input type="text" class="input" v-model="category">
             </div>
           </div>
           
           <div class="field">
             <label>MBTI</label>
             <div class="control">
-              <input type="text" class="input" v-model="community.mbti">
+              <input type="text" class="input" v-model="mbti">
             </div>
           </div>
 
           <div class="field">
             <label>글 제목</label>
             <div class="control">
-              <input type="text" class="input" v-model="community.title">
+              <input type="text" class="input" v-model="title">
             </div>
           </div>
 
           <div class="field">
             <label>글 내용</label>
             <div class="control">
-              <input type="text" class="input" v-model="community.content">
+              <input type="text" class="input" v-model="content">
             </div>
           </div>
 
@@ -62,7 +62,12 @@
     name: 'EditCommunity',
     data() {
       return {
-        community: {}
+        title: '',
+        category: '',
+        mbti: '',
+        content: '',
+        image: '',
+        community: {},
       }
     },
     mounted() {
@@ -77,7 +82,7 @@
         await axios
           .get(`/community/${communityID}/`)
           .then(response => {
-            this.community = response.data
+            this.community = response.data,
             this.category = this.community.category,
             this.mbti = this.community.mbti,
             this.title = this.community.title,
