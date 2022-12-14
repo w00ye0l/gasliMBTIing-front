@@ -9,11 +9,15 @@
         <div class="write__div">
           <router-link to="/dashboard/community/add" class="write__btn is-light">글쓰기</router-link>
         </div>
-        <div class="field">
+
+        <div class="select__box">
+          <div class="field">
             <div class="control">
               <div class="select">
                 <select v-model="category" @change="changeFilter">
-                  <option value="Category">Category</option>
+                  <option value="카테고리" disabled selected>카테고리</option>
+                  <option disabled>=========</option>
+                  <option value="전체">전체</option>
                   <option v-for="category in categories"
                     v-bind:key="category" 
                     :value="category"
@@ -26,7 +30,9 @@
             <div class="control">
               <div class="select">
                 <select v-model="mbti" @change="changeFilter">
-                  <option value="MBTI">MBTI</option>
+                  <option value="MBTI" disabled selected>MBTI</option>
+                  <option disabled>=========</option>
+                  <option value="전체">전체</option>
                   <option v-for="mbti in mbtis"
                     v-bind:key="mbti" 
                     :value="mbti"
@@ -35,6 +41,7 @@
               </div>
             </div>
           </div>
+        </div>
       </div>
       
       <div class="column is-10">
@@ -74,7 +81,7 @@
     data() {
       return {
         communities: [],
-        category:'Category',
+        category:'카테고리',
         categories:['자유','질문','상담','토론'],
         mbti:'MBTI',
         mbtis:['ENTP','ENTJ','ENFP','ENFJ','ESTP','ESTJ','ESFP','ESFJ','INTP','INTJ','INFP','INFJ','ISTP','ISTJ','ISFP','ISFJ'],
@@ -118,11 +125,11 @@
           category = 'counsel'
         }else if(this.category == '토론'){
           category = 'discussion'
-        }else if(this.category == 'Category'){
+        }else if(this.category == '전체' || this.category == '카테고리'){
           category = 'all'
         }
         let mbti = ''
-        if (this.mbti == 'MBTI'){
+        if (this.mbti == 'MBTI' || this.mbti == '전체'){
           mbti = 'all'
         }else{
           mbti = this.mbti
@@ -132,7 +139,11 @@
         await axios
         .get(`/community/filter/${data}/`)
         .then(response => {
-          this.communities = response.data
+          this.communities = response.data.reverse()
+          this.commentNums = []
+          for (let i=0; i < this.communities.length; i++){
+            this.getComment(this.communities[i].id, i)
+          }
         })
         .catch(error => {
           console.log(error)
@@ -182,6 +193,15 @@
   color: #fff;
   box-shadow: 0 0 0 0.2rem #9f22da;
 }
+
+.select__box {
+  margin: auto;
+  margin-top: 2rem;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .article__link {
   color: #000;
 }

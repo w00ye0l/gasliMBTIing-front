@@ -8,7 +8,7 @@
       </div>
 
       <div class="column is-10">
-        <form @submit.prevent="submitForm" enctype="multipart/form-data">
+        <form @submit.prevent="submitForm" enctype="multipart/form-data" class="box">
           <div class="field">
             <label>Category</label>
             <div class="control">
@@ -55,12 +55,14 @@
 
           <div class="field">
             <label>Image</label>
-            <input @change="onInputImage()" type="file" ref="communityimage">
+            <div>
+              <input @change="onInputImage()" type="file" ref="communityimage"/>
+            </div>
           </div>
 
           <div class="field">
-            <div class="control">
-              <button class="button is-success">Submit</button>
+            <div class="control submit__box">
+              <button class="button submit__btn">Submit</button>
             </div>
           </div>
         </form>
@@ -82,7 +84,7 @@
         title: '',
         content: '',
         image: '',
-        mbtis:['ENTP','ENTJ','ENFP','ENFJ','ESTP','ESTJ','ESFP','ESFJ','INTP','INTJ','INFP','INFJ','ISTP','ISTJ','ISFP','ISFJ']
+        mbtis:['ENTP','ENTJ','ENFP','ENFJ','ESTP','ESTJ','ESFP','ESFJ','INTP','INTJ','INFP','INFJ','ISTP','ISTJ','ISFP','ISFJ'],
       }
     },
     methods: {
@@ -121,8 +123,53 @@
 
       async onInputImage() {
         this.image = this.$refs.communityimage.files[0]
+
         return this.image
-      }
+      },
     }
   }
 </script>
+
+<style lang="scss">
+  input[type=file]::file-selector-button {
+    margin-top: 0.5rem;
+    width: 100px;
+    height: 40px;
+    font-size: 1rem;
+    font-family: 'KOTRAHOPE' !important;
+    color: rgb(66, 66, 66);
+    background: #fff;
+    border: 2px dashed #bd32fd;
+    border-radius: 2rem;
+    cursor: pointer;
+
+    &:hover {
+      background: #bd32fd;
+      color: #fff;
+      border: 2px dashed #fff;
+    }
+  }
+
+  .submit__box {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .submit__btn {
+    height: 2.5rem;
+    background: #bd32fd;
+    color: #fff;
+    text-align: center;
+    font-size: 1.3rem;
+    border-radius: 3rem;
+    border: 2px dashed rgb(255, 255, 255);
+    box-shadow: 0 0 0 0.2rem #bd32fd;
+  }
+
+  .submit__btn:hover {
+    background: #9f22da;
+    color: rgb(189, 189, 189);
+    box-shadow: 0 0 0 0.2rem #9f22da;
+  }
+</style>
