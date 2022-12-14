@@ -47,7 +47,9 @@
 
           <div class="field">
             <label>프로필 사진</label>
-            <input @change="onInputImage()" type="file" ref="accountimage">
+            <div>
+              <input @change="onInputImage()" type="file" ref="accountimage">
+            </div>
           </div>
 
           <div class="ageGender">
@@ -128,7 +130,7 @@
           </div>
 
           <div class="field">
-            <div class="control">
+            <div class="control submit__box">
               <button class="button__submit">MBTI!</button>
             </div>
           </div>
