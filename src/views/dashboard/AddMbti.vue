@@ -6,7 +6,7 @@
       </div>
 
       <div class="column is-12">
-        <form @submit.prevent="submitForm">
+        <form @submit.prevent="submitForm" enctype="multipart/form-data">
 
           <div class="field">
             <label>board</label>
@@ -52,6 +52,11 @@
           </div>
 
           <div class="field">
+            <label>Image</label>
+            <input @change="mbtiImage()" type="file" ref="mbtiimage">
+          </div>
+
+          <div class="field">
             <label>character</label>
             <div class="control">
               <input type="text" class="input" v-model="character">
@@ -92,6 +97,7 @@
       return {
         board: '',
         mbti: '',
+        image: '',
         title: '',
         content: '',
         character: '',
@@ -102,28 +108,37 @@
       async submitForm() {
         this.$store.commit('setIsLoading', true)
 
-        const mbit_ = {
+        const mbti_ = {
           board: this.board,
           mbti: this.mbti,
           title: this.title,
           content: this.content,
           character: this.character,
           summary: this.summary,
+          image: this.image
+        }
 
+        const headers = {
+          'content-Type': 'multipart/form-data'
         }
         
         await axios
-          .post('mbti/', mbit_)
+          .post('/mbti/', mbti_, {headers})
           .then(response => {
             console.log(response)
-
-            this.$router.push('/dashboard/mbti/')
+            this.$router.push('/dashboard/mbti')
           })
+
           .catch(error => {
             console.log(error)
           })
-
         this.$store.commit('setIsLoading', false)
+      },
+
+      async mbtiImage() {
+        this.image = this.$refs.mbtiimage.files[0]
+        console.log(this.image)
+        return this.image
       }
     }
   }

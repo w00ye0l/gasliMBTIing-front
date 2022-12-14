@@ -17,7 +17,7 @@
 
       <div class="column is-10">
         <div class="box head">
-          <img :src="require(`@/assets/images/${mbtidetail.mbti}.png`)"/>
+          <img :src="mbtidetail.image" alt="">
           <p class="detail_head title_">{{mbtidetail.character}}</p> 
           <p class="detail_head">{{mbtidetail.summary}}</p>
         </div> 
@@ -61,7 +61,8 @@
     data() {
       return {
         mbtidetail: {},
-        mbti: []
+        mbti: [],
+        mbtiimg: '',
       }
     },
     created() {
@@ -82,6 +83,7 @@
           .then(response => {
             console.log(response)
             this.mbtidetail = response.data
+            this.mbtiimg = response.data.mbti + '.png'
           })
           .catch(error => {
             console.log(error)
