@@ -11,6 +11,8 @@
             <div class="control">
               <div class="select">
                 <select v-model="group">
+                  <option value="그룹" disabled selected>그룹</option>
+                  <option disabled>=========</option>
                   <option value="전체">전체</option>
                   <option v-for="group in groups"
                     v-bind:key="group" 
@@ -30,7 +32,7 @@
 
         <hr>
 
-        <template v-if="group === '전체'">
+        <template v-if="group === '전체' || group === '그룹'">
           <div
             v-for="friend in friends"
             v-bind:key="friend.id"
@@ -190,7 +192,7 @@
     data() {
       return {
         friends: [],
-        group:"전체",
+        group:"그룹",
         groups:[],
         isShowModal: false,
         selectedId:'',
