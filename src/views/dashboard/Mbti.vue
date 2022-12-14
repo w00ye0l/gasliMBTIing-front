@@ -44,7 +44,7 @@
         
         <hr>
 
-        <router-link to="/dashboard/mbti/add" class="button is-light">글쓰기</router-link>
+        <!-- <router-link to="/dashboard/mbti/add" class="button is-light">글쓰기</router-link> -->
       </div>
       
       <template v-if="filters !== '전체'">
