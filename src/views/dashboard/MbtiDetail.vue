@@ -8,11 +8,10 @@
             <font-awesome-icon class="icon is-middle" icon="arrow-left" />
           </router-link>
 
-          <div>
-            <h1 class="title">{{mbtidetail.mbti}} {{mbtidetail.board}}</h1>
-          </div>
-
+          <h1 class="title">{{mbtidetail.mbti}} {{mbtidetail.board}}</h1>
         </div>
+        
+        <hr>
       </div>
 
       <div class="column is-10">
@@ -36,8 +35,8 @@
 
           <div class="is-flex is-justify-content-space-evenly">
             <template v-for="mbti_ in mbti" >
-              <div v-if="mbtidetail.mbti === mbti_.mbti && mbtidetail.id != mbti_.id">
-                <router-link :to="{ name: 'MbtiDetail', params: { id: mbti_.id }}" v-bind:key="mbti_.id">
+              <div v-if="mbtidetail.mbti === mbti_.mbti && mbtidetail.id != mbti_.id" v-bind:key="mbti_.id">
+                <router-link :to="{ name: 'MbtiDetail', params: { id: mbti_.id }}" >
                   {{mbti_.title}}
                 </router-link>
               </div>
@@ -114,7 +113,7 @@
 <style scoped>
   .community__head {
     display: flex;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
   .back__btn {
     display: flex;
