@@ -207,4 +207,22 @@
     height: 80px;
   }
 }
+input[type=file]::file-selector-button {
+  margin-top: 0.5rem;
+  width: 100px;
+  height: 40px;
+  font-size: 1rem;
+  font-family: 'KOTRAHOPE' !important;
+  color: rgb(66, 66, 66);
+  background: #fff;
+  border: 2px dashed #bd32fd;
+  border-radius: 2rem;
+  cursor: pointer;
+
+  &:hover {
+    background: #bd32fd;
+    color: #fff;
+    border: 2px dashed #fff;
+  }
+}
 </style>
