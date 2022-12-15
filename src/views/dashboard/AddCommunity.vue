@@ -10,7 +10,7 @@
       <div class="column is-10">
         <form @submit.prevent="submitForm" enctype="multipart/form-data" class="box">
           <div class="field">
-            <label>Category</label>
+            <label>카테고리</label>
             <div class="control">
               <div class="select">
                 <select v-model="category">
@@ -62,7 +62,8 @@
 
           <div class="field">
             <div class="control submit__box">
-              <button class="button submit__btn">Submit</button>
+              <button class="button submit__btn">글 쓰기</button>
+              <router-link :to="{ name: 'Communities' }" class="button delete__btn">취소</router-link>
             </div>
           </div>
         </form>
@@ -130,7 +131,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   input[type=file]::file-selector-button {
     margin-top: 0.5rem;
     width: 100px;
@@ -169,7 +170,28 @@
 
   .submit__btn:hover {
     background: #9f22da;
-    color: rgb(189, 189, 189);
+    color: #fff;
     box-shadow: 0 0 0 0.2rem #9f22da;
+  }
+
+  .delete__btn {
+    margin-left: 1rem;
+    width: 5rem;
+    height: 2.5rem;
+    background: #fc4b4b;
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 1rem;
+    border-radius: 3rem;
+    border: 2px dashed #fff;
+    box-shadow: 0 0 0 2px #fc4b4b;
+  }
+
+  .delete__btn:hover {
+    color: #fff;
+    background: #cc2525;
+    cursor: pointer;
+    box-shadow: 0 0 0 2px #cc2525;
   }
 </style>
