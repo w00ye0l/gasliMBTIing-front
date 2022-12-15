@@ -10,16 +10,32 @@
       <div class="column is-10">
         <form @submit.prevent="submitForm" class="box" enctype="multipart/form-data">
           <div class="field">
-            <label>Category</label>
+            <label>카테고리</label>
             <div class="control">
-              <input type="text" class="input" v-model="category">
+              <div class="select">
+                <select v-model="category">
+                  <!-- <option value="Category">Category</option> -->
+                  <option v-for="category in categories"
+                    v-bind:key="category" 
+                    :value="category"
+                  >{{category}}</option>
+                </select>
+              </div>
             </div>
           </div>
           
           <div class="field">
             <label>MBTI</label>
             <div class="control">
-              <input type="text" class="input" v-model="mbti">
+              <div class="select">
+                <select v-model="mbti">
+                  <!-- <option value="MBTI">MBTI</option> -->
+                  <option v-for="mbti in mbtis"
+                    v-bind:key="mbti" 
+                    :value="mbti"
+                  >{{mbti}}</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -66,10 +82,12 @@
       return {
         title: '',
         category: '',
+        categories:['자유','질문','상담','토론'],
         mbti: '',
         content: '',
         image: '',
-        community: {}
+        community: {},
+        mbtis:['ENTP','ENTJ','ENFP','ENFJ','ESTP','ESTJ','ESFP','ESFJ','INTP','INTJ','INFP','INFJ','ISTP','ISTJ','ISFP','ISFJ'],
       }
     },
     mounted() {
