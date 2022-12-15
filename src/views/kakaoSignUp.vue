@@ -47,7 +47,9 @@
 
           <div class="field">
             <label>프로필 사진</label>
-            <input @change="onInputImage()" type="file" ref="accountimage">
+            <div>
+              <input @change="onInputImage()" type="file" ref="accountimage">
+            </div>
           </div>
 
           <div class="ageGender">
