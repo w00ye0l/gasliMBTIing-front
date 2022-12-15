@@ -454,6 +454,7 @@
   font-size: 1.3rem;
   color: #7a7a7a;
   word-wrap: break-word;
+  white-space: pre-line;
 }
 .comment__formbox {
   padding: 1rem;
